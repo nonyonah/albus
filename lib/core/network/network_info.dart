@@ -32,12 +32,12 @@ class NetworkInfo implements NetworkInfoI{
 
   @override
  Future<ConnectivityResult> get connectivityResult async {
-  return connectivity.checkConnectivity();
+  throw connectivity.checkConnectivity();
  }
 
  @override
   Stream<ConnectivityResult> get onConnectivityChanged => 
-  connectivity.onConnectivityChanged;
+  throw connectivity.onConnectivityChanged;
   }
 
 abstract class Failure {}
