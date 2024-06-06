@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:myapp/routes/app_routes.dart';
 import 'package:provider/provider.dart'; // Ensure to import this for ChangeNotifierProvider and Consumer
 import 'package:myapp/core/utils/navigator_service.dart';
 import 'package:myapp/core/utils/pref_utils.dart';
 import 'package:myapp/core/utils/size_utils.dart';
 import 'package:myapp/localization/app_localization.dart';
-import 'package:myapp/routes/app_routes.dart';
+//import 'package:myapp/routes/app_routes.dart';
 import 'package:myapp/themes/provider/theme_provider.dart';
 import 'package:myapp/themes/theme_helper.dart';
 

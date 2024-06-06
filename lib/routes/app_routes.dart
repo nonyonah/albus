@@ -8,6 +8,6 @@ class AppRoutes {
 
   static Map<String, WidgetBuilder> get routes => {
     registerScreen: RegisterScreen.builder,
-    initialRoute: initialRoute.builder,
+    initialRoute: RegisterScreen.builder
   };
 }
