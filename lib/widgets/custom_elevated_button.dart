@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/core/utils/size_utils.dart';
 
 abstract class BaseButton extends StatelessWidget {
   final EdgeInsets? margin;
@@ -57,7 +58,7 @@ class CustomElevatedButton extends BaseButton {
   }
 
   Widget _buildElevatedButtonWidget() => Container(
-        height: height ?? 52,
+        height: height ?? 52.v,
         width: width ?? double.maxFinite,
         margin: margin,
         decoration: decoration,

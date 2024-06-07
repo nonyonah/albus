@@ -42,6 +42,10 @@ dependencies:
   provider: ^6.1.2
   flutter_svg: ^2.0.10+1
   google_fonts: ^6.2.1
+  cached_network_image: ^3.3.1
+  sizer: ^2.0.15
+  
+
 
 dev_dependencies:
   flutter_test:
@@ -60,10 +64,27 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
 
+
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  assets: 
+    - assets/images/
+
+  #fonts:
+    #- family: InterTight
+      #fonts:
+       # - asset: fonts/InterTight-Regular.ttf
+        #  weight: 400
+       # - asset: fonts/InterTight-Bold.ttf
+        #  weight: 700
+        #- asset: fonts/InterTight-medium.ttf
+        #  weight: 500
+        #- asset: fonts/InterTight-SemiBold.ttf
+      #  weight: 600
+
 
   # To add assets to your application, add an assets section, like this:
   # assets:

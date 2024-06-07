@@ -1,5 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/core/utils/pref_utils.dart';
 import 'package:myapp/core/utils/size_utils.dart';
 
@@ -54,25 +55,25 @@ class TextThemes {
     bodyLarge: TextStyle(
       color: colorScheme.primary,
       fontSize: 16.fSize,
-      fontFamily: 'InterTight',
-      fontWeight: FontWeight.w400,
+      fontFamily: GoogleFonts.interTight().fontFamily,
+      fontWeight: FontWeight.w300,
     ),
     bodyMedium: TextStyle(
       color: colorScheme.primary,
       fontSize: 13.fSize,
-      fontFamily: 'InterTight',
+      fontFamily: GoogleFonts.interTight().fontFamily,
       fontWeight: FontWeight.w400,
     ),
     headlineSmall: TextStyle(
       color: colorScheme.primary,
       fontSize: 24.fSize,
-      fontFamily: 'InterTight',
+      fontFamily: GoogleFonts.interTight().fontFamily,
       fontWeight: FontWeight.w700,
     ),
     titleMedium: TextStyle(
       color: colorScheme.primary,
       fontSize: 16.fSize,
-      fontFamily: 'InterTight',
+      fontFamily: GoogleFonts.interTight().fontFamily,
       fontWeight: FontWeight.w700,
     ),
   );

@@ -5,16 +5,16 @@ import 'package:myapp/themes/theme_helper.dart';
 extension on TextStyle {
   TextStyle get interTight {
     return copyWith(
-      fontFamily: 'InterTight',
+      fontFamily: 'Inter Tight',
     );
   }
 }
 
 class CustomTextStyle {
-  static get bodyMediumInterTightOnPrimaryContainer => 
-  theme.textTheme.bodyMedium!.interTight.copyWith(
-    color: theme.colorScheme.onPrimaryContainer,
-    fontSize: 14.fSize,
+  static get titleMediumInterTightPrimary => 
+  theme.textTheme.titleMedium!.interTight.copyWith(
+    color: theme.colorScheme.primary.withOpacity(0.3),
+    fontWeight: FontWeight.w500,
   );
 
   static get titleMediumInterTightWhiteA700 => 

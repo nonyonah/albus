@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:myapp/core/utils/image_constant.dart';
+import 'package:myapp/core/utils/navigator_service.dart';
 import 'package:myapp/core/utils/size_utils.dart';
 import 'package:myapp/core/utils/validation_functions.dart';
 import 'package:myapp/themes/custom_text_style.dart';
 import 'package:myapp/themes/theme_helper.dart';
 import 'package:myapp/widgets/custom_elevated_button.dart';
+import 'package:myapp/widgets/custom_image_view.dart';
 import 'package:myapp/widgets/custom_text_form.dart';
 import 'package:myapp/screens/models/register_model.dart';
 import 'package:myapp/screens/provider/register_provider.dart';
@@ -12,13 +15,13 @@ import 'package:provider/provider.dart';
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
 
+  @override
+  RegisterScreenState createState() => RegisterScreenState();
 
-@override
-RegisterScreenState createState() => RegisterScreenState();
-static Widget builder(BuildContext context) {
-  return ChangeNotifierProvider(
-    create: (context) => RegisterProvider(),
-    child: const RegisterScreen(),
+  static Widget builder(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (context) => RegisterProvider(),
+      child: const RegisterScreen(),
     );
   }
 }
@@ -33,14 +36,16 @@ class RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    
     return SafeArea(
       child: Scaffold(
-        backgroundColor: appTheme.whiteA700,
+        backgroundColor: theme.colorScheme.surface,
         resizeToAvoidBottomInset: false,
         body: Center(
           child: SingleChildScrollView(
             padding: EdgeInsets.only(
-              bottom: MediaQuery.of(context).viewInsets.bottom
+              bottom: MediaQuery.of(context).viewInsets.bottom,
             ),
             child: SizedBox(
               height: SizeUtils.height,
@@ -49,30 +54,28 @@ class RegisterScreenState extends State<RegisterScreen> {
                 child: Container(
                   width: double.maxFinite,
                   padding: EdgeInsets.symmetric(
-                    horizontal: 26.h,
-                    vertical: 77.v,
+                    horizontal: 26,
+                    vertical: 77,
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      SizedBox(height: 21.v),
-                      //CustomImageView(
-                      //imagePath: ImageConstant.imgArrowLeft,
-                      //height: 24.adaptSize,
-                      //width: 24.adaptSize,
-                      //onTap: () {
-                      //onTapBackImgArrow(context);},
-                      //),
-                      SizedBox(height: 50.v),
+                      CustomImageView(
+                        imagePath: ImageConstant.imgArrowLeft,
+                        height: 24,
+                        width: 24,
+                        onTap: () => onTapBackImgArrow(context),
+                      ),
+                      SizedBox(height: 50),
                       Text(
                         'Register',
                         style: theme.textTheme.headlineSmall,
                       ),
-                      SizedBox(height: 27.v),
+                      SizedBox(height: 29),
                       Container(
-                        width: 282.h,
-                        margin: EdgeInsets.only(right: 95.h),
+                        width: 282,
+                        margin: EdgeInsets.only(right: 95),
                         child: Text(
                           'Enter your email address and password here',
                           maxLines: 2,
@@ -82,84 +85,66 @@ class RegisterScreenState extends State<RegisterScreen> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 33.v),
+                      SizedBox(height: 32),
                       Padding(
-                        padding: EdgeInsets.only(
-                          left: 6.h,
-                          right: 11.h,
-                        ),
-                        child:
-                        Selector<RegisterProvider, TextEditingController?>(
+                        padding: EdgeInsets.only(right: 9),
+                        child: Selector<RegisterProvider, TextEditingController?>(
                           selector: (context, provider) => provider.emailInputController,
                           builder: (context, emailInputController, child) {
                             return CustomTextFormField(
                               controller: emailInputController,
                               hintText: 'Email address',
-                              hintStyle: CustomTextStyle.bodyMediumInterTightOnPrimaryContainer,
+                              hintStyle: CustomTextStyle.titleMediumInterTightPrimary,
                               textInputType: TextInputType.emailAddress,
                               validator: (value) {
-                                if (value == null || 
-                                (!isValidEmail(value, isRequired: true))) {
-                                  return 'Please enter valid email';
+                                if (value == null || !isValidEmail(value, isRequired: true)) {
+                                  return 'Please enter a valid email';
                                 }
                                 return null;
                               },
-                              contentPadding: EdgeInsets.symmetric(
-                                horizontal: 16.h,
-                                vertical: 11.v,
-                              ),
-                              border:
-                              TextFormFieldStyleHelper.outlineOnPrimary,
+                              border: TextFormFieldStyleHelper.outlineOnPrimary,
                               filled: true,
-                              fillColor: appTheme.gray50,
+                              fillColor: theme.colorScheme.surface,
                             );
                           },
                         ),
                       ),
-                      SizedBox(height: 36.v),
+                      SizedBox(height: 36),
                       Padding(
-                        padding: EdgeInsets.only(
-                          left: 6.h,
-                          right: 11.h
-                        ),
-                        child: 
-                        Selector<RegisterProvider, TextEditingController?>(
+                        padding: EdgeInsets.only(right: 9),
+                        child: Selector<RegisterProvider, TextEditingController?>(
                           selector: (context, provider) => provider.passwordInputController,
                           builder: (context, passwordInputController, child) {
                             return CustomTextFormField(
                               controller: passwordInputController,
                               hintText: 'Enter password',
-                              hintStyle: CustomTextStyle.bodyMediumInterTightOnPrimaryContainer,
+                              hintStyle: CustomTextStyle.titleMediumInterTightPrimary,
                               textInputAction: TextInputAction.done,
-                              textInputType:  TextInputType.visiblePassword,
+                              textInputType: TextInputType.visiblePassword,
                               validator: (value) {
-                                if (value == null || 
-                                (!isValidEmail(value, isRequired: true))) {
-                                  return 'Please enter valid password';
+                                if (value == null || value.length < 6) {
+                                  return 'Please enter a valid password';
                                 }
                                 return null;
                               },
-                              contentPadding: EdgeInsets.symmetric(
-                                horizontal: 16.h,
-                                vertical: 11.v,
-                              ),
-                              border:
-                              TextFormFieldStyleHelper.outlineOnPrimary,
+                              border: TextFormFieldStyleHelper.outlineOnPrimary,
                               filled: true,
-                              fillColor: appTheme.gray50,
+                              fillColor: theme.colorScheme.surface,
                             );
-                          }
+                          },
+                        ),
                       ),
-                      ),
-                      Spacer(),
+                      const Spacer(),
                       CustomElevatedButton(
                         text: 'Continue',
-                        margin: EdgeInsets.only(
-                          left: 13.h,
-                          right: 11.h,
-                        ),
+                        margin: EdgeInsets.symmetric(horizontal: 13),
                         alignment: Alignment.center,
-                      )
+                        onPressed: () {
+                          if (_formKey.currentState?.validate() ?? false) {
+                            // Handle form submission
+                          }
+                        },
+                      ),
                     ],
                   ),
                 ),
@@ -167,7 +152,11 @@ class RegisterScreenState extends State<RegisterScreen> {
             ),
           ),
         ),
-      )
+      ),
     );
+  }
+
+  void onTapBackImgArrow(BuildContext context) {
+    NavigatorService.goBack();
   }
 }

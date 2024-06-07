@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:myapp/core/utils/size_utils.dart';
+import 'package:myapp/themes/custom_text_style.dart';
 import 'package:myapp/themes/theme_helper.dart';
 
 extension TextFormFieldStyleHelper on CustomTextFormField {
@@ -75,7 +76,7 @@ class CustomTextFormField extends StatelessWidget {
   Widget textFormFieldWidget(BuildContext context) => SizedBox(
         width: width ?? double.maxFinite,
         child: TextFormField(
-          scrollPadding: scrollPadding ?? EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          scrollPadding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
           controller: controller,
           focusNode: focusNode,
           onTapOutside: (event) {
@@ -86,7 +87,7 @@ class CustomTextFormField extends StatelessWidget {
             }
           },
           autofocus: autoFocus,
-          style: textStyle,
+          style: textStyle ?? CustomTextStyle.titleMediumInterTightPrimary,
           obscureText: obscureText,
           textInputAction: textInputAction,
           keyboardType: textInputType,
@@ -98,14 +99,14 @@ class CustomTextFormField extends StatelessWidget {
 
   InputDecoration get decoration => InputDecoration(
         hintText: hintText,
-        hintStyle: hintStyle,
+        hintStyle: hintStyle ?? CustomTextStyle.titleMediumInterTightPrimary,
         prefixIcon: prefix,
         prefixIconConstraints: prefixConstraints,
         suffixIcon: suffix,
         suffixIconConstraints: suffixConstraints,
-        contentPadding: contentPadding,
+        contentPadding: contentPadding ?? EdgeInsets.all(14.h),
         isDense: true,
-        fillColor: fillColor,
+        fillColor: fillColor ?? appTheme.gray50,
         filled: filled,
         border: border ?? InputBorder.none,
         enabledBorder: border ?? InputBorder.none,
