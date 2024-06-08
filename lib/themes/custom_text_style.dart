@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/core/utils/size_utils.dart';
 import 'package:myapp/themes/theme_helper.dart';
 
 extension on TextStyle {
   TextStyle get interTight {
     return copyWith(
-      fontFamily: 'Inter Tight',
+      fontFamily: GoogleFonts.outfit().fontFamily,
     );
   }
 }

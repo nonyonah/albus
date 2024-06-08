@@ -55,25 +55,25 @@ class TextThemes {
     bodyLarge: TextStyle(
       color: colorScheme.primary,
       fontSize: 16.fSize,
-      fontFamily: GoogleFonts.interTight().fontFamily,
+      fontFamily: GoogleFonts.outfit().fontFamily,
       fontWeight: FontWeight.w300,
     ),
     bodyMedium: TextStyle(
       color: colorScheme.primary,
       fontSize: 13.fSize,
-      fontFamily: GoogleFonts.interTight().fontFamily,
+      fontFamily: GoogleFonts.outfit().fontFamily,
       fontWeight: FontWeight.w400,
     ),
     headlineSmall: TextStyle(
       color: colorScheme.primary,
       fontSize: 24.fSize,
-      fontFamily: GoogleFonts.interTight().fontFamily,
+      fontFamily: GoogleFonts.outfit().fontFamily,
       fontWeight: FontWeight.w700,
     ),
     titleMedium: TextStyle(
       color: colorScheme.primary,
       fontSize: 16.fSize,
-      fontFamily: GoogleFonts.interTight().fontFamily,
+      fontFamily: GoogleFonts.outfit().fontFamily,
       fontWeight: FontWeight.w700,
     ),
   );

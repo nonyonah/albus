@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:myapp/core/utils/size_utils.dart';
 
 abstract class BaseButton extends StatelessWidget {
@@ -73,7 +74,8 @@ class CustomElevatedButton extends BaseButton {
               Text(
                 text,
                 style: buttonTextStyle ??
-                    const TextStyle(
+                     TextStyle(
+                      fontFamily: GoogleFonts.outfit().fontFamily,
                       color: Colors.white, // Placeholder for CustomTextStyles.titleMediumInterTightWhiteA700
                     ),
               ),
