@@ -1,10 +1,11 @@
+import 'package:albus/core/utils/image_constant.dart';
+import 'package:albus/core/utils/size_utils.dart';
+import 'package:albus/routes/app_routes.dart';
+import 'package:albus/screens/splash_screen/provider/splash_provider.dart';
+import 'package:albus/themes/theme_helper.dart';
+import 'package:albus/widgets/custom_image_view.dart';
 import 'package:flutter/material.dart';
-import 'package:myapp/core/utils/image_constant.dart';
-import 'package:myapp/core/utils/size_utils.dart';
-import 'package:myapp/screens/splash_screen/models/splash_model.dart';
-import 'package:myapp/screens/splash_screen/provider/splash_provider.dart';
-import 'package:myapp/themes/theme_helper.dart';
-import 'package:myapp/widgets/custom_image_view.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 
 class SplashScreen extends StatefulWidget{
@@ -24,6 +25,9 @@ class SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
+    Future.delayed(const Duration(seconds: 3), () {
+      Navigator.pushReplacementNamed(context, AppRoutes.onboardingScreen);
+    });
   }
 
   @override
@@ -39,8 +43,8 @@ class SplashScreenState extends State<SplashScreen> {
               SizedBox(height: 5.v),
               CustomImageView(
                 imagePath: ImageConstant.imgLogo,
-                height: 35.v,
-                width: 115.h
+                height: 320.v,
+                width: 320.h
               )
             ],
           ),

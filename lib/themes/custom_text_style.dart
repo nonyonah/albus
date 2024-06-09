@@ -1,7 +1,8 @@
+import 'package:albus/core/utils/size_utils.dart';
+import 'package:albus/themes/theme_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:myapp/core/utils/size_utils.dart';
-import 'package:myapp/themes/theme_helper.dart';
+
 
 extension on TextStyle {
   TextStyle get outfit {

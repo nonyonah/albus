@@ -1,13 +1,12 @@
+import 'package:albus/core/utils/image_constant.dart';
+import 'package:albus/core/utils/size_utils.dart';
+import 'package:albus/screens/onboarding_screen/provider/onboarding_provider.dart';
+import 'package:albus/themes/custom_button_style.dart';
+import 'package:albus/themes/custom_text_style.dart';
+import 'package:albus/themes/theme_helper.dart';
+import 'package:albus/widgets/custom_elevated_button.dart';
+import 'package:albus/widgets/custom_image_view.dart';
 import 'package:flutter/material.dart';
-import 'package:myapp/core/utils/image_constant.dart';
-import 'package:myapp/core/utils/size_utils.dart';
-import 'package:myapp/screens/onboarding_screen/models/onboarding_model.dart';
-import 'package:myapp/screens/onboarding_screen/provider/onboarding_provider.dart';
-import 'package:myapp/themes/custom_text_style.dart';
-import 'package:myapp/themes/theme_helper.dart';
-import 'package:myapp/widgets/custom_elevated_button.dart';
-import 'package:myapp/themes/custom_button_style.dart';
-import 'package:myapp/widgets/custom_image_view.dart';
 import 'package:provider/provider.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -48,8 +47,8 @@ class OnboardingScreenState extends State<OnboardingScreen> {
               ),
               CustomImageView(
                 imagePath: ImageConstant.imgLogo,
-                height: (35.v),
-                width: (115.h),
+                height: (320.v),
+                width: (320.h),
               ),
               const Spacer(
                 flex: 43,

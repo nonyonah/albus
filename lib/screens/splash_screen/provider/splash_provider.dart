@@ -1,5 +1,6 @@
+import 'package:albus/screens/splash_screen/models/splash_model.dart';
 import 'package:flutter/material.dart';
-import 'package:myapp/screens/splash_screen/models/splash_model.dart';
+
 
 class SplashProvider extends ChangeNotifier {
   SplashModel splashModelObj = SplashModel();

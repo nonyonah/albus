@@ -1,5 +1,5 @@
+import 'package:albus/core/utils/pref_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:myapp/core/utils/pref_utils.dart';
 
 class ThemeProvider extends ChangeNotifier {
 themeChange (String themeType) async {

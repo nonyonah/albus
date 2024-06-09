@@ -1,7 +1,7 @@
+import 'package:albus/core/utils/size_utils.dart';
+import 'package:albus/themes/custom_text_style.dart';
+import 'package:albus/themes/theme_helper.dart';
 import 'package:flutter/material.dart';
-import 'package:myapp/core/utils/size_utils.dart';
-import 'package:myapp/themes/custom_text_style.dart';
-import 'package:myapp/themes/theme_helper.dart';
 
 extension TextFormFieldStyleHelper on CustomTextFormField {
   static OutlineInputBorder get outlineOnPrimary => OutlineInputBorder(

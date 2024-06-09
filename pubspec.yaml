@@ -1,5 +1,5 @@
-name: myapp
-description: "A new Flutter project."
+name: albus
+description: "Bills payment application."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -44,6 +44,16 @@ dependencies:
   google_fonts: ^6.2.1
   cached_network_image: ^3.3.1
   sizer: ^2.0.15
+  flutter_native_splash: ^2.4.0
+
+flutter_native_splash:
+  color: "#ffffff"
+  image: assets/images/Gemini Pay.png
+  android: true
+  ios: true
+  web: false
+  fullscreen: true
+
   
 
 
@@ -70,8 +80,10 @@ flutter:
   # the material Icons class.
   uses-material-design: true
 
+
   assets: 
-    - assets/images/
+      - assets/images/
+
 
   #fonts:
     #- family: InterTight

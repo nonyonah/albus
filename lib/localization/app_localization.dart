@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-import 'package:myapp/core/utils/navigator_service.dart';
+import 'package:albus/core/utils/navigator_service.dart';
 import 'en_us/en_us_translations.dart';
 
 extension LocalizationExtension on String {

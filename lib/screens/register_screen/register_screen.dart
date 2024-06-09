@@ -1,15 +1,13 @@
+import 'package:albus/core/utils/image_constant.dart';
+import 'package:albus/core/utils/navigator_service.dart';
+import 'package:albus/core/utils/size_utils.dart';
+import 'package:albus/core/utils/validation_functions.dart';
+import 'package:albus/screens/register_screen/provider/register_provider.dart';
+import 'package:albus/themes/custom_text_style.dart';
+import 'package:albus/widgets/custom_elevated_button.dart';
+import 'package:albus/widgets/custom_image_view.dart';
+import 'package:albus/widgets/custom_text_form.dart';
 import 'package:flutter/material.dart';
-import 'package:myapp/core/utils/image_constant.dart';
-import 'package:myapp/core/utils/navigator_service.dart';
-import 'package:myapp/core/utils/size_utils.dart';
-import 'package:myapp/core/utils/validation_functions.dart';
-import 'package:myapp/themes/custom_text_style.dart';
-import 'package:myapp/themes/theme_helper.dart';
-import 'package:myapp/widgets/custom_elevated_button.dart';
-import 'package:myapp/widgets/custom_image_view.dart';
-import 'package:myapp/widgets/custom_text_form.dart';
-import 'package:myapp/screens/register_screen/models/register_model.dart';
-import 'package:myapp/screens/register_screen/provider/register_provider.dart';
 import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatefulWidget {

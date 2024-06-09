@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/core/utils/navigator_service.dart';
+import 'package:albus/core/utils/navigator_service.dart';
 
 class ProgressDialogUtils {
   static bool isProgressVisible = false;

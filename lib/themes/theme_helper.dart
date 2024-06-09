@@ -1,8 +1,8 @@
 import 'dart:ui';
+import 'package:albus/core/utils/pref_utils.dart';
+import 'package:albus/core/utils/size_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:myapp/core/utils/pref_utils.dart';
-import 'package:myapp/core/utils/size_utils.dart';
 
 LightCodeColors get appTheme => ThemeHelper().themeColor();
 ThemeData get theme => ThemeHelper().themeData();
@@ -82,7 +82,7 @@ class TextThemes {
 class ColorSchemes {
   static const lightCodeColorScheme = ColorScheme.light(
     primary: Color(0xFF000000),
-    onPrimary: Color(0x19000000),
+    onPrimary: Color.fromARGB(255, 0, 0, 0),
     onPrimaryContainer: Color(0x4C000000),
   );
 }

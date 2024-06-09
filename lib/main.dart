@@ -1,15 +1,15 @@
+import 'package:albus/core/utils/navigator_service.dart';
+import 'package:albus/core/utils/pref_utils.dart';
+import 'package:albus/core/utils/size_utils.dart';
+import 'package:albus/localization/app_localization.dart';
+import 'package:albus/routes/app_routes.dart';
+import 'package:albus/themes/provider/theme_provider.dart';
+import 'package:albus/themes/theme_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:myapp/routes/app_routes.dart';
-import 'package:provider/provider.dart'; // Ensure to import this for ChangeNotifierProvider and Consumer
-import 'package:myapp/core/utils/navigator_service.dart';
-import 'package:myapp/core/utils/pref_utils.dart';
-import 'package:myapp/core/utils/size_utils.dart';
-import 'package:myapp/localization/app_localization.dart';
-//import 'package:myapp/routes/app_routes.dart';
-import 'package:myapp/themes/provider/theme_provider.dart';
-import 'package:myapp/themes/theme_helper.dart';
+import 'package:provider/provider.dart';
+
 
 var globalMessengerKey = GlobalKey<ScaffoldMessengerState>();
 
@@ -23,11 +23,11 @@ void main() {
   });
 
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      systemNavigationBarColor: Colors.transparent,
-      statusBarColor: Colors.transparent,
-      statusBarIconBrightness: Brightness.light,
-      statusBarBrightness: Brightness.dark,
-    ));
+    systemNavigationBarColor: Colors.transparent,
+    statusBarColor: Colors.transparent,
+    statusBarIconBrightness: Brightness.light,
+    statusBarBrightness: Brightness.dark,
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -44,7 +44,7 @@ class MyApp extends StatelessWidget {
               return MaterialApp(
                 title: 'albus',
                 debugShowCheckedModeBanner: false,
-                theme: theme,
+                theme: theme, // Fetching theme from provider
                 navigatorKey: NavigatorService.navigatorKey,
                 scaffoldMessengerKey: globalMessengerKey,
                 localizationsDelegates: const [
@@ -57,7 +57,7 @@ class MyApp extends StatelessWidget {
                   Locale('en', 'US'),
                 ],
                 initialRoute: AppRoutes.initialRoute,
-                routes: AppRoutes.routes,
+                routes: AppRoutes.routes, // Fetching routes from AppRoutes
               );
             },
           ),
