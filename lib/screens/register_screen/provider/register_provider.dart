@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/screens/models/register_model.dart';
+import 'package:myapp/screens/register_screen/models/register_model.dart';
 
 class RegisterProvider extends ChangeNotifier {
   TextEditingController emailInputController = TextEditingController();

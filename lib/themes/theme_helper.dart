@@ -90,4 +90,7 @@ class ColorSchemes {
 class LightCodeColors {
   Color get gray50 => const Color(0xFFF8F8F8);
   Color get whiteA700 => const Color(0xFFFFFFFF);
+  Color get black900 => const Color(0xFF0C0C0C);
+  Color get blueGray100 => const Color(0xFFD9D9D9);
+  Color get blueGray400 => const Color (0xFF888888);
 }

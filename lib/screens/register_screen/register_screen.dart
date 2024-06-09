@@ -8,8 +8,8 @@ import 'package:myapp/themes/theme_helper.dart';
 import 'package:myapp/widgets/custom_elevated_button.dart';
 import 'package:myapp/widgets/custom_image_view.dart';
 import 'package:myapp/widgets/custom_text_form.dart';
-import 'package:myapp/screens/models/register_model.dart';
-import 'package:myapp/screens/provider/register_provider.dart';
+import 'package:myapp/screens/register_screen/models/register_model.dart';
+import 'package:myapp/screens/register_screen/provider/register_provider.dart';
 import 'package:provider/provider.dart';
 
 class RegisterScreen extends StatefulWidget {
@@ -53,7 +53,7 @@ class RegisterScreenState extends State<RegisterScreen> {
                 key: _formKey,
                 child: Container(
                   width: double.maxFinite,
-                  padding: EdgeInsets.symmetric(
+                  padding: const EdgeInsets.symmetric(
                     horizontal: 26,
                     vertical: 77,
                   ),
@@ -67,15 +67,15 @@ class RegisterScreenState extends State<RegisterScreen> {
                         width: 24,
                         onTap: () => onTapBackImgArrow(context),
                       ),
-                      SizedBox(height: 50),
+                      const SizedBox(height: 50),
                       Text(
                         'Register',
                         style: theme.textTheme.headlineSmall,
                       ),
-                      SizedBox(height: 29),
+                      const SizedBox(height: 29),
                       Container(
                         width: 282,
-                        margin: EdgeInsets.only(right: 95),
+                        margin: const EdgeInsets.only(right: 95),
                         child: Text(
                           'Enter your email address and password here',
                           maxLines: 2,
@@ -85,9 +85,9 @@ class RegisterScreenState extends State<RegisterScreen> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 32),
+                      const SizedBox(height: 32),
                       Padding(
-                        padding: EdgeInsets.only(right: 9),
+                        padding: const EdgeInsets.only(right: 9),
                         child: Selector<RegisterProvider, TextEditingController?>(
                           selector: (context, provider) => provider.emailInputController,
                           builder: (context, emailInputController, child) {
@@ -109,9 +109,9 @@ class RegisterScreenState extends State<RegisterScreen> {
                           },
                         ),
                       ),
-                      SizedBox(height: 36),
+                      const SizedBox(height: 36),
                       Padding(
-                        padding: EdgeInsets.only(right: 9),
+                        padding: const EdgeInsets.only(right: 9),
                         child: Selector<RegisterProvider, TextEditingController?>(
                           selector: (context, provider) => provider.passwordInputController,
                           builder: (context, passwordInputController, child) {
@@ -137,7 +137,7 @@ class RegisterScreenState extends State<RegisterScreen> {
                       const Spacer(),
                       CustomElevatedButton(
                         text: 'Continue',
-                        margin: EdgeInsets.symmetric(horizontal: 13),
+                        margin: const EdgeInsets.symmetric(horizontal: 13),
                         alignment: Alignment.center,
                         onPressed: () {
                           if (_formKey.currentState?.validate() ?? false) {

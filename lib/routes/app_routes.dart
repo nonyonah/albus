@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/screens/register_screen.dart';
+import 'package:myapp/screens/register_screen/register_screen.dart';
 
 class AppRoutes {
   static const String registerScreen = '/register_screen';
