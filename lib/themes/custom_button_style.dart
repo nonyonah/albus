@@ -9,7 +9,7 @@ class CustomButtonStyles {
     elevation: WidgetStateProperty.all<double>(0)
   );
   static ButtonStyle get fillBlack => ElevatedButton.styleFrom(
-    backgroundColor: appTheme.black900,
+    backgroundColor: theme.colorScheme.primary,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(26.h),
     ),

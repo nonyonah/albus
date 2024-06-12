@@ -81,9 +81,9 @@ class TextThemes {
 
 class ColorSchemes {
   static const lightCodeColorScheme = ColorScheme.light(
-    primary: Color(0xFF000000),
-    onPrimary: Color.fromARGB(255, 0, 0, 0),
-    onPrimaryContainer: Color(0x4C000000),
+    primary: Color(0xFF5E548E),
+    onPrimary: Color(0xFF131313),
+    //onPrimaryContainer: Color(0x4C000000),
   );
 }
 
