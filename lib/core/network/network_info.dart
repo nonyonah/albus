@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:albus/main.dart';
 
 abstract class NetworkInfoI {
   Future<bool> isConnected();
@@ -61,10 +59,13 @@ class NoInternetException implements Exception {
 
   NoInternetException([String message = 'NoInternetExceptionOccurred']) {
     _message = message;
-    if (globalMessengerKey.currentState != null) {
-      globalMessengerKey.currentState!.showSnackBar(
-        SnackBar(content: Text(_message)),
-      );
-    }
   }
-}
+
+  @override
+  String toString() {
+    return _message;
+  }
+    
+    }
+  
+

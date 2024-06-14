@@ -1,24 +1,19 @@
-import 'package:albus/core/utils/navigator_service.dart';
-import 'package:albus/core/utils/pref_utils.dart';
+import 'package:albus/core/utils/logger.dart';
 import 'package:albus/core/utils/size_utils.dart';
 import 'package:albus/localization/app_localization.dart';
 import 'package:albus/routes/app_routes.dart';
-import 'package:albus/themes/provider/theme_provider.dart';
 import 'package:albus/themes/theme_helper.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:provider/provider.dart';
-
-
-var globalMessengerKey = GlobalKey<ScaffoldMessengerState>();
+import 'package:get/route_manager.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   Future.wait([
-    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]),
-    PrefUtils().init()
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
   ]).then((value) {
+    Logger.init(kReleaseMode ? LogMode.live : LogMode.debug);
     runApp(const MyApp());
   });
 
@@ -37,32 +32,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return Sizer(
       builder: (context, orientation, deviceType) {
-        return ChangeNotifierProvider<ThemeProvider>(
-          create: (context) => ThemeProvider(),
-          child: Consumer<ThemeProvider>(
-            builder: (context, provider, child) {
-              return MaterialApp(
+        return GetMaterialApp(
                 title: 'albus',
                 debugShowCheckedModeBanner: false,
                 theme: theme, // Fetching theme from provider
-                navigatorKey: NavigatorService.navigatorKey,
-                scaffoldMessengerKey: globalMessengerKey,
-                localizationsDelegates: const [
-                  AppLocalizationDelegate(),
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate,
-                  GlobalCupertinoLocalizations.delegate,
-                ],
-                supportedLocales: const [
-                  Locale('en', 'US'),
-                ],
+                translations: AppLocalization(),
+                locale: Get.deviceLocale,
+                fallbackLocale: const Locale('en', 'US'),
                 initialRoute: AppRoutes.initialRoute,
-                routes: AppRoutes.routes, // Fetching routes from AppRoutes
+                getPages: AppRoutes.pages, // Fetching routes from AppRoutes
               );
             },
-          ),
-        );
-      },
-    );
+          );
+      } 
   }
-}

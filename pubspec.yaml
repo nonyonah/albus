@@ -45,6 +45,7 @@ dependencies:
   cached_network_image: ^3.3.1
   sizer: ^2.0.15
   flutter_native_splash: ^2.4.0
+  get: ^4.6.6
 
 flutter_native_splash:
   color: "#ffffff"

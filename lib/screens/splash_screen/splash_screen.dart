@@ -1,55 +1,46 @@
 import 'package:albus/core/utils/image_constant.dart';
 import 'package:albus/core/utils/size_utils.dart';
-import 'package:albus/routes/app_routes.dart';
-import 'package:albus/screens/splash_screen/provider/splash_provider.dart';
-import 'package:albus/themes/theme_helper.dart';
+import 'package:albus/screens/splash_screen/controller/splash_controller.dart';
 import 'package:albus/widgets/custom_image_view.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
+import 'package:get/get.dart';
 
-class SplashScreen extends StatefulWidget{
+class SplashScreen extends GetWidget<SplashController>{
   const SplashScreen({super.key});
-
-  @override
-  SplashScreenState createState() => SplashScreenState();
-  static Widget builder(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => SplashProvider(),
-      child: const SplashScreen(),
-    );
-  }
-}
-
-class SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    super.initState();
-    Future.delayed(const Duration(seconds: 3), () {
-      Navigator.pushReplacementNamed(context, AppRoutes.onboardingScreen);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        backgroundColor: appTheme.whiteA700,
-        body: SizedBox(
-          width: double.infinity,
+        body: Container(
+          width: double.maxFinite,
+          padding: EdgeInsets.all(26.h),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 5.v),
-              CustomImageView(
-                imagePath: ImageConstant.imgLogo,
-                height: 320.v,
-                width: 320.h
-              )
+              _buildColumnVector(),
+              SizedBox(height: 4.v,)
             ],
+          )
           ),
+        )
+      );
+  }
+
+  Widget _buildColumnVector() {
+    return Container(
+      width: double.maxFinite,
+      margin: EdgeInsets.only(right: 6.h),
+      padding: EdgeInsets.only(right: 124.h),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          CustomImageView(
+            imagePath: ImageConstant.imgLogo,
+            height: 240,
+            width: 240,
+          )
+        ],
       ),
-    ),
     );
   }
 }

@@ -1,32 +1,15 @@
 import 'package:albus/core/utils/image_constant.dart';
 import 'package:albus/core/utils/size_utils.dart';
-import 'package:albus/screens/onboarding_screen/provider/onboarding_provider.dart';
-import 'package:albus/themes/custom_button_style.dart';
+import 'package:albus/screens/onboarding_screen/controller/onboarding_controller.dart';
 import 'package:albus/themes/custom_text_style.dart';
 import 'package:albus/themes/theme_helper.dart';
 import 'package:albus/widgets/custom_elevated_button.dart';
 import 'package:albus/widgets/custom_image_view.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:get/get.dart';
 
-class OnboardingScreen extends StatefulWidget {
+class OnboardingScreen extends GetWidget<OnboardingController> {
   const OnboardingScreen({super.key});
-
-  @override
-  OnboardingScreenState createState() => OnboardingScreenState();
-  static Widget builder(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => OnboardingProvider(),
-      child: const OnboardingScreen(),
-    );
-  }
-}
-
-class OnboardingScreenState extends State<OnboardingScreen> {
-  @override
-  void initState() {
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,32 +25,40 @@ class OnboardingScreenState extends State<OnboardingScreen> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Spacer(
-                flex: 56,
-              ),
-              CustomImageView(
-                imagePath: ImageConstant.imgLogo,
-                height: (320.v),
-                width: (320.h),
-              ),
-              const Spacer(
-                flex: 43,
-              ),
-              CustomElevatedButton(
-                text: 'Create Account',
-                buttonStyle: CustomButtonStyles.fillBlack,
-              ),
-              SizedBox(
-                height: (40.v),
-              ),
-              Text(
-                'Login',
-                style: CustomTextStyle.titleMediumOutiftOnPrimary
-              ),
+              Spacer(),
+              _buildVectorSection(),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Widget _buildVectorSection() {
+    return Container(
+      width: double.maxFinite,
+      margin: EdgeInsets.only(right: 6.h),
+      padding: EdgeInsets.symmetric(horizontal: 6.h),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          CustomImageView(
+            imagePath: ImageConstant.imgLogo,
+            height: 240.v,
+            width: 240.h,
+          ),
+          SizedBox(height: 262.v),
+          CustomElevatedButton(
+            text: 'Get Started',
+            margin: EdgeInsets.only(left: 4.h),
+          ),
+          SizedBox(height: 40.v),
+          Text(
+            'Login',
+            style: CustomTextStyle.titleMediumInterTightPrimary,
+          )
+        ]
+    ),
     );
   }
 }
