@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
                 translations: AppLocalization(),
                 locale: Get.deviceLocale,
                 fallbackLocale: const Locale('en', 'US'),
-                initialRoute: AppRoutes.initialRoute,
+                initialRoute: AppRoutes.splashScreen,
                 getPages: AppRoutes.pages, // Fetching routes from AppRoutes
               );
             },

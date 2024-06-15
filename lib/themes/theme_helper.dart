@@ -31,7 +31,7 @@ class ThemeHelper {
       textTheme: TextThemes.textTheme(colorScheme),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: colorScheme.primary,
+          backgroundColor: colorScheme.onPrimaryContainer,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(26),
           ),
@@ -72,7 +72,19 @@ class TextThemes {
     ),
     titleMedium: TextStyle(
       color: colorScheme.primary,
-      fontSize: 16.fSize,
+      fontSize: 17.fSize,
+      fontFamily: GoogleFonts.outfit().fontFamily,
+      fontWeight: FontWeight.w700,
+    ),
+    labelLarge: TextStyle(
+      color: appTheme.black900,
+      fontSize: 13.fSize,
+      fontFamily: GoogleFonts.outfit().fontFamily,
+      fontWeight: FontWeight.w700,
+    ),
+    labelMedium: TextStyle(
+      color: appTheme.black900,
+      fontSize: 10.fSize,
       fontFamily: GoogleFonts.outfit().fontFamily,
       fontWeight: FontWeight.w700,
     ),
@@ -81,9 +93,9 @@ class TextThemes {
 
 class ColorSchemes {
   static const lightCodeColorScheme = ColorScheme.light(
-    primary: Color(0xFF5E548E),
+    primary: Color(0xFF000000),
     onPrimary: Color(0xFF131313),
-    //onPrimaryContainer: Color(0x4C000000),
+    onPrimaryContainer: Color(0xFF5E548E),
   );
 }
 

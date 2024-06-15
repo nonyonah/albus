@@ -25,7 +25,7 @@ class OnboardingScreen extends GetWidget<OnboardingController> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Spacer(),
+              const Spacer(),
               _buildVectorSection(),
             ],
           ),
@@ -51,11 +51,14 @@ class OnboardingScreen extends GetWidget<OnboardingController> {
           CustomElevatedButton(
             text: 'Get Started',
             margin: EdgeInsets.only(left: 4.h),
+            onPressed: () {
+              Get.toNamed('/register');
+            },
           ),
           SizedBox(height: 40.v),
           Text(
             'Login',
-            style: CustomTextStyle.titleMediumInterTightPrimary,
+            style: CustomTextStyle.titleMediumOutiftOnPrimary,
           )
         ]
     ),

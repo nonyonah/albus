@@ -30,7 +30,7 @@ class SplashScreen extends GetWidget<SplashController>{
     return Container(
       width: double.maxFinite,
       margin: EdgeInsets.only(right: 6.h),
-      padding: EdgeInsets.only(right: 124.h),
+      padding: EdgeInsets.symmetric(horizontal: 6.h),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [

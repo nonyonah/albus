@@ -9,9 +9,9 @@ class CustomButtonStyles {
     elevation: WidgetStateProperty.all<double>(0)
   );
   static ButtonStyle get fillBlack => ElevatedButton.styleFrom(
-    backgroundColor: theme.colorScheme.primary,
+    backgroundColor: theme.colorScheme.onPrimaryContainer,
     shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(26.h),
+      borderRadius: BorderRadius.circular(10.h),
     ),
   );
   static ButtonStyle get none => ButtonStyle(

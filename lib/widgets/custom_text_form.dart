@@ -1,17 +1,8 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:albus/core/utils/size_utils.dart';
 import 'package:albus/themes/custom_text_style.dart';
 import 'package:albus/themes/theme_helper.dart';
-import 'package:flutter/material.dart';
-
-extension TextFormFieldStyleHelper on CustomTextFormField {
-  static OutlineInputBorder get outlineOnPrimary => OutlineInputBorder(
-    borderRadius: BorderRadius.circular(20.h),
-    borderSide: BorderSide(
-      color: theme.colorScheme.onPrimary,
-      width: 1,
-    ),
-  );
-}
 
 class CustomTextFormField extends StatelessWidget {
   CustomTextFormField({
@@ -68,15 +59,18 @@ class CustomTextFormField extends StatelessWidget {
     return alignment != null
         ? Align(
             alignment: alignment ?? Alignment.center,
-            child: textFormFieldWidget(context),
+            child: textFormFieldWidget,
           )
-        : textFormFieldWidget(context);
+        : textFormFieldWidget;
   }
 
-  Widget textFormFieldWidget(BuildContext context) => SizedBox(
+  Widget get textFormFieldWidget => SizedBox(
         width: width ?? double.maxFinite,
         child: TextFormField(
-          scrollPadding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          scrollPadding: scrollPadding ??
+              EdgeInsets.only(
+                bottom: MediaQuery.of(Get.context!).viewInsets.bottom,
+              ),
           controller: controller,
           focusNode: focusNode,
           onTapOutside: (event) {
@@ -98,7 +92,7 @@ class CustomTextFormField extends StatelessWidget {
       );
 
   InputDecoration get decoration => InputDecoration(
-        hintText: hintText,
+        hintText: hintText ?? '',
         hintStyle: hintStyle ?? CustomTextStyle.titleMediumInterTightPrimary,
         prefixIcon: prefix,
         prefixIconConstraints: prefixConstraints,
@@ -108,8 +102,15 @@ class CustomTextFormField extends StatelessWidget {
         isDense: true,
         fillColor: fillColor ?? appTheme.gray50,
         filled: filled,
-        border: border ?? InputBorder.none,
-        enabledBorder: border ?? InputBorder.none,
-        focusedBorder: border ?? InputBorder.none,
+        border: border ?? _defaultBorder,
+        enabledBorder: border ?? _defaultBorder,
+        focusedBorder: border ?? _defaultBorder,
+      );
+
+  InputBorder get _defaultBorder => OutlineInputBorder(
+        borderRadius: BorderRadius.circular(24.h),
+        borderSide: BorderSide(
+          color: appTheme.black900.withOpacity(0.1),
+        ),
       );
 }

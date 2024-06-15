@@ -5,13 +5,13 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 extension ImageTypeExtension on String {
   ImageType get imageType {
-    if (this.startsWith('http') || this.startsWith('https')) {
+    if (startsWith('http') || startsWith('https')) {
       return ImageType.network;
-    } else if (this.endsWith('svg')) {
+    } else if (endsWith('svg')) {
       return ImageType.svg;
-    } else if (this.startsWith('file://')) {
+    } else if (startsWith('file://')) {
       return ImageType.file;
-    } else if (this.endsWith('png')) {
+    } else if (endsWith('png')) {
       return ImageType.png;
     } else {
       return ImageType.unknown;
@@ -22,9 +22,9 @@ extension ImageTypeExtension on String {
 enum ImageType { svg, png, network, file, unknown }
 
 class CustomImageView extends StatelessWidget {
-  CustomImageView({
+  const CustomImageView({
     Key? key,
-    this.imagePath,
+    required this.imagePath,
     this.height,
     this.width,
     this.color,
@@ -37,7 +37,7 @@ class CustomImageView extends StatelessWidget {
     this.placeHolder = 'assets/images/image_not_found.png',
   }) : super(key: key);
 
-  final String? imagePath;
+  final String imagePath;
   final double? height;
   final double? width;
   final Color? color;
@@ -61,30 +61,51 @@ class CustomImageView extends StatelessWidget {
       padding: margin ?? EdgeInsets.zero,
       child: InkWell(
         onTap: onTap,
-        child: _buildImage(),
+        child: _buildCircleImage(),
       ),
     );
   }
 
-  Widget _buildImage() {
-    switch (imagePath!.imageType) {
+  Widget _buildCircleImage() {
+    if (radius != null) {
+      return ClipRRect(
+        borderRadius: BorderRadius.circular(radius!),
+        child: _buildImageWithBorder(),
+      );
+    } else {
+      return _buildImageWithBorder();
+    }
+  }
+
+  Widget _buildImageWithBorder() {
+    if (border != null) {
+      return Container(
+        decoration: BoxDecoration(
+          border: Border.all(),
+          borderRadius: border,
+        ),
+        child: _buildImageView(),
+      );
+    } else {
+      return _buildImageView();
+    }
+  }
+
+  Widget _buildImageView() {
+    switch (imagePath.imageType) {
       case ImageType.svg:
-        return Container(
+        return SvgPicture.asset(
+          imagePath,
           height: height,
           width: width,
-          child: SvgPicture.asset(
-            imagePath!,
-            height: height,
-            width: width,
-            fit: fit ?? BoxFit.contain,
-            colorFilter: color != null
-                ? ColorFilter.mode(color!, BlendMode.srcIn)
-                : null,
-          ),
+          fit: fit ?? BoxFit.contain,
+          colorFilter: color != null
+              ? ColorFilter.mode(color!, BlendMode.srcIn)
+              : null,
         );
       case ImageType.file:
         return Image.file(
-          File(imagePath!),
+          File(imagePath),
           height: height,
           width: width,
           fit: fit ?? BoxFit.cover,
@@ -92,12 +113,12 @@ class CustomImageView extends StatelessWidget {
         );
       case ImageType.network:
         return CachedNetworkImage(
-          imageUrl: imagePath!,
+          imageUrl: imagePath,
           height: height,
           width: width,
           fit: fit ?? BoxFit.cover,
           color: color,
-          placeholder: (context, url) => Container(
+          placeholder: (context, url) => SizedBox(
             height: 30,
             width: 30,
             child: LinearProgressIndicator(
@@ -114,13 +135,14 @@ class CustomImageView extends StatelessWidget {
         );
       case ImageType.png:
         return Image.asset(
-          imagePath!,
+          imagePath,
           height: height,
           width: width,
           fit: fit ?? BoxFit.cover,
           color: color,
         );
       case ImageType.unknown:
+      default:
         return Image.asset(
           placeHolder,
           height: height,

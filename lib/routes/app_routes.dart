@@ -1,5 +1,7 @@
 import 'package:albus/screens/onboarding_screen/binding/onboarding_binding.dart';
 import 'package:albus/screens/onboarding_screen/onboarding_screen.dart';
+import 'package:albus/screens/otp_code_screen/binding/otp_binding.dart';
+import 'package:albus/screens/otp_code_screen/otp_code_screen.dart';
 import 'package:albus/screens/register_screen/binding/register_binding.dart';
 import 'package:albus/screens/register_screen/register_screen.dart';
 import 'package:albus/screens/splash_screen/binding/splash_binding.dart';
@@ -11,7 +13,7 @@ class AppRoutes {
   static const String splashScreen = '/splash';
   static const String onboardingScreen = '/onboarding';
   static const String registerScreen = '/register';
-  static const String initialRoute = '/initialRoute';
+  static const String otpScreen = '/otp';
 
   static List<GetPage> pages = [
     GetPage(
@@ -28,6 +30,11 @@ class AppRoutes {
       name: registerScreen,
       page: () => RegisterScreen(),
       bindings: [RegisterBinding()],
+    ),
+    GetPage(
+      name: otpScreen,
+      page: () => const OtpCodeScreen(),
+      bindings: [OtpCodeBinding()],
     ),
   ];
 }
