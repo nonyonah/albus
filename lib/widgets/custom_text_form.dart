@@ -25,6 +25,7 @@ class CustomTextFormField extends StatelessWidget {
     this.suffix,
     this.suffixConstraints,
     this.contentPadding,
+    this.borderDecoration,
     this.border,
     this.fillColor,
     this.filled = false,
@@ -49,6 +50,7 @@ class CustomTextFormField extends StatelessWidget {
   final Widget? suffix;
   final BoxConstraints? suffixConstraints;
   final EdgeInsets? contentPadding;
+  final InputBorder? borderDecoration;
   final InputBorder? border;
   final Color? fillColor;
   final bool filled;

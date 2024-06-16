@@ -1,3 +1,5 @@
+import 'package:albus/screens/name_screen/binding/name_binding.dart';
+import 'package:albus/screens/name_screen/name_screen.dart';
 import 'package:albus/screens/onboarding_screen/binding/onboarding_binding.dart';
 import 'package:albus/screens/onboarding_screen/onboarding_screen.dart';
 import 'package:albus/screens/otp_code_screen/binding/otp_binding.dart';
@@ -14,6 +16,7 @@ class AppRoutes {
   static const String onboardingScreen = '/onboarding';
   static const String registerScreen = '/register';
   static const String otpScreen = '/otp';
+  static const String nameScreen = '/name';
 
   static List<GetPage> pages = [
     GetPage(
@@ -36,5 +39,10 @@ class AppRoutes {
       page: () => const OtpCodeScreen(),
       bindings: [OtpCodeBinding()],
     ),
+    GetPage(
+      name: nameScreen,
+      page: () => NameScreen(),
+      bindings: [NameBinding()],
+    )
   ];
 }
