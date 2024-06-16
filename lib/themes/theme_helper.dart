@@ -83,7 +83,7 @@ class TextThemes {
       fontWeight: FontWeight.w700,
     ),
     labelMedium: TextStyle(
-      color: appTheme.black900,
+      color: appTheme.whiteA700,
       fontSize: 10.fSize,
       fontFamily: GoogleFonts.outfit().fontFamily,
       fontWeight: FontWeight.w700,

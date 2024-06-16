@@ -7,6 +7,7 @@ import 'package:albus/themes/custom_button_style.dart';
 import 'package:albus/widgets/custom_image_view.dart';
 import 'package:albus/widgets/custom_text_form.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';
 
 
@@ -36,10 +37,8 @@ class OtpCodeScreen extends GetWidget<OtpCodeController> {
   }
 
   Widget _otpCodeInput() {
-    return CustomTextFormField(
-      controller: controller.otpController,
-      hintText: '000-000',
-      textInputAction: TextInputAction.done,
+    return OtpTextField(
+      textStyle: theme.textTheme.headlineSmall
     );
   }
 
@@ -75,7 +74,7 @@ class OtpCodeScreen extends GetWidget<OtpCodeController> {
                 )
               ),
             ),
-            SizedBox(height: 30.v),
+            SizedBox(height: 100.v),
             _otpCodeInput(),
             const Spacer(),
             Align(
@@ -90,9 +89,9 @@ class OtpCodeScreen extends GetWidget<OtpCodeController> {
                   SizedBox(width: 8.h),
                   CustomElevatedButton(
                     height: 22.v,
-                    width: 54.h,
+                    width: 50.h,
                     text: 'Resend',
-                    buttonStyle: CustomButtonStyles.fillPrimaryTL11,
+                    buttonStyle: CustomButtonStyles.fillBlack,
                     buttonTextStyle: theme.textTheme.labelMedium!,
                   ),
                 ],
