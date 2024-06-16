@@ -131,7 +131,7 @@ class NameScreen extends GetWidget<NameController> {
             _buildLastNameInput(),
             SizedBox(height: 20.v),
             SizedBox(
-              width: double.maxFinite,
+              width: SizeUtils.width,
               child: _buildPhoneNumberInput(),
             ),
             const Spacer(),
@@ -142,6 +142,7 @@ class NameScreen extends GetWidget<NameController> {
                 right: 6.h,
               ),
             ),
+            SizedBox(height: 60.v),
           ],
         ),
       ),
