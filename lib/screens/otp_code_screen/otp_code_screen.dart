@@ -107,6 +107,7 @@ class OtpCodeScreen extends GetWidget<OtpCodeController> {
               ),
               alignment: Alignment.center,
             ),
+            SizedBox(height: 30.v),
           ],
         ),
         

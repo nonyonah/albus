@@ -63,6 +63,7 @@ class CustomElevatedButton extends BaseButton {
               style: buttonTextStyle ??
               TextStyle(
                       fontFamily: GoogleFonts.outfit().fontFamily,
+                      fontSize: 17.fSize,
                       color: Colors.white, // Placeholder for CustomTextStyles.titleMediumInterTightWhiteA700
                     ),
             ),
