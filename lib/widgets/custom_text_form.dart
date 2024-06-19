@@ -5,7 +5,7 @@ import 'package:albus/themes/custom_text_style.dart';
 import 'package:albus/themes/theme_helper.dart';
 
 class CustomTextFormField extends StatelessWidget {
-  CustomTextFormField({
+  const CustomTextFormField({
     Key? key,
     this.alignment,
     this.width,
@@ -26,7 +26,9 @@ class CustomTextFormField extends StatelessWidget {
     this.suffixConstraints,
     this.contentPadding,
     this.borderDecoration,
+    this.boxDecoration,
     this.border,
+    this.borderRadius,
     this.fillColor,
     this.filled = false,
     this.validator,
@@ -52,6 +54,8 @@ class CustomTextFormField extends StatelessWidget {
   final EdgeInsets? contentPadding;
   final InputBorder? borderDecoration;
   final InputBorder? border;
+  final BorderRadius? borderRadius;
+  final BoxDecoration? boxDecoration;
   final Color? fillColor;
   final bool filled;
   final FormFieldValidator<String>? validator;
@@ -60,40 +64,47 @@ class CustomTextFormField extends StatelessWidget {
   Widget build(BuildContext context) {
     return alignment != null
         ? Align(
-            alignment: alignment ?? Alignment.center,
-            child: textFormFieldWidget,
+            alignment: alignment!,
+            child: _textFormFieldWidget,
           )
-        : textFormFieldWidget;
+        : _textFormFieldWidget;
   }
 
-  Widget get textFormFieldWidget => SizedBox(
+  Widget get _textFormFieldWidget => SizedBox(
         width: width ?? double.maxFinite,
-        child: TextFormField(
-          scrollPadding: scrollPadding ??
-              EdgeInsets.only(
-                bottom: MediaQuery.of(Get.context!).viewInsets.bottom,
+        child: Container(
+          decoration: boxDecoration ??
+              BoxDecoration(
+                borderRadius: borderRadius ?? BorderRadius.circular(24.h),
+                color: appTheme.gray50.withOpacity(1),
               ),
-          controller: controller,
-          focusNode: focusNode,
-          onTapOutside: (event) {
-            if (focusNode != null) {
-              focusNode?.unfocus();
-            } else {
-              FocusManager.instance.primaryFocus?.unfocus();
-            }
-          },
-          autofocus: autoFocus,
-          style: textStyle ?? CustomTextStyle.titleMediumInterTightPrimary,
-          obscureText: obscureText,
-          textInputAction: textInputAction,
-          keyboardType: textInputType,
-          maxLines: maxLines ?? 1,
-          decoration: decoration,
-          validator: validator,
+          child: TextFormField(
+            scrollPadding: scrollPadding ??
+                EdgeInsets.only(
+                  bottom: MediaQuery.of(Get.context!).viewInsets.bottom,
+                ),
+            controller: controller,
+            focusNode: focusNode,
+            onTapOutside: (event) {
+              if (focusNode != null) {
+                focusNode?.unfocus();
+                } else {
+                  FocusManager.instance.primaryFocus?.unfocus();
+                  }
+                },
+            autofocus: autoFocus,
+            style: textStyle ?? CustomTextStyle.titleMediumInterTightPrimary,
+            obscureText: obscureText,
+            textInputAction: textInputAction,
+            keyboardType: textInputType,
+            maxLines: maxLines ?? 1,
+            decoration: _decoration,
+            validator: validator,
+          ),
         ),
       );
 
-  InputDecoration get decoration => InputDecoration(
+  InputDecoration get _decoration => InputDecoration(
         hintText: hintText ?? '',
         hintStyle: hintStyle ?? CustomTextStyle.titleMediumInterTightPrimary,
         prefixIcon: prefix,
@@ -102,24 +113,22 @@ class CustomTextFormField extends StatelessWidget {
         suffixIconConstraints: suffixConstraints,
         contentPadding: contentPadding ?? EdgeInsets.all(14.h),
         isDense: true,
-        fillColor: fillColor ?? Colors.black.withOpacity(0.05),
+        fillColor: fillColor ?? Colors.grey.withOpacity(0.05),
         filled: filled,
         border: border ?? borderDecoration ??
             OutlineInputBorder(
               borderRadius: BorderRadius.circular(24.h),
               borderSide: BorderSide.none,
             ),
-            enabledBorder: borderDecoration ??
+        enabledBorder: borderDecoration ??
             OutlineInputBorder(
               borderRadius: BorderRadius.circular(24.h),
               borderSide: BorderSide.none,
             ),
-            focusedBorder: borderDecoration ??
+        focusedBorder: borderDecoration ??
             OutlineInputBorder(
               borderRadius: BorderRadius.circular(24.h),
-              borderSide: BorderSide.none,
+              borderSide: BorderSide(color: Colors.grey.withOpacity(0.10)),
             ),
       );
-
-  
 }

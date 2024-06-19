@@ -26,16 +26,16 @@ class CustomPhoneNumber extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(
         horizontal: 4.h,
-        vertical: 12.v,
+        vertical: 4.v,
       ),
       decoration: BoxDecoration(
-        //color: appTheme.gray50,
-        borderRadius: BorderRadius.circular(24.h,
-        ),
-        border: Border.all(
-        color: appTheme.black900.withOpacity(0),
-        width: 0.5.h,
-      ),
+        color: appTheme.gray50,
+        borderRadius: BorderRadius.circular(50.h,
+        //),
+        //border: Border.all(
+        //color: appTheme.black900.withOpacity(0.10),
+        //width: 0.5.h,
+      )
       ),
       child: Row(
         children: [
