@@ -106,7 +106,7 @@ class NameScreen extends GetWidget<NameController> {
               width: 24.adaptSize,
               alignment: Alignment.centerLeft,
               onTap: () {
-                onTapImgArrowLeftOne();
+                backButton();
               },
             ),
             SizedBox(height: 50.v),
@@ -141,6 +141,9 @@ class NameScreen extends GetWidget<NameController> {
                 left: 12.h,
                 right: 6.h,
               ),
+              onPressed: () {
+                        Get.toNamed('/createyourpassword');
+                      },
             ),
             SizedBox(height: 60.v),
           ],
@@ -149,7 +152,7 @@ class NameScreen extends GetWidget<NameController> {
     );
   }
 
-  void onTapImgArrowLeftOne() {
+  void backButton() {
     Get.back();
   }
 }

@@ -54,7 +54,7 @@ class OtpCodeScreen extends GetWidget<OtpCodeController> {
               height: 24.adaptSize,
               width: 24.adaptSize,
               onTap: () {
-                onTapImgBackArrow();
+                backButton();
               },
             ),
             SizedBox(height: 50.v),
@@ -116,7 +116,7 @@ class OtpCodeScreen extends GetWidget<OtpCodeController> {
       ),
     );
   }
-  void onTapImgBackArrow() {
+  void backButton() {
     Get.back();
   }
 }

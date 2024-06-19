@@ -1,3 +1,5 @@
+import 'package:albus/screens/create_password_screen/binding/create_password_binding.dart';
+import 'package:albus/screens/create_password_screen/create_password.dart';
 import 'package:albus/screens/name_screen/binding/name_binding.dart';
 import 'package:albus/screens/name_screen/name_screen.dart';
 import 'package:albus/screens/onboarding_screen/binding/onboarding_binding.dart';
@@ -17,6 +19,7 @@ class AppRoutes {
   static const String registerScreen = '/register';
   static const String otpScreen = '/otp';
   static const String nameScreen = '/name';
+  static const String createYourPasswordScreen = '/createyourpassword';
 
   static List<GetPage> pages = [
     GetPage(
@@ -43,6 +46,11 @@ class AppRoutes {
       name: nameScreen,
       page: () => NameScreen(),
       bindings: [NameBinding()],
+    ),
+    GetPage(
+      name: createYourPasswordScreen,
+      page: () => CreateYourPasswordScreen(),
+      bindings: [CreateYourPasswordBinding()],
     )
   ];
 }

@@ -42,7 +42,7 @@ class RegisterScreen extends GetWidget<RegisterController> {
                         imagePath: ImageConstant.imgArrowLeft,
                         height: 24.adaptSize,
                         width: 24.adaptSize,
-                        onTap: onTapImgBackArrow,
+                        onTap: backButton,
                       ),
                       const SizedBox(height: 50),
                       Text(
@@ -92,7 +92,7 @@ class RegisterScreen extends GetWidget<RegisterController> {
     );
   }
 
-  void onTapImgBackArrow() {
+  void backButton() {
     Get.back();
   }
 }
