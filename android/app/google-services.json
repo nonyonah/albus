@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "91175147280",
+    "project_id": "gemini-pay-fb7ad",
+    "storage_bucket": "gemini-pay-fb7ad.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:91175147280:android:1ce9544c5b0b5320a9f795",
+        "android_client_info": {
+          "package_name": "com.albus.app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD_DadAUwP6jweNXaV-PDwelAgH87clAEU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

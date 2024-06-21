@@ -1,3 +1,4 @@
+import 'package:albus/core/services/auth_service.dart';
 import 'package:albus/core/utils/image_constant.dart';
 import 'package:albus/core/utils/size_utils.dart';
 import 'package:albus/core/utils/validation_functions.dart';
@@ -75,9 +76,12 @@ class RegisterScreen extends GetWidget<RegisterController> {
                           right: 11.h,
                         ),
                         alignment: Alignment.center,
-                        onPressed: () {
+                        onPressed: () async {
                          {
-                            Get.toNamed('/otp');
+                            if (_formKey.currentState!.validate()) {
+                              AuthService().signup(
+                                email: controller.emailInputController.text);
+                            }
                           }
                         },
                       )

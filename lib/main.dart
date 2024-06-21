@@ -1,3 +1,4 @@
+import 'package:albus/core/services/auth_service.dart';
 import 'package:albus/core/utils/logger.dart';
 import 'package:albus/core/utils/size_utils.dart';
 import 'package:albus/localization/app_localization.dart';
@@ -6,10 +7,17 @@ import 'package:albus/themes/theme_helper.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/route_manager.dart';
+import 'package:get/get.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform
+  ).then((value) => Get.put(AuthService()));
+
   Future.wait([
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
   ]).then((value) {
