@@ -79,8 +79,7 @@ class RegisterScreen extends GetWidget<RegisterController> {
                         onPressed: () async {
                          {
                             if (_formKey.currentState!.validate()) {
-                              AuthService().signup(
-                                email: controller.emailInputController.text);
+                            
                             }
                           }
                         },

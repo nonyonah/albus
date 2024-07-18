@@ -55,7 +55,7 @@ dependencies:
 
 flutter_native_splash:
   color: "#ffffff"
-  image: assets/images/Gemini Pay.png
+  image: assets/images/Logo.svg
   android: true
   ios: true
   web: false

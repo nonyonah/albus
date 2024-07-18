@@ -23,8 +23,8 @@ class ThemeHelper {
   }
 
   ThemeData _getThemeData() {
-    var colorScheme = 
-    _supportedCustomScheme[_appTheme] ?? ColorSchemes.lightCodeColorScheme;
+    var colorScheme =
+        _supportedCustomScheme[_appTheme] ?? ColorSchemes.lightCodeColorScheme;
     return ThemeData(
       visualDensity: VisualDensity.standard,
       colorScheme: colorScheme,
@@ -52,50 +52,50 @@ class ThemeHelper {
 
 class TextThemes {
   static TextTheme textTheme(ColorScheme colorScheme) => TextTheme(
-    bodyLarge: TextStyle(
-      color: colorScheme.primary,
-      fontSize: 16.fSize,
-      fontFamily: GoogleFonts.outfit().fontFamily,
-      fontWeight: FontWeight.w300,
-    ),
-    bodyMedium: TextStyle(
-      color: colorScheme.primary,
-      fontSize: 13.fSize,
-      fontFamily: GoogleFonts.outfit().fontFamily,
-      fontWeight: FontWeight.w400,
-    ),
-    headlineSmall: TextStyle(
-      color: colorScheme.primary,
-      fontSize: 24.fSize,
-      fontFamily: GoogleFonts.outfit().fontFamily,
-      fontWeight: FontWeight.w700,
-    ),
-    titleMedium: TextStyle(
-      color: colorScheme.primary,
-      fontSize: 17.fSize,
-      fontFamily: GoogleFonts.outfit().fontFamily,
-      fontWeight: FontWeight.w700,
-    ),
-    labelLarge: TextStyle(
-      color: appTheme.black900,
-      fontSize: 13.fSize,
-      fontFamily: GoogleFonts.outfit().fontFamily,
-      fontWeight: FontWeight.w700,
-    ),
-    labelMedium: TextStyle(
-      color: appTheme.whiteA700,
-      fontSize: 10.fSize,
-      fontFamily: GoogleFonts.outfit().fontFamily,
-      fontWeight: FontWeight.w700,
-    ),
-  );
+        bodyLarge: TextStyle(
+          color: colorScheme.primary,
+          fontSize: 16.fSize,
+          fontFamily: GoogleFonts.interTight().fontFamily,
+          fontWeight: FontWeight.w300,
+        ),
+        bodyMedium: TextStyle(
+          color: colorScheme.primary,
+          fontSize: 13.fSize,
+          fontFamily: GoogleFonts.interTight().fontFamily,
+          fontWeight: FontWeight.w400,
+        ),
+        headlineSmall: TextStyle(
+          color: colorScheme.primary,
+          fontSize: 24.fSize,
+          fontFamily: GoogleFonts.interTight().fontFamily,
+          fontWeight: FontWeight.w700,
+        ),
+        titleMedium: TextStyle(
+          color: colorScheme.primary,
+          fontSize: 17.fSize,
+          fontFamily: GoogleFonts.interTight().fontFamily,
+          fontWeight: FontWeight.w700,
+        ),
+        labelLarge: TextStyle(
+          color: appTheme.black900,
+          fontSize: 13.fSize,
+          fontFamily: GoogleFonts.interTight().fontFamily,
+          fontWeight: FontWeight.w700,
+        ),
+        labelMedium: TextStyle(
+          color: appTheme.whiteA700,
+          fontSize: 10.fSize,
+          fontFamily: GoogleFonts.interTight().fontFamily,
+          fontWeight: FontWeight.w700,
+        ),
+      );
 }
 
 class ColorSchemes {
   static const lightCodeColorScheme = ColorScheme.light(
-    primary: Color(0xFF000000),
+    primary: Color(0xFF03045E),
     onPrimary: Color(0xFF131313),
-    onPrimaryContainer: Color(0xFF5E548E),
+    onPrimaryContainer: Color(0xFF03045E),
   );
 }
 
@@ -104,5 +104,5 @@ class LightCodeColors {
   Color get whiteA700 => const Color(0xFFFFFFFF);
   Color get black900 => const Color(0xFF0C0C0C);
   Color get blueGray100 => const Color(0xFFD9D9D9);
-  Color get blueGray400 => const Color (0xFF888888);
+  Color get blueGray400 => const Color(0xFF888888);
 }
