@@ -194,6 +194,7 @@ class RegisterScreen extends GetWidget<RegisterController> {
       margin: EdgeInsets.symmetric(horizontal: 12.h),
       onPressed: () {
         if (_formKey.currentState?.validate() ?? false) {
+          Get.toNamed('/otp');
           // Perform registration
         }
       },

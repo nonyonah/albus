@@ -105,7 +105,7 @@ class OtpCodeScreen extends GetWidget<OtpCodeController> {
                 right: 6.h,
               ),
               onPressed: () {
-                Get.toNamed('/name');
+                Get.toNamed('/');
               },
               alignment: Alignment.center,
             ),
