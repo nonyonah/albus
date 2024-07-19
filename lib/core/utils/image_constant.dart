@@ -5,7 +5,7 @@ class ImageConstant {
   static String imgEyeOpen = '$imagePath/Eye.svg';
   static String imgEyeClose = '$imagePath/EyeSlash.svg';
   static String imgOnboarding = '$imagePath/Onboarding.png';
-  static String imgNotifications = '$imagePath/Notifications.svg';
+  static String imgNotifications = '$imagePath/Notifications.png';
   static String imgConnecting = '$imagePath/Connecting account.svg';
   static String imgSuccess = '$imagePath/Success.svg';
 }

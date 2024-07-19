@@ -53,25 +53,25 @@ class ThemeHelper {
 class TextThemes {
   static TextTheme textTheme(ColorScheme colorScheme) => TextTheme(
         bodyLarge: TextStyle(
-          color: colorScheme.primary,
+          color: appTheme.black900,
           fontSize: 16.fSize,
           fontFamily: GoogleFonts.interTight().fontFamily,
           fontWeight: FontWeight.w300,
         ),
         bodyMedium: TextStyle(
-          color: colorScheme.primary,
+          color: appTheme.black900,
           fontSize: 13.fSize,
           fontFamily: GoogleFonts.interTight().fontFamily,
           fontWeight: FontWeight.w400,
         ),
         headlineSmall: TextStyle(
-          color: colorScheme.primary,
+          color: appTheme.black900,
           fontSize: 24.fSize,
           fontFamily: GoogleFonts.interTight().fontFamily,
           fontWeight: FontWeight.w700,
         ),
         titleMedium: TextStyle(
-          color: colorScheme.primary,
+          color: appTheme.black900,
           fontSize: 17.fSize,
           fontFamily: GoogleFonts.interTight().fontFamily,
           fontWeight: FontWeight.w700,

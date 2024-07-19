@@ -10,11 +10,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';
 
-
 class OtpCodeScreen extends GetWidget<OtpCodeController> {
   const OtpCodeScreen({super.key});
 
-@override
+  @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
@@ -27,8 +26,11 @@ class OtpCodeScreen extends GetWidget<OtpCodeController> {
             right: 26.h,
           ),
           child: Column(
-            children: [_buildVerificationSection(), 
-            SizedBox(height: 4.v,)
+            children: [
+              _buildVerificationSection(),
+              SizedBox(
+                height: 4.v,
+              )
             ],
           ),
         ),
@@ -37,9 +39,7 @@ class OtpCodeScreen extends GetWidget<OtpCodeController> {
   }
 
   Widget _otpCodeInput() {
-    return OtpTextField(
-      textStyle: theme.textTheme.headlineSmall
-    );
+    return OtpTextField(textStyle: theme.textTheme.headlineSmall);
   }
 
   Widget _buildVerificationSection() {
@@ -66,13 +66,12 @@ class OtpCodeScreen extends GetWidget<OtpCodeController> {
             SizedBox(
               width: double.maxFinite,
               child: Text(
-                'Enter the code we sent you so that we can verify your email address',
-                maxLines: 2,
-                overflow: TextOverflow.ellipsis,
-                style: theme.textTheme.bodyLarge!.copyWith(
-                  height: 1.38,
-                )
-              ),
+                  'Enter the code we sent you so that we can verify your email address',
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: theme.textTheme.bodyLarge!.copyWith(
+                    height: 1.38,
+                  )),
             ),
             SizedBox(height: 100.v),
             _otpCodeInput(),
@@ -105,19 +104,18 @@ class OtpCodeScreen extends GetWidget<OtpCodeController> {
                 right: 6.h,
               ),
               onPressed: () {
-                Get.toNamed('/');
+                Get.toNamed('/notification');
               },
               alignment: Alignment.center,
             ),
             SizedBox(height: 30.v),
           ],
         ),
-        
       ),
     );
   }
+
   void backButton() {
     Get.back();
   }
 }
-

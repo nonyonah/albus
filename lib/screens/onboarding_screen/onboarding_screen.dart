@@ -30,6 +30,10 @@ class OnboardingScreen extends GetWidget<OnboardingController> {
                 imagePath: ImageConstant.imgOnboarding,
                 height: 300.adaptSize,
                 width: double.maxFinite,
+                margin: EdgeInsets.only(
+                  left: 28.h,
+                  right: 30.h,
+                ),
               ),
               SizedBox(height: 52.v),
               Text(
