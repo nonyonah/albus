@@ -8,14 +8,14 @@ import 'package:albus/core/utils/validation_functions.dart';
 import 'custom_text_form.dart';
 
 class CustomPhoneNumber extends StatelessWidget {
-  CustomPhoneNumber(
-    {Key? key,
+  CustomPhoneNumber({
+    Key? key,
     required this.country,
     required this.onTap,
     required this.controller,
-    }
-  )
-  :super(key: key,);
+  }) : super(
+          key: key,
+        );
 
   Country country;
   Function(Country) onTap;
@@ -30,12 +30,13 @@ class CustomPhoneNumber extends StatelessWidget {
       ),
       decoration: BoxDecoration(
         color: appTheme.gray50,
-        borderRadius: BorderRadius.circular(50.h,
-        //),
-        //border: Border.all(
-        //color: appTheme.black900.withOpacity(0.10),
-        //width: 0.5.h,
-      )
+        borderRadius: BorderRadius.circular(
+          10.h,
+          //),
+          //border: Border.all(
+          //color: appTheme.black900.withOpacity(0.10),
+          //width: 0.5.h,
+        ),
       ),
       child: Row(
         children: [
@@ -44,11 +45,10 @@ class CustomPhoneNumber extends StatelessWidget {
               _openCountryPicker(context);
             },
             child: Padding(
-              padding: EdgeInsets.only(left: 12.h),
-              child: CountryPickerUtils.getDefaultFlagImage(
-                country,
-              )
-            ),
+                padding: EdgeInsets.only(left: 12.h),
+                child: CountryPickerUtils.getDefaultFlagImage(
+                  country,
+                )),
           ),
           Expanded(
             child: Padding(
@@ -74,36 +74,37 @@ class CustomPhoneNumber extends StatelessWidget {
   }
 
   Widget _buildDialogItem(Country country) => Row(
-    children: <Widget>[
-      CountryPickerUtils.getDefaultFlagImage(country),
-      Container(
-        margin: EdgeInsets.only(
-          left: 10.h,
-        ),
-        width: 60.h,
-        child: Text(
-          "+${country.phoneCode}",
-          style: TextStyle(
-            fontSize: 14.fSize,
+        children: <Widget>[
+          CountryPickerUtils.getDefaultFlagImage(country),
+          Container(
+            margin: EdgeInsets.only(
+              left: 10.h,
+            ),
+            width: 60.h,
+            child: Text(
+              "+${country.phoneCode}",
+              style: TextStyle(
+                fontSize: 14.fSize,
+              ),
+            ),
           ),
-        ),
-      ),
-    ],
-  );
+        ],
+      );
 
   void _openCountryPicker(BuildContext context) => showDialog(
-    context: context,
-    builder: (context) => CountryPickerDialog(
-      searchInputDecoration: InputDecoration(
-        hintText: 'Search...',
-        hintStyle: TextStyle(fontSize: 14.fSize),
-      ),
-      isSearchable: true,
-      title: Text('Select your phone code',
-          style: TextStyle(fontSize: 14.fSize),
+        context: context,
+        builder: (context) => CountryPickerDialog(
+          searchInputDecoration: InputDecoration(
+            hintText: 'Search...',
+            hintStyle: TextStyle(fontSize: 14.fSize),
+          ),
+          isSearchable: true,
+          title: Text(
+            'Select your phone code',
+            style: TextStyle(fontSize: 14.fSize),
           ),
           onValuePicked: (Country country) => onTap(country),
           itemBuilder: _buildDialogItem,
-    ),
-  );
+        ),
+      );
 }

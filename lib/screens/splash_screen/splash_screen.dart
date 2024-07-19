@@ -11,24 +11,25 @@ class SplashScreen extends GetWidget<SplashController> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-        child: Scaffold(
-      backgroundColor: theme.colorScheme.primary,
-      body: Container(
-          width: double.maxFinite,
-          padding: EdgeInsets.all(26.h),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              _buildColumnVector(),
-              SizedBox(
-                height: 4.v,
-              )
-            ],
-          )),
-    ));
+      child: Scaffold(
+        backgroundColor: theme.colorScheme.primary,
+        body: Container(
+            width: double.maxFinite,
+            padding: EdgeInsets.all(26.h),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                _buildLogoSection(),
+                SizedBox(
+                  height: 4.v,
+                )
+              ],
+            )),
+      ),
+    );
   }
 
-  Widget _buildColumnVector() {
+  Widget _buildLogoSection() {
     return Container(
       width: double.maxFinite,
       margin: EdgeInsets.only(right: 6.h),

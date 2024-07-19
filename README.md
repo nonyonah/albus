@@ -1,7 +1,5 @@
 # Albus
 
-
-
 Albus is a user-friendly budgeting app designed to help you manage your finances effortlessly. With intuitive design and powerful features, Albus enables you to track your spending, set budget goals, and achieve financial stability.
 
 Features

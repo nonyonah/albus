@@ -19,14 +19,28 @@ class OnboardingScreen extends GetWidget<OnboardingController> {
         body: Container(
           width: double.maxFinite,
           padding: EdgeInsets.symmetric(
-            horizontal: (38.h),
-            vertical: (70.v),
+            horizontal: 30.h,
+            vertical: 72.v,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              SizedBox(height: 140.v),
+              CustomImageView(
+                imagePath: ImageConstant.imgOnboarding,
+                height: 300.adaptSize,
+                width: double.maxFinite,
+              ),
+              SizedBox(height: 52.v),
+              Text(
+                'Simplify your finances by tracking expenses, setting budgets, and achieving your financial goals',
+                maxLines: 2,
+                overflow: TextOverflow.ellipsis,
+                textAlign: TextAlign.center,
+                style: Theme.of(context).textTheme.bodyMedium,
+              ),
               const Spacer(),
-              _buildVectorSection(),
+              _buildGetStartedSection(),
             ],
           ),
         ),
@@ -34,34 +48,30 @@ class OnboardingScreen extends GetWidget<OnboardingController> {
     );
   }
 
-  Widget _buildVectorSection() {
+  Widget _buildGetStartedSection() {
     return Container(
-      width: double.maxFinite,
-      margin: EdgeInsets.only(right: 6.h),
-      padding: EdgeInsets.symmetric(horizontal: 6.h),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          CustomImageView(
-            imagePath: ImageConstant.imgLogo,
-            height: 240.v,
-            width: 240.h,
-          ),
-          SizedBox(height: 262.v),
-          CustomElevatedButton(
-            text: 'Get Started',
-            margin: EdgeInsets.only(left: 4.h),
-            onPressed: () {
-              Get.toNamed('/register');
-            },
-          ),
-          SizedBox(height: 40.v),
-          Text(
-            'Login',
-            style: CustomTextStyle.titleMediumOutiftOnPrimary,
-          )
-        ]
-    ),
-    );
+        width: double.maxFinite,
+        padding: EdgeInsets.symmetric(horizontal: 4.h),
+        child: Column(
+          children: [
+            CustomElevatedButton(
+              text: 'Get Started',
+              margin: EdgeInsets.only(left: 4.h),
+              onPressed: () {
+                Get.toNamed('/register');
+              },
+            ),
+            SizedBox(height: 20.v),
+            TextButton(
+              onPressed: () {
+                Get.toNamed('/login');
+              },
+              child: Text(
+                'Login',
+                style: CustomTextStyle.titleMediumOutiftOnPrimary,
+              ),
+            ),
+          ],
+        ));
   }
 }

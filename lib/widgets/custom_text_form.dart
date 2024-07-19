@@ -77,7 +77,7 @@ class CustomTextFormField extends StatelessWidget {
         child: Container(
           decoration: boxDecoration ??
               BoxDecoration(
-                borderRadius: borderRadius ?? BorderRadius.circular(24.h),
+                borderRadius: borderRadius ?? BorderRadius.circular(10.h),
                 color: appTheme.gray50.withOpacity(1),
               ),
           child: TextFormField(
@@ -90,10 +90,10 @@ class CustomTextFormField extends StatelessWidget {
             onTapOutside: (event) {
               if (focusNode != null) {
                 focusNode?.unfocus();
-                } else {
-                  FocusManager.instance.primaryFocus?.unfocus();
-                  }
-                },
+              } else {
+                FocusManager.instance.primaryFocus?.unfocus();
+              }
+            },
             autofocus: autoFocus,
             style: textStyle ?? CustomTextStyle.titleMediumInterTightPrimary,
             obscureText: obscureText,
@@ -113,23 +113,24 @@ class CustomTextFormField extends StatelessWidget {
         prefixIconConstraints: prefixConstraints,
         suffixIcon: suffix,
         suffixIconConstraints: suffixConstraints,
-        contentPadding: contentPadding ?? EdgeInsets.all(14.h),
+        contentPadding: contentPadding ?? EdgeInsets.all(15.h),
         isDense: true,
         fillColor: fillColor ?? Colors.grey.withOpacity(0.05),
         filled: filled,
-        border: border ?? borderDecoration ??
+        border: border ??
+            borderDecoration ??
             OutlineInputBorder(
-              borderRadius: BorderRadius.circular(24.h),
+              borderRadius: BorderRadius.circular(10.h),
               borderSide: BorderSide.none,
             ),
         enabledBorder: borderDecoration ??
             OutlineInputBorder(
-              borderRadius: BorderRadius.circular(24.h),
+              borderRadius: BorderRadius.circular(10.h),
               borderSide: BorderSide.none,
             ),
         focusedBorder: borderDecoration ??
             OutlineInputBorder(
-              borderRadius: BorderRadius.circular(24.h),
+              borderRadius: BorderRadius.circular(10.h),
               borderSide: BorderSide(color: Colors.grey.withOpacity(0.10)),
             ),
       );
