@@ -2,7 +2,8 @@ bool isValidEmail(String? inputString, {bool isRequired = false}) {
   if (!isRequired && (inputString == null || inputString.isEmpty)) {
     return true;
   } else if (inputString != null && inputString.isNotEmpty) {
-    const pattern = r'^[^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*@([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}$';
+    const pattern =
+        r'^[^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*@([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}$';
     final regExp = RegExp(pattern);
     return regExp.hasMatch(inputString);
   }

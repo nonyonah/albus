@@ -161,7 +161,7 @@ class RegisterScreen extends GetWidget<RegisterController> {
             ),
             validator: (value) {
               if (value == null ||
-                  (!isValidPassword(value, isRequired: true))) {
+                  (!isValidPassword(value, isRequired: false))) {
                 return 'Please enter a valid password';
               }
               return null;
