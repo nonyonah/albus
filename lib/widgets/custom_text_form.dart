@@ -6,7 +6,7 @@ import 'package:albus/themes/theme_helper.dart';
 
 class CustomTextFormField extends StatelessWidget {
   const CustomTextFormField({
-    Key? key,
+    super.key,
     this.alignment,
     this.width,
     this.scrollPadding,
@@ -33,7 +33,7 @@ class CustomTextFormField extends StatelessWidget {
     this.fillColor,
     this.filled = false,
     this.validator,
-  }) : super(key: key);
+  });
 
   final Alignment? alignment;
   final double? width;

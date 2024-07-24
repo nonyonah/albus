@@ -1,4 +1,3 @@
-import 'dart:ui';
 import 'package:albus/core/utils/pref_utils.dart';
 import 'package:albus/core/utils/size_utils.dart';
 import 'package:flutter/material.dart';
@@ -8,13 +7,13 @@ LightCodeColors get appTheme => ThemeHelper().themeColor();
 ThemeData get theme => ThemeHelper().themeData();
 
 class ThemeHelper {
-  var _appTheme = PrefUtils().getThemeData();
+  final _appTheme = PrefUtils().getThemeData();
 
-  Map<String, LightCodeColors> _supportedCustomColor = {
+  final Map<String, LightCodeColors> _supportedCustomColor = {
     'lightCode': LightCodeColors()
   };
 
-  Map<String, ColorScheme> _supportedCustomScheme = {
+  final Map<String, ColorScheme> _supportedCustomScheme = {
     'lightCode': ColorSchemes.lightCodeColorScheme
   };
 

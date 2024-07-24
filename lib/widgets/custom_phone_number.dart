@@ -3,19 +3,16 @@ import 'package:albus/themes/theme_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:country_pickers/country.dart';
 import 'package:country_pickers/country_pickers.dart';
-import 'package:country_pickers/utils/utils.dart';
 import 'package:albus/core/utils/validation_functions.dart';
 import 'custom_text_form.dart';
 
 class CustomPhoneNumber extends StatelessWidget {
   CustomPhoneNumber({
-    Key? key,
+    super.key,
     required this.country,
     required this.onTap,
     required this.controller,
-  }) : super(
-          key: key,
-        );
+  });
 
   Country country;
   Function(Country) onTap;

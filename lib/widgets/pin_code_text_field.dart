@@ -6,7 +6,7 @@ import 'package:pin_code_fields/pin_code_fields.dart';
 
 class CustomPinCodeTextField extends StatelessWidget {
   CustomPinCodeTextField(
-    {Key? key,
+    {super.key,
     required this.context,
     required this.onChanged,
     this.alignment,
@@ -14,7 +14,7 @@ class CustomPinCodeTextField extends StatelessWidget {
     this.textStyle,
     this.hintStyle,
     this.validator}
-  ) : super(key: key);
+  );
 
   final BuildContext context;
   Function(String) onChanged;

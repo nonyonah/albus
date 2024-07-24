@@ -1,35 +1,23 @@
 import 'package:albus/core/utils/size_utils.dart';
-import 'package:albus/themes/theme_helper.dart';
 import 'package:albus/widgets/base_button.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class CustomElevatedButton extends BaseButton {
-  CustomElevatedButton(
-      {Key? key,
+  const CustomElevatedButton(
+      {super.key, Key? key,
       this.decoration,
       this.leftIcon,
       this.rightIcon,
-      EdgeInsets? margin,
-      VoidCallback? onPressed,
-      ButtonStyle? buttonStyle,
-      Alignment? alignment,
-      TextStyle? buttonTextStyle,
-      bool? isDisabled,
-      double? height,
-      double? width,
-      required String text})
-      : super(
-          text: text,
-          onPressed: onPressed,
-          buttonStyle: buttonStyle,
-          isDisabled: isDisabled,
-          buttonTextStyle: buttonTextStyle,
-          height: height,
-          width: width,
-          alignment: alignment,
-          margin: margin,
-        );
+      super.margin,
+      super.onPressed,
+      super.buttonStyle,
+      super.alignment,
+      super.buttonTextStyle,
+      super.isDisabled,
+      super.height,
+      super.width,
+      required super.text});
 
   final BoxDecoration? decoration;
   final Widget? leftIcon;

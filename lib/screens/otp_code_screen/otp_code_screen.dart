@@ -5,7 +5,6 @@ import 'package:albus/themes/theme_helper.dart';
 import 'package:albus/widgets/custom_elevated_button.dart';
 import 'package:albus/themes/custom_button_style.dart';
 import 'package:albus/widgets/custom_image_view.dart';
-import 'package:albus/widgets/custom_text_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';

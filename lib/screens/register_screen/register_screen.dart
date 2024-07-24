@@ -1,4 +1,3 @@
-import 'package:albus/core/services/auth_service.dart';
 import 'package:albus/core/utils/image_constant.dart';
 import 'package:albus/core/utils/size_utils.dart';
 import 'package:albus/core/utils/validation_functions.dart';
@@ -70,7 +69,7 @@ class RegisterScreen extends GetWidget<RegisterController> {
                         margin: EdgeInsets.symmetric(horizontal: 4.h),
                         child: _buildPhoneNumber(),
                       ),
-                      Spacer(),
+                      const Spacer(),
                       _buildContinueButton()
                     ],
                   ),

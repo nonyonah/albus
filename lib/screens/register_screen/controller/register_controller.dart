@@ -1,4 +1,3 @@
-import 'package:albus/core/services/auth_service.dart';
 import 'package:albus/screens/register_screen/models/register_model.dart';
 import 'package:country_pickers/utils/utils.dart';
 import 'package:flutter/material.dart';
