@@ -9,7 +9,6 @@ import 'package:albus/screens/register_screen/binding/register_binding.dart';
 import 'package:albus/screens/register_screen/register_screen.dart';
 import 'package:albus/screens/splash_screen/binding/splash_binding.dart';
 import 'package:albus/screens/splash_screen/splash_screen.dart';
-import 'package:get/route_manager.dart';
 
 import '../screens/notification_permission_screen/binding/notification_permission_binding.dart';
 
@@ -21,35 +20,4 @@ class AppRoutes {
   static const String notificationPermissionScreen = '/notification';
   static const String loginScreen = '/login';
 
-  static List<GetPage> pages = [
-    GetPage(
-        name: splashScreen,
-        page: () => const SplashScreen(),
-        bindings: [SplashBinding()]),
-    GetPage(
-      name: onboardingScreen,
-      page: () => const OnboardingScreen(),
-      bindings: [OnboardingBinding()],
-    ),
-    GetPage(
-      name: registerScreen,
-      page: () => RegisterScreen(),
-      bindings: [RegisterBinding()],
-    ),
-    GetPage(
-      name: otpScreen,
-      page: () => const OtpCodeScreen(),
-      bindings: [OtpCodeBinding()],
-    ),
-    GetPage(
-      name: notificationPermissionScreen,
-      page: () => const NotificationPermissionScreen(),
-      bindings: [NotificationPermissionBinding()],
-    ),
-    GetPage(
-      name: loginScreen,
-      page: () => LoginScreen(),
-      bindings: [LoginBinding()],
-    )
-  ];
 }

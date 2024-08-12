@@ -1,6 +1,6 @@
 import 'package:albus/core/utils/size_utils.dart';
 import 'package:albus/themes/theme_helper.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 class AppDecoration {
   static BoxDecoration get brandBackground => BoxDecoration(

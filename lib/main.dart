@@ -1,56 +1,57 @@
-import 'package:albus/core/services/auth_service.dart';
-import 'package:albus/core/utils/logger.dart';
 import 'package:albus/core/utils/size_utils.dart';
 import 'package:albus/localization/app_localization.dart';
 import 'package:albus/routes/app_routes.dart';
 import 'package:albus/themes/theme_helper.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:get/get.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'core/utils/navigator_service.dart';
+import 'themes/notifier/theme_notifier.dart';
 
-void main() async {
+var globalMessengerKey = GlobalKey<ScaffoldMessengerState>();
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
-
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform
-  ).then((value) => Get.put(AuthService()));
-
   Future.wait([
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
   ]).then((value) {
-    Logger.init(kReleaseMode ? LogMode.live : LogMode.debug);
-    runApp(const MyApp());
+    runApp(ProviderScope(child: MyApp()));
   });
 
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    systemNavigationBarColor: Colors.transparent,
-    statusBarColor: Colors.transparent,
     statusBarIconBrightness: Brightness.light,
     statusBarBrightness: Brightness.dark,
   ));
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
+class MyApp extends ConsumerWidget {
   @override
-  Widget build(BuildContext context) {
-    return Sizer(
-      builder: (context, orientation, deviceType) {
-        return GetMaterialApp(
-                title: 'albus',
-                debugShowCheckedModeBanner: false,
-                theme: theme, // Fetching theme from provider
-                translations: AppLocalization(),
-                locale: Get.deviceLocale,
-                fallbackLocale: const Locale('en', 'US'),
-                initialRoute: AppRoutes.splashScreen,
-                getPages: AppRoutes.pages, // Fetching routes from AppRoutes
-              );
-            },
-          );
-      } 
+  Widget build(
+    BuildContext context,
+    WidgetRef ref,
+  ) {
+    final themeType = ref.watch(themeNotifier).themeType;
+    return Sizer(builder: (context, orientation, deviceType) {
+      return MaterialApp(
+        theme: theme,
+        title: albus,
+        navigatorKey: NavigatorService.navigatorKey,
+        debugShowCheckedModeBanner: false,
+        localizationsDelegates: [
+          AppLocalizationDelegate(),
+          GlobalMaterialLocalizations.delegate,
+          GlobalWidgetLocalizations.delegate,
+          GlobalCupertinoLocalizations.delegate,
+        ],
+        supportedLocales: [
+          Locale(
+            'en',
+            '',
+          )
+        ],
+        initialRoute: AppRoutes.initialRoute,
+        routes: AppRoutes.routes,
+      );
+    });
   }
+}

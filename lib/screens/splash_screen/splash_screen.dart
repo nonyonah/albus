@@ -1,47 +1,48 @@
 import 'package:albus/core/utils/image_constant.dart';
-import 'package:albus/core/utils/size_utils.dart';
-import 'package:albus/screens/splash_screen/controller/splash_controller.dart';
-import 'package:albus/themes/theme_helper.dart';
-import 'package:albus/widgets/custom_image_view.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sizer/sizer.dart';
+import '../../themes/theme_helper.dart';
+import '../../widgets/custom_image_view.dart';
 
-class SplashScreen extends GetWidget<SplashController> {
+class SplashScreen extends ConsumerStatefulWidget {
   const SplashScreen({super.key});
+
+  @override
+  SplashScreenState createState() => SplashScreenState();
+}
+
+class SplashScreenState extends ConsumerState<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         backgroundColor: theme.colorScheme.primary,
         body: Container(
-            width: double.maxFinite,
-            padding: EdgeInsets.all(26.h),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                _buildLogoSection(),
-                SizedBox(
-                  height: 4.v,
-                )
-              ],
-            )),
+          width: double.maxFinite,
+          padding: EdgeInsets.all(30.h),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              _buildLogoVector(context),
+              SizedBox(height: 4.h),
+            ],
+          ),
+        ),
       ),
     );
   }
 
-  Widget _buildLogoSection() {
-    return Container(
+  Widget _buildLogoVector(BuildContext context) {
+    return SizedBox(
       width: double.maxFinite,
-      margin: EdgeInsets.only(right: 6.h),
-      padding: EdgeInsets.symmetric(horizontal: 6.h),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           CustomImageView(
             imagePath: ImageConstant.imgLogo,
-            height: 30,
-            width: 30,
-          )
+            height: 34.h,
+            width: 114.w,
+          ),
         ],
       ),
     );

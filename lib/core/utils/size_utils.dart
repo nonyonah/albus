@@ -1,5 +1,5 @@
 
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 
 const num deviceWidth = 430;
 const num deviceHeight = 932;
