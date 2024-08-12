@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 class CustomElevatedButton extends BaseButton {
   const CustomElevatedButton(
-      {super.key, Key? key,
+      {super.key,
       this.decoration,
       this.leftIcon,
       this.rightIcon,
@@ -33,7 +33,7 @@ class CustomElevatedButton extends BaseButton {
   }
 
   Widget get buildElevatedButtonWidget => Container(
-        height: height ?? 52.v,
+        height: height ?? 52.h,
         width: width ?? double.maxFinite,
         margin: margin,
         decoration: decoration,

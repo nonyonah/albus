@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:albus/core/utils/size_utils.dart';
 import 'package:albus/themes/custom_text_style.dart';
 import 'package:albus/themes/theme_helper.dart';
@@ -67,12 +66,12 @@ class CustomTextFormField extends StatelessWidget {
     return alignment != null
         ? Align(
             alignment: alignment!,
-            child: _textFormFieldWidget,
+            child: _textFormFieldWidget(context),
           )
-        : _textFormFieldWidget;
+        : _textFormFieldWidget(context);
   }
 
-  Widget get _textFormFieldWidget => SizedBox(
+  Widget _textFormFieldWidget (BuildContext context) => SizedBox(
         width: width ?? double.maxFinite,
         child: Container(
           decoration: boxDecoration ??
@@ -83,7 +82,7 @@ class CustomTextFormField extends StatelessWidget {
           child: TextFormField(
             scrollPadding: scrollPadding ??
                 EdgeInsets.only(
-                  bottom: MediaQuery.of(Get.context!).viewInsets.bottom,
+                  bottom: MediaQuery.of(context).viewInsets.bottom,
                 ),
             controller: controller,
             focusNode: focusNode,

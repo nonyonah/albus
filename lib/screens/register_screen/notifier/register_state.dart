@@ -1,5 +1,5 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
+import 'package:equatable/equatable.dart';
 
 import '../models/register_model.dart';
 
@@ -40,10 +40,6 @@ class RegisterState extends Equatable {
 
   @override
   List<Object?> get props => [
-        fullNameInputController,
-        emailInputController,
-        confirmEmailInputController,
-        passwordInputController,
         isShowPassword,
         registerModelObj,
       ];

@@ -35,7 +35,7 @@ class SplashScreenState extends ConsumerState<SplashScreen> {
 
   Widget _buildLogoVector(BuildContext context) {
     return SizedBox(
-      width: double.maxFinite,
+      width: 100.w,
       child: Column(
         children: [
           CustomImageView(

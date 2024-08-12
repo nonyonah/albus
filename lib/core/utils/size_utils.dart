@@ -1,65 +1,62 @@
+import 'package:flutter/material.dart';
 
-import 'package:flutter/cupertino.dart';
-
-const num deviceWidth = 430;
-const num deviceHeight = 932;
-const num statusBar = 0;
+const num DESIGN_WIDTH = 430;
+const num DESIGN_HEIGHT = 932;
+const num STATUS_BAR = 0;
 
 extension ResponsiveExtension on num {
   double get _width => SizeUtils.width;
   double get _height => SizeUtils.height;
-  double get h => ((this * _width) / deviceWidth);
-  double get v => ((this * _height) / (deviceHeight - statusBar));
-
-  double get adaptSize {
-    var height = v;
-    var width = h;
-    return height < width ? height.toDouble(): width.toDouble();
-  }
   
-  double get fSize => adaptSize;
+  double get h => (this / DESIGN_HEIGHT) * _height;
+  double get w => (this / DESIGN_WIDTH) * _width;
+  double get fsize => (this / DESIGN_WIDTH) * _width;
 }
 
 extension FormatExtension on double {
   double toDoubleValue({int fractionDigits = 2}) {
-    return double.parse(toStringAsFixed(fractionDigits));
+    return double.parse(this.toStringAsFixed(fractionDigits));
   }
 
   double isNonZero({num defaultValue = 0.0}) {
-    return this > 0 ? this: defaultValue.toDouble();
+    return this > 0 ? this : defaultValue.toDouble();
   }
 }
 
-enum DeviceType {mobile, tablet, desktop}
+enum DeviceType { mobile, tablet, desktop }
 
 typedef ResponsiveBuild = Widget Function(
-  BuildContext context, Orientation orientation, DeviceType deviceType);
+    BuildContext context, Orientation orientation, DeviceType deviceType);
 
-class Sizer extends StatelessWidget {
-  const Sizer({super.key, required this.builder});
+class CustomSizer extends StatelessWidget {
+  const CustomSizer({
+    Key? key,
+    required this.builder,
+  }) : super(key: key);
+  
   final ResponsiveBuild builder;
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(builder: (context, constraints) {
-      return OrientationBuilder(builder: (context, orientation) {
-        SizeUtils.setScreenSize(constraints, orientation);
-        return builder(context, orientation, SizeUtils.deviceType);
-      });
-    });
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return OrientationBuilder(
+          builder: (context, orientation) {
+            SizeUtils.setScreenSize(constraints, orientation);
+            return builder(context, orientation, SizeUtils.deviceType);
+          },
+        );
+      },
+    );
   }
 }
 
-class SizeUtils{
+class SizeUtils {
   static late BoxConstraints boxConstraints;
-
   static late Orientation orientation;
-
-  static late DeviceType deviceType;
-
-  static late double height;
-
   static late double width;
+  static late double height;
+  static late DeviceType deviceType;
 
   static void setScreenSize(
     BoxConstraints constraints,
@@ -67,15 +64,22 @@ class SizeUtils{
   ) {
     boxConstraints = constraints;
     orientation = currentOrientation;
+
     if (orientation == Orientation.portrait) {
-      width = 
-      boxConstraints.maxWidth.isNonZero(defaultValue: deviceWidth);
-      height = boxConstraints.maxHeight.isNonZero();
+      width = boxConstraints.maxWidth.isNonZero(defaultValue: DESIGN_WIDTH);
+      height = boxConstraints.maxHeight.isNonZero(defaultValue: DESIGN_HEIGHT);
     } else {
-      width = 
-      boxConstraints.maxHeight.isNonZero(defaultValue: deviceWidth);
-      height = boxConstraints.maxWidth.isNonZero();
+      width = boxConstraints.maxHeight.isNonZero(defaultValue: DESIGN_WIDTH);
+      height = boxConstraints.maxWidth.isNonZero(defaultValue: DESIGN_HEIGHT);
     }
-    deviceType = DeviceType.mobile;
+
+    // You may need to adjust this logic based on device dimensions
+    if (width > 600) {
+      deviceType = DeviceType.tablet;
+    } else if (width > 1200) {
+      deviceType = DeviceType.desktop;
+    } else {
+      deviceType = DeviceType.mobile;
     }
   }
+}
