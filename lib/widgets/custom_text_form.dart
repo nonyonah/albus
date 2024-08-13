@@ -71,7 +71,7 @@ class CustomTextFormField extends StatelessWidget {
         : _textFormFieldWidget(context);
   }
 
-  Widget _textFormFieldWidget (BuildContext context) => SizedBox(
+  Widget _textFormFieldWidget(BuildContext context) => SizedBox(
         width: width ?? double.maxFinite,
         child: Container(
           decoration: boxDecoration ??
@@ -94,7 +94,7 @@ class CustomTextFormField extends StatelessWidget {
               }
             },
             autofocus: autoFocus,
-            style: textStyle ?? CustomTextStyle.titleMediumInterTightPrimary,
+            style: textStyle ?? theme.textTheme.titleSmall,
             obscureText: obscureText,
             textInputAction: textInputAction,
             keyboardType: textInputType,
@@ -107,7 +107,7 @@ class CustomTextFormField extends StatelessWidget {
 
   InputDecoration get _decoration => InputDecoration(
         hintText: hintText ?? '',
-        hintStyle: hintStyle ?? CustomTextStyle.titleMediumInterTightPrimary,
+        hintStyle: hintStyle ?? CustomTextStyles.bodyMediumBlack900,
         prefixIcon: prefix,
         prefixIconConstraints: prefixConstraints,
         suffixIcon: suffix,

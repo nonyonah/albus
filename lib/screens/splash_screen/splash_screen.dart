@@ -1,7 +1,7 @@
 import 'package:albus/core/utils/image_constant.dart';
+import 'package:albus/core/utils/size_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:sizer/sizer.dart';
 import '../../themes/theme_helper.dart';
 import '../../widgets/custom_image_view.dart';
 
@@ -13,6 +13,14 @@ class SplashScreen extends ConsumerStatefulWidget {
 }
 
 class SplashScreenState extends ConsumerState<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(seconds: 3), () {
+      Navigator.pushReplacementNamed(context, '/onboarding');
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -35,13 +43,13 @@ class SplashScreenState extends ConsumerState<SplashScreen> {
 
   Widget _buildLogoVector(BuildContext context) {
     return SizedBox(
-      width: 100.w,
+      width: double.maxFinite,
       child: Column(
         children: [
           CustomImageView(
             imagePath: ImageConstant.imgLogo,
             height: 34.h,
-            width: 114.w,
+            width: 114.h,
           ),
         ],
       ),

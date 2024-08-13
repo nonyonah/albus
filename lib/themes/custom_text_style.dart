@@ -4,26 +4,73 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 extension on TextStyle {
-  TextStyle get outfit {
+  TextStyle get interTight {
     return copyWith(
       fontFamily: GoogleFonts.interTight().fontFamily,
     );
   }
 }
 
-class CustomTextStyle {
-  static get titleMediumInterTightPrimary =>
-      theme.textTheme.titleMedium!.outfit.copyWith(
-        color: theme.colorScheme.primary.withOpacity(0.3),
+//body text style
+class CustomTextStyles {
+  static get bodyMedium13 => theme.textTheme.bodyMedium!.copyWith(
+        fontSize: 13.fSize,
+      );
+  static get bodyMediumBlack900 => theme.textTheme.bodyMedium!.copyWith(
+        color: appTheme.black900.withOpacity(0.3),
+      );
+  static get smallBlack900 => theme.textTheme.bodySmall!.copyWith(
+        color: appTheme.black900,
+      );
+
+//display text style
+  static get displayLargeBlack900 => theme.textTheme.displayLarge!.copyWith(
+        color: appTheme.black900,
+      );
+  static get displayLargeBlack900_1 => theme.textTheme.displayLarge!.copyWith(
+        color: appTheme.black900,
+      );
+
+  //headline text style
+  static get headlineLargeOnPrimary => theme.textTheme.headlineLarge!.copyWith(
+        color: theme.colorScheme.onPrimary.withOpacity(1),
+        fontSize: 13.fSize,
+      );
+
+  //label text style
+  static get labelLarge13 => theme.textTheme.labelLarge!.copyWith(
+        fontSize: 13.fSize,
+      );
+  static get labelLargeBlack900 => theme.textTheme.labelLarge!.copyWith(
+        color: appTheme.black900.withOpacity(0.5),
+      );
+  static get labelLargeMedium => theme.textTheme.labelLarge!.copyWith(
+        fontWeight: FontWeight.w500,
+      );
+  static get labelLargeMedium13 => theme.textTheme.labelLarge!.copyWith(
+        fontSize: 13.fSize,
+        fontWeight: FontWeight.w500,
+      );
+  static get labelMediumOnPrimary => theme.textTheme.labelMedium!.copyWith(
+        color: theme.colorScheme.onPrimary.withOpacity(1),
+        fontSize: 11.fSize,
         fontWeight: FontWeight.w500,
       );
 
-  static get titleMediumInterTightWhiteA700 =>
-      theme.textTheme.titleMedium!.outfit.copyWith(
-        color: appTheme.whiteA700,
+  //title text style
+  static get titleLarge22 => theme.textTheme.titleLarge!.copyWith(
+        fontSize: 22.fSize,
+      );
+  static get titleLargeOnPrimary => theme.textTheme.titleLarge!.copyWith(
+        color: theme.colorScheme.onPrimary.withOpacity(1),
+      );
+  static get titleMedium17 => theme.textTheme.titleMedium!.copyWith(
         fontSize: 17.fSize,
       );
-
-  static get titleMediumOutiftOnPrimary => theme.textTheme.titleMedium!.outfit
-      .copyWith(color: theme.colorScheme.onPrimary, fontSize: 17.fSize);
+      static get titleMedium17_1 => theme.textTheme.titleMedium!.copyWith(
+        fontSize: 17.fSize,
+      );
+      static get titleMediumBlack900 => theme.textTheme.titleMedium!.copyWith(
+        color: appTheme.black900,
+      );
 }
