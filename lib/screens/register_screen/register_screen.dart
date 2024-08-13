@@ -1,9 +1,15 @@
 import 'package:albus/core/utils/image_constant.dart';
 import 'package:albus/core/utils/size_utils.dart';
+import 'package:albus/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../core/utils/navigator_service.dart';
+import '../../core/utils/validation_functions.dart';
+import '../../themes/theme_helper.dart';
 import '../../widgets/custom_image_view.dart';
+import '../../widgets/custom_text_form.dart';
+import 'notifier/register_notifier.dart';
 
 class RegisterScreen extends ConsumerStatefulWidget {
   const RegisterScreen({super.key});
@@ -13,7 +19,7 @@ class RegisterScreen extends ConsumerStatefulWidget {
 }
 
 class _RegisterScreenState extends ConsumerState<RegisterScreen> {
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
@@ -42,18 +48,179 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                       CustomImageView(
                         imagePath: ImageConstant.imgArrowLeft,
                         height: 24.h,
-                        width:24.h,
+                        width: 24.h,
                         alignment: Alignment.centerLeft,
-                        
-                      )
+                        onTap: () {
+                          onTapGoBack(context);
+                        },
+                      ),
+                      SizedBox(height: 46.h),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Get Started',
+                          style: theme.textTheme.headlineSmall,
+                        ),
+                      ),
+                      SizedBox(height: 28.h),
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          'Let us know who you are',
+                          style: theme.textTheme.bodyMedium,
+                        ),
+                      ),
+                      SizedBox(height: 20.h),
+                      _buildFullNameInput(context),
+                      SizedBox(height: 14.h),
+                      _buildEmailAddress(context),
+                      SizedBox(height: 14.h),
+                      _buildConfirmEmailAddress(context),
+                      SizedBox(height: 14.h),
+                      _buildPasswordInput(context),
+                      const Spacer(),
+                      _buildContinueButton(context),
                     ],
                   ),
                 ),
-              )
+              ),
             ),
           ),
         ),
       ),
-    )
+    );
+  }
+
+  Widget _buildFullNameInput(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 4.h),
+      child: Consumer(
+        builder: (context, ref, _) {
+          return CustomTextFormField(
+            controller: ref.watch(registerNotifier).fullNameInputController,
+            hintText: 'Full name',
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: 6.h,
+              vertical: 14.h,
+            ),
+            validator: (value) {
+              if (!isText(value)) {
+                return 'Please enter valid text';
+              }
+              return null;
+            },
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildEmailAddress(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 4.h),
+      child: Consumer(
+        builder: (context, ref, _) {
+          return CustomTextFormField(
+            controller: ref.watch(registerNotifier).emailInputController,
+            hintText: 'Email Address',
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: 6.h,
+              vertical: 14.h,
+            ),
+            validator: (value) {
+              if (value == null || !isValidEmail(value, isRequired: true)) {
+                return 'Please enter a valid email address';
+              }
+              return null;
+            },
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildConfirmEmailAddress(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 4.h),
+      child: Consumer(
+        builder: (context, ref, _) {
+          return CustomTextFormField(
+            controller: ref.watch(registerNotifier).confirmEmailInputController,
+            hintText: 'Confirm Email Address',
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: 6.h,
+              vertical: 14.h,
+            ),
+            validator: (value) {
+              if (value == null || !isValidEmail(value, isRequired: true)) {
+                return 'Please enter a valid email address';
+              }
+              return null;
+            },
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildPasswordInput(BuildContext context) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 4.h),
+      child: Consumer(
+        builder: (context, ref, _) {
+          final isPasswordVisible = ref.watch(registerNotifier).isShowPassword;
+          return CustomTextFormField(
+            controller: ref.watch(registerNotifier).passwordInputController,
+            hintText: 'Enter password',
+            textInputType: TextInputType.visiblePassword,
+            suffix: InkWell(
+              onTap: () {
+                ref.read(registerNotifier.notifier).changePasswordVisibility();
+              },
+              child: Container(
+                margin: EdgeInsets.fromLTRB(18.h, 12.h, 16.h, 12.h),
+                child: CustomImageView(
+                  imagePath: isPasswordVisible
+                      ? ImageConstant.imgEyeClose // Closed eye icon
+                      : ImageConstant.imgEyeOpen, // Open eye icon
+                  height: 20.h,
+                  width: 24.h,
+                ),
+              ),
+            ),
+            suffixConstraints: BoxConstraints(
+              maxHeight: 50.h,
+            ),
+            obscureText: !isPasswordVisible, // Show/hide password
+            contentPadding: EdgeInsets.symmetric(
+              horizontal: 16.h,
+              vertical: 12.h,
+            ),
+            validator: (value) {
+              if (value == null || !isValidPassword(value, isRequired: true)) {
+                return 'Please enter a valid password';
+              }
+              return null;
+            },
+          );
+        },
+      ),
+    );
+  }
+
+  Widget _buildContinueButton(BuildContext context) {
+    return CustomElevatedButton(
+      text: 'Continue',
+      margin: EdgeInsets.symmetric(horizontal: 12.h),
+      onPressed: () {
+        if (_formKey.currentState?.validate() ?? false) {
+          // Handle continue action
+        }
+      },
+    );
+  }
+
+  void onTapGoBack(BuildContext context) {
+    NavigatorService.goBack();
   }
 }

@@ -1,11 +1,13 @@
-import 'package:albus/core/utils/size_utils.dart';
-import 'package:albus/themes/custom_text_style.dart';
-import 'package:albus/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../core/utils/image_constant.dart';
+import 'package:go_router/go_router.dart';
+import '../../core/utils/size_utils.dart';
+import '../../routes/app_routes.dart';
+import '../../themes/custom_text_style.dart';
 import '../../themes/theme_helper.dart';
+import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_image_view.dart';
+import '../../core/utils/image_constant.dart';
 
 class OnboardingScreen extends ConsumerStatefulWidget {
   const OnboardingScreen({super.key});
@@ -56,22 +58,30 @@ class OnboardingScreenState extends ConsumerState<OnboardingScreen> {
 
   Widget _buildAuthenticationSection(BuildContext context) {
     return Container(
-        width: double.maxFinite,
-        padding: EdgeInsets.symmetric(horizontal: 4.h),
-        child: Column(
-          children: [
-            const CustomElevatedButton(
-              onPressed: () {},
-              text: 'Get Started'),
-            SizedBox(height: 34.h),
-            TextButton(
-              onPressed: () {},
-              child: Text(
-                'Login',
-                style: CustomTextStyles.titleMedium17_1,
-              ),
-            )
-          ],
-        ));
+      width: double.maxFinite,
+      padding: EdgeInsets.symmetric(horizontal: 4.h),
+      child: Column(
+        children: [
+          CustomElevatedButton(
+            text: 'Get Started',
+            onPressed: () {
+              GoRouter.of(context)
+                  .go(AppRoutes.registerScreen); // Navigate using GoRouter
+            },
+          ),
+          SizedBox(height: 34.h),
+          TextButton(
+            onPressed: () {
+              GoRouter.of(context)
+                  .go(AppRoutes.loginScreen); // Navigate using GoRouter
+            },
+            child: Text(
+              'Login',
+              style: CustomTextStyles.titleMedium17_1,
+            ),
+          )
+        ],
+      ),
+    );
   }
 }
