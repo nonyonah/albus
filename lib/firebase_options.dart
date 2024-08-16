@@ -72,4 +72,5 @@ class DefaultFirebaseOptions {
     storageBucket: 'gemini-pay-fb7ad.appspot.com',
     iosBundleId: 'com.albus.app',
   );
+
 }

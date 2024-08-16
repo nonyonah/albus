@@ -3,13 +3,11 @@ import 'package:albus/core/utils/size_utils.dart';
 import 'package:albus/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
 import '../../core/utils/navigator_service.dart';
 import '../../core/utils/validation_functions.dart';
 import '../../themes/theme_helper.dart';
 import '../../widgets/custom_image_view.dart';
 import '../../widgets/custom_text_form.dart';
-import 'notifier/register_notifier.dart';
 
 class RegisterScreen extends ConsumerStatefulWidget {
   const RegisterScreen({super.key});
@@ -209,13 +207,28 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   }
 
   Widget _buildContinueButton(BuildContext context) {
-    return CustomElevatedButton(
-      text: 'Continue',
-      margin: EdgeInsets.symmetric(horizontal: 12.h),
-      onPressed: () {
-        if (_formKey.currentState?.validate() ?? false) {
-          // Handle continue action
-        }
+    return Consumer(
+      builder: (context, ref, _) {
+        final registrationStatus = ref.watch(registerNotifier).registrationStatus;
+        final errorMessage = ref.watch(registerNotifier).errorMessage;
+
+        return Column(
+          children: [
+            if (registrationStatus == RegistrationStatus.loading)
+              CircularProgressIndicator(),
+            if (errorMessage != null)
+              Text(errorMessage, style: TextStyle(color: Colors.red)),
+            CustomElevatedButton(
+              text: 'Continue',
+              margin: EdgeInsets.symmetric(horizontal: 12.h),
+              onPressed: () {
+                if (_formKey.currentState?.validate() ?? false) {
+                  ref.read(registerNotifier.notifier).registerUser();
+                }
+              },
+            ),
+          ],
+        );
       },
     );
   }
