@@ -14,12 +14,14 @@ class CustomTextFormField extends StatelessWidget {
     this.autoFocus = false,
     this.textStyle,
     this.obscureText = false,
+    this.readOnly = false,
     this.textInputAction = TextInputAction.next,
     this.textInputType = TextInputType.text,
     this.maxLines,
     this.hintText,
     this.hintStyle,
     this.prefix,
+    this.inputHeight,
     this.prefixConstraints,
     this.suffix,
     this.suffixConstraints,
@@ -32,6 +34,7 @@ class CustomTextFormField extends StatelessWidget {
     this.fillColor,
     this.filled = false,
     this.validator,
+    this.onTap,
   });
 
   final Alignment? alignment;
@@ -40,6 +43,7 @@ class CustomTextFormField extends StatelessWidget {
   final TextEditingController? controller;
   final FocusNode? focusNode;
   final bool autoFocus;
+  final bool readOnly;
   final TextStyle? textStyle;
   final bool obscureText;
   final TextInputAction textInputAction;
@@ -56,10 +60,12 @@ class CustomTextFormField extends StatelessWidget {
   final InputBorder? border;
   final BorderRadius? borderRadius;
   final BoxDecoration? boxDecoration;
-  final Decoration? decoration;
+  final InputDecoration? decoration;
   final Color? fillColor;
+  final double? inputHeight;
   final bool filled;
   final FormFieldValidator<String>? validator;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -71,37 +77,36 @@ class CustomTextFormField extends StatelessWidget {
         : _textFormFieldWidget(context);
   }
 
-  Widget _textFormFieldWidget(BuildContext context) => SizedBox(
+  Widget _textFormFieldWidget(BuildContext context) => Container(
         width: width ?? double.maxFinite,
-        child: Container(
-          decoration: boxDecoration ??
-              BoxDecoration(
-                borderRadius: borderRadius ?? BorderRadius.circular(10.h),
-                color: appTheme.gray50.withOpacity(1),
-              ),
-          child: TextFormField(
-            scrollPadding: scrollPadding ??
-                EdgeInsets.only(
-                  bottom: MediaQuery.of(context).viewInsets.bottom,
-                ),
-            controller: controller,
-            focusNode: focusNode,
-            onTapOutside: (event) {
-              if (focusNode != null) {
-                focusNode?.unfocus();
-              } else {
-                FocusManager.instance.primaryFocus?.unfocus();
-              }
-            },
-            autofocus: autoFocus,
-            style: textStyle ?? theme.textTheme.titleSmall,
-            obscureText: obscureText,
-            textInputAction: textInputAction,
-            keyboardType: textInputType,
-            maxLines: maxLines ?? 1,
-            decoration: _decoration,
-            validator: validator,
-          ),
+        height: 60.h,
+        decoration: boxDecoration ??
+            BoxDecoration(
+              borderRadius: borderRadius ?? BorderRadius.circular(10.h),
+              color: appTheme.gray50.withOpacity(1),
+            ),
+        child: TextFormField(
+          scrollPadding: scrollPadding ??
+              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+          controller: controller,
+          focusNode: focusNode,
+          onTapOutside: (event) {
+            if (focusNode != null) {
+              focusNode?.unfocus();
+            } else {
+              FocusManager.instance.primaryFocus?.unfocus();
+            }
+          },
+          autofocus: autoFocus,
+          style: textStyle ?? theme.textTheme.titleSmall,
+          obscureText: obscureText,
+          readOnly: readOnly,
+          onTap: onTap,
+          textInputAction: textInputAction,
+          keyboardType: textInputType,
+          maxLines: maxLines ?? 1,
+          decoration: decoration ?? _decoration,
+          validator: validator,
         ),
       );
 
@@ -112,7 +117,8 @@ class CustomTextFormField extends StatelessWidget {
         prefixIconConstraints: prefixConstraints,
         suffixIcon: suffix,
         suffixIconConstraints: suffixConstraints,
-        contentPadding: contentPadding ?? EdgeInsets.all(15.h),
+        contentPadding: contentPadding ??
+            EdgeInsets.symmetric(vertical: 64.h, horizontal: 15.h),
         isDense: true,
         fillColor: fillColor ?? Colors.grey.withOpacity(0.05),
         filled: filled,

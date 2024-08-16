@@ -59,7 +59,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                         alignment: Alignment.centerLeft,
                         child: Text(
                           'Get Started',
-                          style: theme.textTheme.headlineSmall,
+                          style: theme.textTheme.headlineLarge,
                         ),
                       ),
                       SizedBox(height: 28.h),
@@ -100,8 +100,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
             controller: ref.watch(registerNotifier).fullNameInputController,
             hintText: 'Full name',
             contentPadding: EdgeInsets.symmetric(
-              horizontal: 6.h,
-              vertical: 14.h,
+              horizontal: 14.h,
+              vertical: 20.h,
             ),
             validator: (value) {
               if (!isText(value)) {
@@ -124,8 +124,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
             controller: ref.watch(registerNotifier).emailInputController,
             hintText: 'Email Address',
             contentPadding: EdgeInsets.symmetric(
-              horizontal: 6.h,
-              vertical: 14.h,
+              horizontal: 14.h,
+              vertical: 20.h,
             ),
             validator: (value) {
               if (value == null || !isValidEmail(value, isRequired: true)) {
@@ -148,8 +148,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
             controller: ref.watch(registerNotifier).confirmEmailInputController,
             hintText: 'Confirm Email Address',
             contentPadding: EdgeInsets.symmetric(
-              horizontal: 6.h,
-              vertical: 14.h,
+              horizontal: 14.h,
+              vertical: 20.h,
             ),
             validator: (value) {
               if (value == null || !isValidEmail(value, isRequired: true)) {
@@ -183,8 +183,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                   imagePath: isPasswordVisible
                       ? ImageConstant.imgEyeClose // Closed eye icon
                       : ImageConstant.imgEyeOpen, // Open eye icon
-                  height: 20.h,
-                  width: 24.h,
+                  height: 14.h,
+                  width: 20.h,
                 ),
               ),
             ),
@@ -193,8 +193,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
             ),
             obscureText: !isPasswordVisible, // Show/hide password
             contentPadding: EdgeInsets.symmetric(
-              horizontal: 16.h,
-              vertical: 12.h,
+              horizontal: 14.h,
+              vertical: 20.h,
             ),
             validator: (value) {
               if (value == null || !isValidPassword(value, isRequired: true)) {
