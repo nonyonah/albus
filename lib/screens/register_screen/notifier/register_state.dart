@@ -10,14 +10,18 @@ class RegisterState extends Equatable {
   final TextEditingController passwordInputController;
   final bool isShowPassword;
   final RegisterModel registerModelObj;
+  final RegistrationStatus registrationStatus;
+  final String? errorMessage;
 
-  RegisterState({
+  const RegisterState({
     required this.fullNameInputController,
     required this.emailInputController,
     required this.confirmEmailInputController,
     required this.passwordInputController,
     required this.isShowPassword,
     required this.registerModelObj,
+    required this.registrationStatus,
+    this.errorMessage,
   });
 
   RegisterState copyWith({
@@ -27,7 +31,9 @@ class RegisterState extends Equatable {
     TextEditingController? passwordInputController,
     bool? isShowPassword,
     RegisterModel? registerModelObj,
-  }) {
+    RegistrationStatus? registrationStatus,
+    String? errorMessage,
+  }){
     return RegisterState(
       fullNameInputController: fullNameInputController ?? this.fullNameInputController,
       emailInputController: emailInputController ?? this.emailInputController,
@@ -35,12 +41,22 @@ class RegisterState extends Equatable {
       passwordInputController: passwordInputController ?? this.passwordInputController,
       isShowPassword: isShowPassword ?? this.isShowPassword,
       registerModelObj: registerModelObj ?? this.registerModelObj,
+      registrationStatus: registrationStatus ?? this.registrationStatus,
+      errorMessage: errorMessage,
     );
   }
 
   @override
   List<Object?> get props => [
-        isShowPassword,
-        registerModelObj,
-      ];
+    fullNameInputController,
+    emailInputController,
+    confirmEmailInputController,
+    passwordInputController,
+    isShowPassword,
+    registerModelObj,
+    registrationStatus,
+    errorMessage,
+  ];
 }
+
+enum RegistrationStatus { initial, loading, success, failure }
