@@ -214,7 +214,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
       margin: EdgeInsets.symmetric(horizontal: 12.h),
       onPressed: () {
         if (_formKey.currentState?.validate() ?? false) {
-          // Handle continue action
+          ref.read(registerNotifier.notifier).registerUser();
         }
       },
     );

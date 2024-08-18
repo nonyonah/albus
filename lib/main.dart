@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -10,11 +11,14 @@ import 'package:albus/screens/onboarding_screen/onboarding_screen.dart';
 import 'package:albus/screens/register_screen/register_screen.dart';
 import 'package:albus/screens/splash_screen/splash_screen.dart';
 import 'package:albus/themes/notifier/theme_notifier.dart';
-
 import 'core/utils/size_utils.dart';
+import 'firebase_options.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform
+  );
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   runApp(const ProviderScope(child: MyApp()));
