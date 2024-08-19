@@ -12,9 +12,9 @@ bool isValidEmail(String? inputString, {bool isRequired = false}) {
 
 bool isValidPassword(String? inputString, {bool isRequired = false}) {
   if (!isRequired && (inputString == null || inputString.isEmpty)) {
-    return true;
+    return isRequired;
   } else if (inputString != null && inputString.isNotEmpty) {
-    const pattern = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*]).{8,}$';
+     const pattern = r'^(?=.*[0-9]).{6,}$';
     final regExp = RegExp(pattern);
     return regExp.hasMatch(inputString);
   }

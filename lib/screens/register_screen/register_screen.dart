@@ -77,7 +77,6 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                       SizedBox(height: 14.h),
                       _buildEmailAddress(context),
                       SizedBox(height: 14.h),
-                      _buildConfirmEmailAddress(context),
                       SizedBox(height: 14.h),
                       _buildPasswordInput(context),
                       const Spacer(),
@@ -161,30 +160,6 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
     );
   }
 
-  Widget _buildConfirmEmailAddress(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 4.h),
-      child: Consumer(
-        builder: (context, ref, _) {
-          return CustomTextFormField(
-            controller: ref.watch(registerNotifier).confirmEmailInputController,
-            hintText: 'Confirm Email Address',
-            contentPadding: EdgeInsets.symmetric(
-              horizontal: 14.h,
-              vertical: 20.h,
-            ),
-            validator: (value) {
-              if (value == null || !isValidEmail(value, isRequired: true)) {
-                return 'Please enter a valid email address';
-              }
-              return null;
-            },
-          );
-        },
-      ),
-    );
-  }
-
   Widget _buildPasswordInput(BuildContext context) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 4.h),
@@ -203,8 +178,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                 margin: EdgeInsets.fromLTRB(18.h, 12.h, 16.h, 12.h),
                 child: CustomImageView(
                   imagePath: isPasswordVisible
-                      ? ImageConstant.imgEyeClose // Closed eye icon
-                      : ImageConstant.imgEyeOpen, // Open eye icon
+                      ? ImageConstant.imgEyeOpen // Closed eye icon
+                      : ImageConstant.imgEyeClose, // Open eye icon
                   height: 14.h,
                   width: 20.h,
                 ),
@@ -220,7 +195,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
             ),
             validator: (value) {
               if (value == null || !isValidPassword(value, isRequired: false)) {
-                return 'Please enter a valid password';
+                return 'Please enter a valid password (min 6 characters, including at least one number)';
               }
               return null;
             },
@@ -247,6 +222,6 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   }
 
   void onTapGoBack(BuildContext context) {
-    NavigatorService.goBack();
+    NavigatorService.goBack(context);
   }
 }
