@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lottie/lottie.dart';
+import '../../core/utils/navigator_service.dart';
 import '../../core/utils/size_utils.dart';
 import '../../routes/app_routes.dart';
 import '../../themes/custom_text_style.dart';
@@ -33,11 +35,14 @@ class OnboardingScreenState extends ConsumerState<OnboardingScreen> {
               SizedBox(
                 height: 86.h,
               ),
-              CustomImageView(
-                imagePath: ImageConstant.imgOnboarding,
-                height: 300.h,
-                width: double.maxFinite,
+              Container(
                 margin: EdgeInsets.symmetric(horizontal: 34.h),
+                child: Lottie.asset(
+                  'assets/images/Onboarding.json',
+                  repeat: true,
+                  height: 300.h,
+                  width: double.maxFinite,
+                ),
               ),
               SizedBox(height: 54.h),
               Text(
@@ -65,8 +70,7 @@ class OnboardingScreenState extends ConsumerState<OnboardingScreen> {
           CustomElevatedButton(
             text: 'Get Started',
             onPressed: () {
-              GoRouter.of(context)
-                  .go(AppRoutes.registerScreen); // Navigate using GoRouter
+              NavigatorService.pushNamed('/register');
             },
           ),
           SizedBox(height: 34.h),

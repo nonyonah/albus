@@ -1,50 +1,37 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 
 class NavigatorService {
   static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
-  static void pushNamed(
+  static Future<dynamic> pushNamed(
     String routeName, {
-    Map<String, dynamic>? queryParameters,
-    Object? extra,
-  }) {
-    navigatorKey.currentContext?.pushNamed(
-      routeName,
-      queryParameters: queryParameters,
-      extra: extra,
-    );
+    dynamic arguments,
+  }) async {
+    return navigatorKey.currentState
+        ?.pushNamed(routeName, arguments: arguments);
   }
 
   static void goBack() {
-    navigatorKey.currentContext?.pop();
+    return navigatorKey.currentState?.pop();
   }
 
-  static void pushNamedAndRemoveUntil(
+  static Future<dynamic> pushNamedAndRemoveUntil(
     String routeName, {
-    Map<String, dynamic>? queryParameters,
-    Object? extra,
-  }) {
-    navigatorKey.currentContext?.goNamed(
+    bool routePredicate = false,
+    dynamic arguments,
+  }) async {
+    return navigatorKey.currentState?.pushNamedAndRemoveUntil(
       routeName,
-      queryParameters: queryParameters,
-      extra: extra,
+      (route) => routePredicate,
+      arguments: arguments,
     );
   }
 
-  static void popAndPushNamed(
-    String routeName, {
-    Map<String, dynamic>? queryParameters,
-    Object? extra,
-  }) {
-    final context = navigatorKey.currentContext;
-    if (context != null) {
-      context.pop();
-      context.pushNamed(
-        routeName,
-        queryParameters: queryParameters,
-        extra: extra,
-      );
-    }
+  static Future<dynamic> popAndPushNamed(
+    String routeName,
+    dynamic arguments,
+  ) async {
+    return navigatorKey.currentState
+        ?.popAndPushNamed(routeName, arguments: arguments);
   }
 }

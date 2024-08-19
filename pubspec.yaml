@@ -55,6 +55,7 @@ dependencies:
   go_router: ^14.2.3
   cloud_firestore: ^5.2.1
   firebase_analytics: ^11.2.1
+  lottie: ^3.1.2
 
 
 

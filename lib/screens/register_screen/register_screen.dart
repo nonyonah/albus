@@ -77,7 +77,6 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                       SizedBox(height: 14.h),
                       _buildEmailAddress(context),
                       SizedBox(height: 14.h),
-                      SizedBox(height: 14.h),
                       _buildPasswordInput(context),
                       const Spacer(),
                       if (registerState.registrationStatus ==
@@ -222,6 +221,6 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   }
 
   void onTapGoBack(BuildContext context) {
-    NavigatorService.goBack(context);
+    NavigatorService.goBack();
   }
 }

@@ -2,7 +2,7 @@ import 'package:albus/core/utils/image_constant.dart';
 import 'package:albus/core/utils/size_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
+import '../../core/utils/navigator_service.dart';
 import '../../themes/theme_helper.dart';
 import '../../widgets/custom_image_view.dart';
 
@@ -18,8 +18,8 @@ class SplashScreenState extends ConsumerState<SplashScreen> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 3), () {
-  context.go('/onboarding');
-},);
+      NavigatorService.pushNamedAndRemoveUntil('/onboarding');
+    });
   }
 
   @override
