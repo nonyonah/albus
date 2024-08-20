@@ -1,51 +1,55 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:equatable/equatable.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import '../../../core/utils/snackbar.dart';
+import '../../../repository/auth_repository.dart';
 import '../models/register_model.dart';
 import 'register_state.dart';
 
 // Register State Notifier Provider
 final registerNotifier = StateNotifierProvider<RegisterNotifier, RegisterState>(
-  (ref) => RegisterNotifier(RegisterState(
-    fullNameInputController: TextEditingController(),
-    emailInputController: TextEditingController(),
-    confirmEmailInputController: TextEditingController(),
-    passwordInputController: TextEditingController(),
-    isShowPassword: true,
-    registerModelObj: const RegisterModel(),
-    registrationStatus: RegistrationStatus.initial,
-  )),
+  (ref) => RegisterNotifier(
+    RegisterState(
+      fullNameInputController: TextEditingController(),
+      emailInputController: TextEditingController(),
+      passwordInputController: TextEditingController(),
+      isShowPassword: true,
+      registerModelObj: const RegisterModel(),
+      registrationStatus: RegistrationStatus.initial,
+    ),
+    ref.read(authRepositoryProvider),
+  ),
 );
+
+// Auth Repository Provider
+final authRepositoryProvider = Provider((ref) => AuthRepository());
 
 // Register Notifier Class
 class RegisterNotifier extends StateNotifier<RegisterState> {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  final AuthRepository _authRepository;
 
-  RegisterNotifier(RegisterState state) : super(state);
+  RegisterNotifier(RegisterState state, this._authRepository) : super(state);
 
-  Future<void> registerUser() async {
+  Future<void> registerUser(BuildContext context) async {
     state = state.copyWith(registrationStatus: RegistrationStatus.loading);
 
     try {
-      // Validate email confirmation
-      if (state.emailInputController.text != state.confirmEmailInputController.text) {
-        throw Exception("Email addresses do not match");
-      }
-
-      UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
-        email: state.emailInputController.text,
-        password: state.passwordInputController.text,
+      UserCredential userCredential = await _authRepository.registerUser(
+        state.emailInputController.text,
+        state.passwordInputController.text,
       );
 
       if (userCredential.user != null) {
-        await storeUserData(userCredential.user!.uid);
+        await _authRepository.storeUserData(
+          userCredential.user!.uid,
+          state.fullNameInputController.text,
+          state.emailInputController.text,
+        );
         state = state.copyWith(
           registrationStatus: RegistrationStatus.success,
           errorMessage: null,
         );
+        showSnackbar(context, 'Registration successful!', color: Colors.black);
       }
     } on FirebaseAuthException catch (e) {
       String errorMessage;
@@ -60,23 +64,26 @@ class RegisterNotifier extends StateNotifier<RegisterState> {
         registrationStatus: RegistrationStatus.failure,
         errorMessage: errorMessage,
       );
+      showSnackbar(context, errorMessage, color: Colors.black);
     } catch (e) {
       state = state.copyWith(
         registrationStatus: RegistrationStatus.failure,
         errorMessage: 'An unexpected error occurred: ${e.toString()}',
       );
+      showSnackbar(context, 'An unexpected error occurred',
+          color: Colors.black);
     }
-  }
-
-  Future<void> storeUserData(String uid) async {
-    await _firestore.collection('users').doc(uid).set({
-      'fullName': state.fullNameInputController.text,
-      'email': state.emailInputController.text,
-      'createdAt': FieldValue.serverTimestamp(),
-    });
   }
 
   void changePasswordVisibility() {
     state = state.copyWith(isShowPassword: !state.isShowPassword);
+  }
+
+  @override
+  void dispose() {
+    state.fullNameInputController.dispose();
+    state.emailInputController.dispose();
+    state.passwordInputController.dispose();
+    super.dispose();
   }
 }

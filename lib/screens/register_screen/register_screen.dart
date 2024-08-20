@@ -3,6 +3,7 @@ import 'package:albus/core/utils/size_utils.dart';
 import 'package:albus/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../core/utils/lottie_service.dart';
 import 'notifier/register_notifier.dart';
 import 'notifier/register_state.dart';
 import '../../core/utils/navigator_service.dart';
@@ -20,6 +21,8 @@ class RegisterScreen extends ConsumerStatefulWidget {
 
 class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final lottieService = LottieService();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +30,7 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
 
     return SafeArea(
       child: Scaffold(
+        key: _scaffoldKey,
         resizeToAvoidBottomInset: false,
         body: Center(
           child: SingleChildScrollView(
@@ -81,24 +85,23 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                       const Spacer(),
                       if (registerState.registrationStatus ==
                           RegistrationStatus.loading)
-                        const CircularProgressIndicator(),
-                      if (registerState.errorMessage != null)
-                        Padding(
-                          padding: EdgeInsets.only(bottom: 10.h),
-                          child: Text(
-                            registerState.errorMessage!,
-                            style: const TextStyle(color: Colors.red),
+                        if (registerState.errorMessage != null)
+                          Padding(
+                            padding: EdgeInsets.only(bottom: 10.h),
+                            // child: Text(
+                            //   registerState.errorMessage!,
+                            //   style: const TextStyle(color: Colors.red),
+                            // ),
                           ),
-                        ),
                       _buildContinueButton(context),
                       if (registerState.registrationStatus ==
                           RegistrationStatus.success)
                         Padding(
                           padding: EdgeInsets.only(top: 10.h),
-                          child: const Text(
-                            'Registration successful!',
-                            style: TextStyle(color: Colors.green),
-                          ),
+                          // child: const Text(
+                          //   'Registration successful!',
+                          //   style: TextStyle(color: Colors.green),
+                          // ),
                         ),
                     ],
                   ),
@@ -214,7 +217,8 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
           ? null
           : () {
               if (_formKey.currentState?.validate() ?? false) {
-                ref.read(registerNotifier.notifier).registerUser();
+                ref.read(registerNotifier.notifier).registerUser(context);
+                NavigatorService.pushNamed('/notification');
               }
             },
     );

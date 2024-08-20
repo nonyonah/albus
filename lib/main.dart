@@ -10,14 +10,15 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'core/utils/navigator_service.dart';
 import 'core/utils/size_utils.dart';
 import 'firebase_options.dart';
+import 'repository/firebase_notification.dart';
 import 'themes/notifier/theme_notifier.dart';
 
 var globalMessengerKey = GlobalKey<ScaffoldMessengerState>();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform
-    );
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await FirebaseNotification().initNotifications();
+  
   Future.wait([
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
   ]).then((value) {
