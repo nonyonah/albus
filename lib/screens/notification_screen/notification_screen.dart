@@ -3,6 +3,8 @@ import 'package:albus/widgets/custom_elevated_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lottie/lottie.dart';
+import 'package:permission_handler/permission_handler.dart';
+import '../../core/utils/notification_permission.dart';
 import '../../themes/custom_text_style.dart';
 import '../../themes/theme_helper.dart';
 
@@ -11,6 +13,12 @@ class NotificationScreen extends ConsumerStatefulWidget {
 
   @override
   NotificationScreenState createState() => NotificationScreenState();
+  void handleNotificationPermission() async {
+    try {
+    } catch (e) {
+      // Handle the exception or show an error message to the user
+    }
+  }
 }
 
 class NotificationScreenState extends ConsumerState<NotificationScreen> {
@@ -46,7 +54,12 @@ class NotificationScreenState extends ConsumerState<NotificationScreen> {
                 style: theme.textTheme.bodyMedium!.copyWith(height: 1.57),
               ),
               const Spacer(),
-              const CustomElevatedButton(text: 'Turn on notifications'),
+              CustomElevatedButton(
+                text: 'Turn on notifications',
+                onPressed: () {
+                  requestPermission(permission: Permission.notification);
+                },
+              ),
               SizedBox(height: 34.h),
               TextButton(
                 onPressed: () {},

@@ -1,15 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
 import '../../core/utils/navigator_service.dart';
 import '../../core/utils/size_utils.dart';
-import '../../routes/app_routes.dart';
 import '../../themes/custom_text_style.dart';
 import '../../themes/theme_helper.dart';
 import '../../widgets/custom_elevated_button.dart';
-import '../../widgets/custom_image_view.dart';
-import '../../core/utils/image_constant.dart';
 
 class OnboardingScreen extends ConsumerStatefulWidget {
   const OnboardingScreen({super.key});
@@ -76,8 +72,8 @@ class OnboardingScreenState extends ConsumerState<OnboardingScreen> {
           SizedBox(height: 34.h),
           TextButton(
             onPressed: () {
-              GoRouter.of(context)
-                  .go(AppRoutes.loginScreen); // Navigate using GoRouter
+              //GoRouter.of(context)
+                  //.go(AppRoutes.loginScreen); // Navigate using GoRouter
             },
             child: Text(
               'Login',

@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-
 import '../models/notification_model.dart';
 
 class NotificationState extends Equatable {
@@ -14,4 +13,6 @@ class NotificationState extends Equatable {
       notificationModelObj: notificationModelObj ?? this.notificationModelObj,
     );
   }
+
+  
 }
