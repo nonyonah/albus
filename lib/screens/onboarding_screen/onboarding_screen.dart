@@ -66,6 +66,15 @@ class OnboardingScreenState extends ConsumerState<OnboardingScreen> {
           CustomElevatedButton(
             text: 'Get Started',
             onPressed: () {
+              showDialog(
+                context: context,
+                builder: (context) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                },
+              );
+              Navigator.pop(context);
               NavigatorService.pushNamed('/register');
             },
           ),
@@ -73,7 +82,7 @@ class OnboardingScreenState extends ConsumerState<OnboardingScreen> {
           TextButton(
             onPressed: () {
               //GoRouter.of(context)
-                  //.go(AppRoutes.loginScreen); // Navigate using GoRouter
+              //.go(AppRoutes.loginScreen); // Navigate using GoRouter
             },
             child: Text(
               'Login',

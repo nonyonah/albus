@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:lottie/lottie.dart';
 import 'package:permission_handler/permission_handler.dart';
+import '../../core/utils/navigator_service.dart';
 import '../../core/utils/notification_permission.dart';
 import '../../themes/custom_text_style.dart';
 import '../../themes/theme_helper.dart';
@@ -14,8 +15,7 @@ class NotificationScreen extends ConsumerStatefulWidget {
   @override
   NotificationScreenState createState() => NotificationScreenState();
   void handleNotificationPermission() async {
-    try {
-    } catch (e) {
+    try {} catch (e) {
       // Handle the exception or show an error message to the user
     }
   }
@@ -62,7 +62,18 @@ class NotificationScreenState extends ConsumerState<NotificationScreen> {
               ),
               SizedBox(height: 34.h),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  showDialog(
+                    context: context,
+                    builder: (context) {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    },
+                  );
+                  Navigator.pop(context);
+                  NavigatorService.pushNamed('/category');
+                },
                 child: Text(
                   'Skip',
                   style: CustomTextStyles.titleMedium17_1,

@@ -217,8 +217,18 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
           ? null
           : () {
               if (_formKey.currentState?.validate() ?? false) {
-                ref.read(registerNotifier.notifier).registerUser(context);
+                showDialog(
+                context: context,
+                builder: (context) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                },
+              );
+                ref.read(registerNotifier.notifier).registerUser(context).then((_) {
+                Navigator.pop(context);
                 NavigatorService.pushNamed('/notification');
+              });
               }
             },
     );
