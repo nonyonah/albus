@@ -22,7 +22,7 @@ class AppRoutes {
     registerScreen: (context) => const RegisterScreen(),
     //otpScreen: (context) => SplashScreen(),
     notificationPermissionScreen: (context) => const NotificationScreen(),
-    categoryScreen: (context) => CategoryScreen(),
+    categoryScreen: (context) => const CategoriesScreen(),
     //loginScreen: (context) => SplashScreen(),
     initialRoute: (context) => const SplashScreen()
   };
