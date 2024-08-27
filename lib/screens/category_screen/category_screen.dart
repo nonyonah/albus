@@ -1,29 +1,25 @@
 import 'package:albus/core/utils/size_utils.dart';
-import 'package:albus/screens/category_screen/models/categories_model.dart';
-import 'package:albus/widgets/custom_image_view.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/material.dart';
 import '../../core/utils/image_constant.dart';
 import '../../themes/theme_helper.dart';
+import '../../widgets/custom_image_view.dart';
 import 'initiliazation/categories_initialization.dart';
 
-class CategoryScreen extends ConsumerStatefulWidget {
-  const CategoryScreen({super.key});
-
+class CategoryScreen extends ConsumerWidget {
   @override
-  CategoryScreenState createState() => CategoryScreenState();
-}
-
-class CategoryScreenState extends ConsumerState<CategoryScreen> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final categoriesState = ref.watch(categoriesNotifier);
+    final notifier = ref.read(categoriesNotifier.notifier);
+    
     return SafeArea(
       child: Scaffold(
         body: Container(
           width: double.maxFinite,
-          padding: EdgeInsets.symmetric(
-            horizontal: 26.h,
-            vertical: 54.h,
+          padding: EdgeInsets.only(
+            left: 18.h,
+            top: 50.h,
+            right: 18.h, 
           ),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,52 +28,61 @@ class CategoryScreenState extends ConsumerState<CategoryScreen> {
                 imagePath: ImageConstant.imgArrowLeft,
                 height: 24.h,
                 width: 24.h,
+                onTap: () {
+                  onTapGoBack(context);
+                },
               ),
-              SizedBox(
-                height: 70.h,
-              ),
-              _buildChooseCategoriesSection(context),
-              SizedBox(
-                height: 30.h,
-              ),
-              //_buildFoodDrinkSection(context),
-              // SizedBox(height: 30.h,),
-              // _buildTransportationSection(context),
-              // SizedBox(height: 30.h,),
-              // _buildEntertainmentRecreationSection(context),
-              // SizedBox(height: 30.h,)
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-Widget _buildChooseCategoriesSection(BuildContext context) {
-  return Container(
-    width: double.maxFinite,
-    padding: EdgeInsets.symmetric(horizontal: 10.h),
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          "Let's choose some categories",
-          style: theme.textTheme.headlineLarge,
-        ),
-        SizedBox(
-          height: 6.h,
-        ),
-        Text(
-          'Here are some suggestions for you(you can add, edit or remove this later)',
-          maxLines: 2,
-          overflow: TextOverflow.ellipsis,
-          style: theme.textTheme.bodyMedium!.copyWith(
-            height: 1.57,
+              SizedBox(height: 72.h),
+              Expanded(
+                child: Align(
+                  alignment: Alignment.center,
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                      left: 12.h,
+                      right: 24.h,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Let's choose some categories",
+                          style: theme.textTheme.headlineLarge,
+                        ),
+                        SizedBox(height: 8),
+                        Text(
+                          'Here are some suggestions for you (you can always add, edit or remove these later)',
+                          maxLines: 2,
+                          overflow: TextOverflow.ellipsis,
+                          style: theme.textTheme.bodyMedium!.copyWith(
+                            height: 1.57,
+                          ),
+                        ),
+                        SizedBox(height: 24.h),
+                        Expanded(
+                          child: SingleChildScrollView(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                _buildCategoryScreen(
+                                  "Food & Drink",
+                                  categoriesState.categoriesModelObj.suggestion1ItemList,
+                                  (index, value) => notifier.onSelectedChipView(index, value),
+                                ),
+                              ],
+                            )
+                          )
+                        )
+                      ]
+                    )
+                  )
+                ),
+              )
+            ]
           ),
         )
-      ],
-    ),
-  );
-}
+      )
+    )
+  }
 
+ 
+}
