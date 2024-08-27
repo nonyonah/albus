@@ -1,22 +1,25 @@
-import 'package:albus/core/utils/size_utils.dart';
-import 'package:albus/screens/category_screen/models/suggested_item.dart';
 import 'package:flutter/material.dart';
+import '../../../core/utils/size_utils.dart';
 import '../../../themes/theme_helper.dart';
+import '../suggested_item.dart';
 
-// Base Widget to avoid repetition
-class BaseSuggestedItemWidget extends StatelessWidget {
-  final String skillcard;
-  final bool isSelected;
+class SuggestedItemWidget extends StatelessWidget {
+  final SuggestedItem suggestedItem;
   final Function(bool)? onSelectedChipView;
-  final String avatarEmoji;
 
-  const BaseSuggestedItemWidget({
-    required this.skillcard,
-    required this.isSelected,
-    this.onSelectedChipView,
-    required this.avatarEmoji,
-    Key? key,
-  }) : super(key: key);
+  const SuggestedItemWidget(this.suggestedItem,
+      {Key? key, this.onSelectedChipView})
+      : super(key: key);
+
+  static const Map<String, String> categoryEmojis = {
+    'Groceries': '🛒',
+    'Restaurants': '🍔',
+    'Repairs': '🔧',
+    'Subscriptions': '💳',
+    'Transportation': '🚌',
+    'Clothing': '👗',
+    'Electricity': '💡',
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -25,11 +28,12 @@ class BaseSuggestedItemWidget extends StatelessWidget {
         top: 8.h,
         right: 14.h,
         bottom: 8.h,
+        left: 14.h,
       ),
       showCheckmark: false,
       labelPadding: EdgeInsets.zero,
       label: Text(
-        skillcard,
+        suggestedItem.name,
         style: TextStyle(
           color: appTheme.black900,
           fontSize: 14.fSize,
@@ -37,10 +41,11 @@ class BaseSuggestedItemWidget extends StatelessWidget {
           fontWeight: FontWeight.w700,
         ),
       ),
-      avatar: Text(avatarEmoji),
-      selected: isSelected,
-      backgroundColor:
-          isSelected ? theme.colorScheme.primary : theme.colorScheme.onPrimary,
+      avatar: Text(categoryEmojis[suggestedItem.name] ?? '❓'),
+      selected: suggestedItem.isSelected,
+      backgroundColor: suggestedItem.isSelected
+          ? theme.colorScheme.primary
+          : theme.colorScheme.onPrimary,
       selectedColor: theme.colorScheme.primary,
       shape: RoundedRectangleBorder(
         side: BorderSide(
@@ -49,141 +54,9 @@ class BaseSuggestedItemWidget extends StatelessWidget {
         ),
         borderRadius: BorderRadius.circular(50.h),
       ),
-      onSelected: onSelectedChipView,
-    );
-  }
-}
-
-// Widgets for each SuggestedItemModel with different emojis
-class SuggestedItemWidget extends StatelessWidget {
-  final SuggestedItemModel suggestedItemModelObj;
-  final Function(bool)? onSelectedChipView;
-
-  const SuggestedItemWidget(this.suggestedItemModelObj,
-      {Key? key, this.onSelectedChipView})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BaseSuggestedItemWidget(
-      skillcard: suggestedItemModelObj.skillcard!,
-      isSelected: suggestedItemModelObj.isSelected ?? false,
-      onSelectedChipView: onSelectedChipView,
-      avatarEmoji: '🛒', // Emoji for SuggestedItemModel (Groceries)
-    );
-  }
-}
-
-class Suggested2ItemWidget extends StatelessWidget {
-  final Suggested2ItemModel suggestedItemModelObj;
-  final Function(bool)? onSelectedChipView;
-
-  const Suggested2ItemWidget(this.suggestedItemModelObj,
-      {Key? key, this.onSelectedChipView})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BaseSuggestedItemWidget(
-      skillcard: suggestedItemModelObj.skillcard!,
-      isSelected: suggestedItemModelObj.isSelected ?? false,
-      onSelectedChipView: onSelectedChipView,
-      avatarEmoji: '🍔', // Emoji for Suggested2ItemModel (Restaurants)
-    );
-  }
-}
-
-class Suggested3ItemWidget extends StatelessWidget {
-  final Suggested3ItemModel suggestedItemModelObj;
-  final Function(bool)? onSelectedChipView;
-
-  const Suggested3ItemWidget(this.suggestedItemModelObj,
-      {Key? key, this.onSelectedChipView})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BaseSuggestedItemWidget(
-      skillcard: suggestedItemModelObj.skillcard!,
-      isSelected: suggestedItemModelObj.isSelected ?? false,
-      onSelectedChipView: onSelectedChipView,
-      avatarEmoji: '🔧', // Emoji for Suggested3ItemModel (Repairs)
-    );
-  }
-}
-
-class Suggested4ItemWidget extends StatelessWidget {
-  final Suggested4ItemModel suggestedItemModelObj;
-  final Function(bool)? onSelectedChipView;
-
-  const Suggested4ItemWidget(this.suggestedItemModelObj,
-      {Key? key, this.onSelectedChipView})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BaseSuggestedItemWidget(
-      skillcard: suggestedItemModelObj.skillcard!,
-      isSelected: suggestedItemModelObj.isSelected ?? false,
-      onSelectedChipView: onSelectedChipView,
-      avatarEmoji: '💳', // Emoji for Suggested4ItemModel (Subscriptions)
-    );
-  }
-}
-
-class Suggested5ItemWidget extends StatelessWidget {
-  final Suggested5ItemModel suggestedItemModelObj;
-  final Function(bool)? onSelectedChipView;
-
-  const Suggested5ItemWidget(this.suggestedItemModelObj,
-      {Key? key, this.onSelectedChipView})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BaseSuggestedItemWidget(
-      skillcard: suggestedItemModelObj.skillcard!,
-      isSelected: suggestedItemModelObj.isSelected ?? false,
-      onSelectedChipView: onSelectedChipView,
-      avatarEmoji: '🚌', // Emoji for Suggested5ItemModel (Transportation)
-    );
-  }
-}
-
-class Suggested6ItemWidget extends StatelessWidget {
-  final Suggested6ItemModel suggestedItemModelObj;
-  final Function(bool)? onSelectedChipView;
-
-  const Suggested6ItemWidget(this.suggestedItemModelObj,
-      {Key? key, this.onSelectedChipView})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BaseSuggestedItemWidget(
-      skillcard: suggestedItemModelObj.skillcard!,
-      isSelected: suggestedItemModelObj.isSelected ?? false,
-      onSelectedChipView: onSelectedChipView,
-      avatarEmoji: '👗', // Emoji for Suggested6ItemModel (Clothing)
-    );
-  }
-}
-
-class Suggested7ItemWidget extends StatelessWidget {
-  final Suggested7ItemModel suggestedItemModelObj;
-  final Function(bool)? onSelectedChipView;
-
-  const Suggested7ItemWidget(this.suggestedItemModelObj,
-      {Key? key, this.onSelectedChipView})
-      : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return BaseSuggestedItemWidget(
-      skillcard: suggestedItemModelObj.skillcard!,
-      isSelected: suggestedItemModelObj.isSelected ?? false,
-      onSelectedChipView: onSelectedChipView,
-      avatarEmoji: '💡', // Emoji for Suggested7ItemModel (Electricity)
+      onSelected: (bool selected) {
+        onSelectedChipView?.call(selected);
+      },
     );
   }
 }
