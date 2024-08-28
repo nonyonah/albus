@@ -4,8 +4,8 @@ import '../models/categories_model.dart';
 import 'categories_state.dart';
 
 final categoriesNotifier =
-    StateNotifierProvider<CategoriesNotifier, CategoriesState>(
-  (ref) => CategoriesNotifier(
+StateNotifierProvider<CategoriesNotifier, CategoriesState>(
+      (ref) => CategoriesNotifier(
     CategoriesState(
       categoriesModelObj: CategoriesModel(
         suggestedItems: [
@@ -26,6 +26,15 @@ class CategoriesNotifier extends StateNotifier<CategoriesState> {
   CategoriesNotifier(CategoriesState state) : super(state);
 
   void onSelectedChipView(String id, bool value) {
+    // Update the selected items based on the value
+    final updatedSelectedItems = [...state.selectedItems];
+    if (value) {
+      updatedSelectedItems.add(id);
+    } else {
+      updatedSelectedItems.remove(id);
+    }
+
+    // Update the suggested items
     final updatedItems = state.categoriesModelObj!.suggestedItems.map((item) {
       if (item.id == id) {
         return item.copyWith(isSelected: value);
@@ -33,10 +42,12 @@ class CategoriesNotifier extends StateNotifier<CategoriesState> {
       return item;
     }).toList();
 
+    // Update the state
     state = state.copyWith(
       categoriesModelObj: state.categoriesModelObj?.copyWith(
         suggestedItems: updatedItems,
       ),
+      selectedItems: updatedSelectedItems,
     );
   }
 }

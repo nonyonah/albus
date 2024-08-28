@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../../core/utils/navigator_service.dart';
 import '../../core/utils/size_utils.dart';
 import '../../themes/theme_helper.dart';
 import '../../widgets/custom_image_view.dart';
@@ -35,7 +36,7 @@ class _CategoriesScreenState extends ConsumerState<CategoriesScreen> {
                 height: 24.h,
                 width: 24.h,
                 onTap: () {
-                  Navigator.pop(context);
+                  onTapGoBack(context);
                 },
               ),
               SizedBox(height: 72.h),
@@ -53,10 +54,7 @@ class _CategoriesScreenState extends ConsumerState<CategoriesScreen> {
                         SizedBox(height: 34.h),
                         _buildSuggestedViewSection(context, ref),
                         Spacer(),
-                        CustomElevatedButton(
-                          text: 'Continue',
-                          margin: EdgeInsets.only(left: 14.h),
-                        ),
+                        _buildContinueButton(ref),
                       ],
                     ),
                   ),
@@ -114,5 +112,31 @@ class _CategoriesScreenState extends ConsumerState<CategoriesScreen> {
         }).toList(),
       ),
     );
+  }
+
+  Widget _buildContinueButton(WidgetRef ref) {
+    final categoriesState = ref.watch(categoriesNotifier);
+    final isContinueEnabled = categoriesState.selectedItems.length >= 2;
+
+    return CustomElevatedButton(
+      text: 'Continue',
+      margin: EdgeInsets.only(left: 14.h),
+      onPressed: isContinueEnabled
+          ? () {
+        _onContinuePressed(context);
+        Navigator.pop(context);
+        NavigatorService.pushNamed('/cash');
+      }
+          : null,
+    );
+
+  }
+
+  void _onContinuePressed(BuildContext context) {
+    // Handle the continue action
+  }
+
+  onTapGoBack(BuildContext context) {
+    NavigatorService.goBack();
   }
 }

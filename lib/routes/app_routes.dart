@@ -1,3 +1,4 @@
+import 'package:albus/screens/cash_balance_setup_screen/cash_balance_setup_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../screens/notification_screen/notification_screen.dart';
@@ -13,6 +14,7 @@ class AppRoutes {
   static const String otpScreen = '/otp';
   static const String notificationPermissionScreen = '/notification';
   static const String categoryScreen = '/category';
+  static const String cashBalanceSetupScreen = '/cash';
   static const String loginScreen = '/login';
   static const String initialRoute = '/initialRoute';
 
@@ -20,7 +22,7 @@ class AppRoutes {
     splashScreen: (context) => const SplashScreen(),
     onboardingScreen: (context) => const OnboardingScreen(),
     registerScreen: (context) => const RegisterScreen(),
-    //otpScreen: (context) => SplashScreen(),
+    cashBalanceSetupScreen: (context) => const CashBalanceSetupScreen(),
     notificationPermissionScreen: (context) => const NotificationScreen(),
     categoryScreen: (context) => const CategoriesScreen(),
     //loginScreen: (context) => SplashScreen(),
