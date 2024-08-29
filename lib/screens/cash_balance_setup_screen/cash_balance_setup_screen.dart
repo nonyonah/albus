@@ -87,7 +87,7 @@ class CashBalanceSetupScreenState extends ConsumerState<CashBalanceSetupScreen> 
           ),
           SizedBox(height: 4.h),
           Text(
-            'How much cash do you have in your physical wallet? We will also suggest category amounts based on the categories you selected',
+            'We will suggest category amounts based on the categories you selected',
             maxLines: 2,
             overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.center,
