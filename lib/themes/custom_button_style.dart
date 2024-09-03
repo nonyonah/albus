@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 class CustomButtonStyles {
   static ButtonStyle get fillPrimaryTL14 => ElevatedButton.styleFrom(
-        backgroundColor: theme.colorScheme.primary,
+        backgroundColor: appTheme.blueGray50,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(14.h),
         ),
