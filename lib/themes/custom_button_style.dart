@@ -44,16 +44,6 @@ class CustomButtonStyles {
     ),
     elevation: 0,
   );
-  // static ButtonStyle get outlineBlack => Outlined.styleFrom(
-  //   backgroundColor: theme.colorScheme.onPrimary.withOpacity(1),
-  //   side: BorderSide(
-  //     color: appTheme.black900.withOpacity(0.5),
-  //     width: 0,
-  //   ),
-  //   shape: RoundedRectangleBorder(
-  //     borderRadius: BorderRadius.circular(14.h),
-  //   ),
-  // );
   static ButtonStyle get none => ButtonStyle(
     backgroundColor: WidgetStateProperty.all<Color>(Colors.transparent),
     elevation: WidgetStateProperty.all<double>(0),
