@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class CashBalanceSetupModel extends Equatable {
-  CashBalanceSetupModel();
+  const CashBalanceSetupModel();
 
   CashBalanceSetupModel copyWith() {
     return CashBalanceSetupModel();

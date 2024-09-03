@@ -1,6 +1,5 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:albus/screens/splash_screen/models/splash_model.dart';
 
 import '../models/onboarding_model.dart';
 part 'onboarding_state.dart';

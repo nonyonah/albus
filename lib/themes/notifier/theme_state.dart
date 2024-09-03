@@ -2,7 +2,7 @@
 import 'package:equatable/equatable.dart';
 
 class ThemeState extends Equatable {
-  ThemeState({required this.themeType});
+  const ThemeState({required this.themeType});
 
   final String themeType;
 

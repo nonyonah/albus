@@ -11,7 +11,7 @@ class RegisterState extends Equatable {
   final RegistrationStatus registrationStatus;
   final String? errorMessage;
 
-  RegisterState({
+  const RegisterState({
     required this.fullNameInputController,
     required this.emailInputController,
     required this.passwordInputController,

@@ -8,7 +8,7 @@ final themeNotifier = StateNotifierProvider<ThemeNotifier, ThemeState>(
     (ref) => ThemeNotifier(ThemeState(themeType: PrefUtils().getThemeData())));
 
 class ThemeNotifier extends StateNotifier<ThemeState> {
-  ThemeNotifier(ThemeState state) : super(state);
+  ThemeNotifier(super.state);
 
   changeTheme(String themeType) async {
     PrefUtils().setThemeData(themeType);

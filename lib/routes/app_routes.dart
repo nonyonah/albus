@@ -1,5 +1,4 @@
 import 'package:albus/screens/cash_balance_setup_screen/cash_balance_setup_screen.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import '../screens/notification_screen/notification_screen.dart';
 import '../screens/onboarding_screen/onboarding_screen.dart';

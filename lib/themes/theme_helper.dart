@@ -5,68 +5,67 @@ import 'package:google_fonts/google_fonts.dart';
 
 LightCodeColors get appTheme => ThemeHelper().themeColor();
 ThemeData get theme => ThemeHelper().themeData();
-    
+
 class ThemeHelper {
   final _appTheme = PrefUtils().getThemeData();
-    
-      final Map<String, LightCodeColors> _supportedCustomColor = {
+
+  final Map<String, LightCodeColors> _supportedCustomColor = {
     'lightCode': LightCodeColors()
   };
-    
-      final Map<String, ColorScheme> _supportedCustomScheme = {
+
+  final Map<String, ColorScheme> _supportedCustomScheme = {
     'lightCode': ColorSchemes.lightCodeColorScheme
   };
-    
-      LightCodeColors _getThemeColors() {
+
+  LightCodeColors _getThemeColors() {
     return _supportedCustomColor[_appTheme] ?? LightCodeColors();
   }
-    
-      ThemeData _getThemeData() {
+
+  ThemeData _getThemeData() {
     var colorScheme =
         _supportedCustomScheme[_appTheme] ?? ColorSchemes.lightCodeColorScheme;
-        return ThemeData(
-            visualDensity: VisualDensity.standard,
+    return ThemeData(
+        visualDensity: VisualDensity.standard,
         colorScheme: colorScheme,
         textTheme: TextThemes.textTheme(colorScheme),
-            elevatedButtonTheme: ElevatedButtonThemeData(
-              style: ElevatedButton.styleFrom(
+        elevatedButtonTheme: ElevatedButtonThemeData(
+          style: ElevatedButton.styleFrom(
             backgroundColor: colorScheme.onPrimaryContainer,
             shape: RoundedRectangleBorder(
-                   borderRadius: BorderRadius.circular(26),
-                ),
+              borderRadius: BorderRadius.circular(26),
+            ),
             visualDensity: const VisualDensity(
               vertical: -4,
-                  horizontal: -4,
-                ),
+              horizontal: -4,
+            ),
             padding: EdgeInsets.zero,
           ),
-            ),
-            outlinedButtonTheme: OutlinedButtonThemeData(
+        ),
+        outlinedButtonTheme: OutlinedButtonThemeData(
           style: OutlinedButton.styleFrom(
             backgroundColor: Colors.transparent,
-                side: BorderSide(
-                  color: appTheme.black900.withOpacity(0.5),
+            side: BorderSide(
+              color: appTheme.black900.withOpacity(0.5),
               width: 0,
             ),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(14),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(14),
             ),
             visualDensity: const VisualDensity(
-                  vertical: -4,
-                  horizontal: -4,
-                ),
-                padding: EdgeInsets.zero,
-              ),
+              vertical: -4,
+              horizontal: -4,
             ),
-            floatingActionButtonTheme: FloatingActionButtonThemeData(
-                backgroundColor: colorScheme.primary));
+            padding: EdgeInsets.zero,
+          ),
+        ),
+        floatingActionButtonTheme: FloatingActionButtonThemeData(
+            backgroundColor: colorScheme.primary));
   }
 
   LightCodeColors themeColor() => _getThemeColors();
 
   ThemeData themeData() => _getThemeData();
-}    
-    
+}
 
 class TextThemes {
   static TextTheme textTheme(ColorScheme colorScheme) => TextTheme(
@@ -165,4 +164,6 @@ class LightCodeColors {
   Color get gray100F6 => const Color(0XF6F6F6F6);
   Color get lightBlue400 => const Color(0XFF26C9FC);
   Color get red100 => const Color(0XFFFFC8DD);
+  Color get greenA700 => const Color(0XFF00AB66);
+  Color get yellow900 => const Color(0XFFE17A2C);
 }

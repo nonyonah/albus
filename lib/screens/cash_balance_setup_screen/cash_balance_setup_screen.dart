@@ -51,7 +51,7 @@ class CashBalanceSetupScreenState extends ConsumerState<CashBalanceSetupScreen> 
                     child: Column(
                       children: [
                         _buildContentSection(context),
-                        SizedBox(height: 88),
+                        const SizedBox(height: 88),
                         Center(
                           child: CurrencyInputWidget(
                             onChanged: (value) {
@@ -59,8 +59,8 @@ class CashBalanceSetupScreenState extends ConsumerState<CashBalanceSetupScreen> 
                             },
                           ),
                         ),
-                        Spacer(),
-                        CustomElevatedButton(
+                        const Spacer(),
+                        const CustomElevatedButton(
                           text: 'Continue',
                         ),
                       ],

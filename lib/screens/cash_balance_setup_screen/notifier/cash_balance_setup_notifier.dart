@@ -9,5 +9,5 @@ final cashBalanceSetupNotifier = StateNotifierProvider<CashBalanceSetupNotifier,
 );
 
 class CashBalanceSetupNotifier extends StateNotifier<CashBalanceSetupState>{
-  CashBalanceSetupNotifier(CashBalanceSetupState state) : super(state);
+  CashBalanceSetupNotifier(super.state);
 }

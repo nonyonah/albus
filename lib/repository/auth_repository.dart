@@ -8,7 +8,7 @@ class AuthRepository {
   Future<UserCredential> registerUser(String email, String password) async {
     try {
       return await _auth.createUserWithEmailAndPassword(email: email, password: password);
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException {
       // Handle Firebase-specific errors here if necessary
       rethrow; // Passes the error up the call stack
     } catch (e) {
@@ -20,7 +20,7 @@ class AuthRepository {
   Future<UserCredential> loginUser(String email, String password) async {
     try {
       return await _auth.signInWithEmailAndPassword(email: email, password: password);
-    } on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException {
       // Handle Firebase-specific errors here if necessary
       rethrow;
     } catch (e) {

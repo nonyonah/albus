@@ -8,8 +8,7 @@ class SuggestedItemWidget extends StatelessWidget {
   final Function(bool)? onSelectedChipView;
 
   const SuggestedItemWidget(this.suggestedItem,
-      {Key? key, this.onSelectedChipView})
-      : super(key: key);
+      {super.key, this.onSelectedChipView});
 
   static const Map<String, String> categoryEmojis = {
     'Groceries': '🛒',

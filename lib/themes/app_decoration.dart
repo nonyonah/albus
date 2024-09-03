@@ -60,7 +60,7 @@ class AppDecoration {
       ),
     ),
   );
-  static BoxDecoration get outlineBlack900 => BoxDecoration();
+  static BoxDecoration get outlineBlack900 => const BoxDecoration();
 }
 
 class BorderRadiusStyle {

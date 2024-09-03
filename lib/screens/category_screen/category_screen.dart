@@ -10,7 +10,7 @@ import 'notifiers/categories_notifier.dart';
 import 'widget/suggested_item_widget.dart';
 
 class CategoriesScreen extends ConsumerStatefulWidget {
-  const CategoriesScreen({Key? key}) : super(key: key);
+  const CategoriesScreen({super.key});
 
   @override
   ConsumerState<CategoriesScreen> createState() => _CategoriesScreenState();
@@ -53,7 +53,7 @@ class _CategoriesScreenState extends ConsumerState<CategoriesScreen> {
                         _buildTitleSection(context),
                         SizedBox(height: 34.h),
                         _buildSuggestedViewSection(context, ref),
-                        Spacer(),
+                        const Spacer(),
                         _buildContinueButton(ref),
                       ],
                     ),

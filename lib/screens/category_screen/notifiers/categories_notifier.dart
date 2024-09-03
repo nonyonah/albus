@@ -23,7 +23,7 @@ StateNotifierProvider<CategoriesNotifier, CategoriesState>(
 );
 
 class CategoriesNotifier extends StateNotifier<CategoriesState> {
-  CategoriesNotifier(CategoriesState state) : super(state);
+  CategoriesNotifier(super.state);
 
   void onSelectedChipView(String id, bool value) {
     // Update the selected items based on the value

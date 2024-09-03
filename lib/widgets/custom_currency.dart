@@ -33,7 +33,7 @@ class _CurrencyInputWidgetState extends State<CurrencyInputWidget> {
       decimalDigits: 0,
     );
     _controller.text =
-        widget.currencySymbol + '0'; // Display the currency symbol initially
+        '${widget.currencySymbol}0'; // Display the currency symbol initially
 
     _focusNode.addListener(() {
       if (_focusNode.hasFocus) {

@@ -1,7 +1,7 @@
 import 'package:equatable/equatable.dart';
 
 class NotificationModel extends Equatable {
-  NotificationModel();
+  const NotificationModel();
 
   NotificationModel copyWith() {
     return NotificationModel();

@@ -1,8 +1,7 @@
 import '../suggested_item.dart';
 
 class SuggestedItemImpl extends SuggestedItem {
-  SuggestedItemImpl({required String id, required String name, bool isSelected = false})
-      : super(id: id, name: name, isSelected: isSelected);
+  SuggestedItemImpl({required super.id, required super.name, super.isSelected});
 
   @override
   SuggestedItemImpl copyWith({bool? isSelected}) {

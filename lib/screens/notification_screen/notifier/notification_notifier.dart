@@ -14,5 +14,5 @@ final notificationNotifier =
 );
 
 class NotificationNotifier extends StateNotifier<NotificationState> {
-  NotificationNotifier(NotificationState state) : super(state);
+  NotificationNotifier(super.state);
 }

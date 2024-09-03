@@ -28,7 +28,7 @@ final authRepositoryProvider = Provider((ref) => AuthRepository());
 class RegisterNotifier extends StateNotifier<RegisterState> {
   final AuthRepository _authRepository;
 
-  RegisterNotifier(RegisterState state, this._authRepository) : super(state);
+  RegisterNotifier(super.state, this._authRepository);
 
   Future<void> registerUser(BuildContext context) async {
     state = state.copyWith(registrationStatus: RegistrationStatus.loading);
