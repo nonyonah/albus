@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
+import '../screens/category_screen/category_screen.dart';
 import '../screens/notification_screen/notification_screen.dart';
 import '../screens/onboarding_screen/onboarding_screen.dart';
 import '../screens/register_screen/register_screen.dart';
 import '../screens/splash_screen/splash_screen.dart';
-import 'package:albus/screens/category_screen/category_screen.dart';
-
 import '../screens/suggestion_screen/suggestion_screen.dart';
 
 class AppRoutes {

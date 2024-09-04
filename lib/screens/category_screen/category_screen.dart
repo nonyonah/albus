@@ -6,6 +6,7 @@ import '../../themes/theme_helper.dart';
 import '../../widgets/custom_image_view.dart';
 import '../../core/utils/image_constant.dart';
 import '../../widgets/custom_elevated_button.dart';
+import '../suggestion_screen/notifier/suggestion_notifier.dart';
 import 'notifiers/categories_notifier.dart';
 import 'widget/suggested_item_widget.dart';
 
@@ -19,6 +20,8 @@ class CategoriesScreen extends ConsumerStatefulWidget {
 class _CategoriesScreenState extends ConsumerState<CategoriesScreen> {
   @override
   Widget build(BuildContext context) {
+     final suggestionState = ref.watch(suggestionNotifier);
+    final allCategories = suggestionState.suggestionModelObj!.buttonListItem;
     return SafeArea(
       child: Scaffold(
         body: Container(
@@ -125,7 +128,7 @@ class _CategoriesScreenState extends ConsumerState<CategoriesScreen> {
           ? () {
         _onContinuePressed(context);
         Navigator.pop(context);
-        NavigatorService.pushNamed('/cash');
+        NavigatorService.pushNamed('/suggestion');
       }
           : null,
     );

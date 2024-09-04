@@ -41,6 +41,8 @@ class CustomTextStyles {
   static get labelLarge13 => theme.textTheme.labelLarge!.copyWith(
         fontSize: 13.fSize,
       );
+  static get labelLargeOnPrimary => theme.textTheme.labelLarge!
+      .copyWith(color: theme.colorScheme.onPrimary.withOpacity(1));
   static get labelLargeBlack900 => theme.textTheme.labelLarge!.copyWith(
         color: appTheme.black900.withOpacity(0.5),
       );
@@ -67,10 +69,10 @@ class CustomTextStyles {
   static get titleMedium17 => theme.textTheme.titleMedium!.copyWith(
         fontSize: 17.fSize,
       );
-      static get titleMedium17_1 => theme.textTheme.titleMedium!.copyWith(
+  static get titleMedium17_1 => theme.textTheme.titleMedium!.copyWith(
         fontSize: 17.fSize,
       );
-      static get titleMediumBlack900 => theme.textTheme.titleMedium!.copyWith(
+  static get titleMediumBlack900 => theme.textTheme.titleMedium!.copyWith(
         color: appTheme.black900,
       );
 }

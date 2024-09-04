@@ -30,7 +30,7 @@ class CustomButtonStyles {
     ),
     elevation: 0,
   );
-  static ButtonStyle get fillPrimryTL10 => ElevatedButton.styleFrom(
+  static ButtonStyle get fillPrimaryTL10 => ElevatedButton.styleFrom(
     backgroundColor: theme.colorScheme.primary,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(10.h),
