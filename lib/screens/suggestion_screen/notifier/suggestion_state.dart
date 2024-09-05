@@ -2,7 +2,7 @@ import 'package:equatable/equatable.dart';
 import '../models/suggestion_model.dart';
 
 class SuggestionState extends Equatable {
-  SuggestionState({
+  const SuggestionState({
     this.suggestionModelObj,
     this.selectedCategories = const [],
   });

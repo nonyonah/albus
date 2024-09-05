@@ -16,14 +16,14 @@ class ButtonListItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
+    return InkWell(
       onTap: () {
         onTapOptions?.call();
       },
       child: Container(
         padding: EdgeInsets.symmetric(
-          horizontal: 16.h,
-          vertical: 6.h,
+          horizontal: 20.h,
+          vertical: 15.h,
         ),
         decoration: AppDecoration.fillBlueGray.copyWith(
           borderRadius: BorderRadiusStyle.roundedBorder12,
@@ -38,18 +38,20 @@ class ButtonListItemWidget extends StatelessWidget {
                 style: theme.textTheme.titleSmall,
               ),
             ),
-            const Spacer(flex: 53,),
+            const Spacer(
+              flex: 50,
+            ),
             Align(
-              alignment: Alignment.bottomCenter,
+              alignment: Alignment.center,
               child: Padding(
-                padding: EdgeInsets.only(bottom: 4.h),
+                padding: EdgeInsets.only(bottom: 10.h),
                 child: Text(
                   buttonListItemModelObj.frequency,
                   style: theme.textTheme.titleSmall,
                 ),
               ),
             ),
-            const Spacer(flex: 46),
+            const Spacer(flex: 50),
             Container(
               margin: EdgeInsets.only(right: 8.h),
               padding: EdgeInsets.symmetric(horizontal: 14.h),

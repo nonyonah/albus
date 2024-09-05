@@ -1,4 +1,3 @@
-import 'package:equatable/equatable.dart';
 import 'package:riverpod/riverpod.dart';
 
 import '../../core/utils/pref_utils.dart';

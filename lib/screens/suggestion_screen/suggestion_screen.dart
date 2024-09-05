@@ -37,13 +37,13 @@ class _SuggestionScreenState extends ConsumerState<SuggestionScreen> {
               _buildBackButton(context),
               SizedBox(height: 48.h),
               _buildTitle(),
-              SizedBox(height: 18.h),
+              SizedBox(height: 10.h),
               _buildAllocationSuggestions(context),
               SizedBox(height: 10.h),
               _buildCurrencyDisplayContext(context),
               SizedBox(height: 10.h),
               _buildShoppingList(context, ref),
-              Spacer(),
+              const Spacer(),
               _buildFinishButton(context),
               SizedBox(height: 30.h),
             ],
@@ -78,7 +78,7 @@ class _SuggestionScreenState extends ConsumerState<SuggestionScreen> {
   Widget _buildAllocationSuggestions(BuildContext context) {
     return Container(
       width: double.maxFinite,
-      padding: EdgeInsets.all(18.h),
+      padding: EdgeInsets.all(25.h),
       decoration: AppDecoration.fillBlueGray.copyWith(
         borderRadius: BorderRadiusStyle.roundedBorder12,
       ),
@@ -94,7 +94,7 @@ class _SuggestionScreenState extends ConsumerState<SuggestionScreen> {
             overflow: TextOverflow.ellipsis,
             style: CustomTextStyles.labelLarge13.copyWith(height: 1.69),
           ),
-          SizedBox(height: 2.h),
+          SizedBox(height: 7.h),
           _buildSuggestAmountButton(),
         ],
       ),
@@ -107,7 +107,7 @@ class _SuggestionScreenState extends ConsumerState<SuggestionScreen> {
       width: 92.h,
       text: 'Suggest amount',
       buttonStyle: CustomButtonStyles.fillPrimaryTL10,
-      buttonTextStyle: theme.textTheme.bodyMedium,
+      buttonTextStyle: theme.textTheme.bodySmall,
       onPressed: () {},
     );
   }
@@ -115,12 +115,12 @@ class _SuggestionScreenState extends ConsumerState<SuggestionScreen> {
   Widget _buildCurrencyDisplayContext(BuildContext context) {
     return SizedBox(
       width: double.maxFinite,
-      child: GestureDetector(
+      child: InkWell(
         onTap: () {},
         child: Container(
           padding: EdgeInsets.symmetric(
             horizontal: 16.h,
-            vertical: 12.h,
+            vertical: 15.h,
           ),
           decoration: AppDecoration.fillBlueGray.copyWith(
             borderRadius: BorderRadiusStyle.roundedBorder12,
@@ -129,9 +129,9 @@ class _SuggestionScreenState extends ConsumerState<SuggestionScreen> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Align(
-                alignment: Alignment.bottomCenter,
+                alignment: Alignment.center,
                 child: Padding(
-                  padding: EdgeInsets.only(top: 2.h),
+                  padding: EdgeInsets.only(left: 8.h),
                   child: Text(
                     'Current Currency',
                     style: theme.textTheme.titleSmall,

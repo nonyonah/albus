@@ -4,7 +4,7 @@ class NotificationModel extends Equatable {
   const NotificationModel();
 
   NotificationModel copyWith() {
-    return NotificationModel();
+    return const NotificationModel();
   }
 
   @override

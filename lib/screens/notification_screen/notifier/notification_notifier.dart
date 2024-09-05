@@ -8,7 +8,7 @@ final notificationNotifier =
     StateNotifierProvider<NotificationNotifier, NotificationState>(
   (ref) => NotificationNotifier(
     NotificationState(
-      notificationModelObj: NotificationModel(),
+      notificationModelObj: const NotificationModel(),
     ),
   ),
 );
