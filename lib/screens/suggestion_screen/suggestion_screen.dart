@@ -11,6 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../themes/theme_helper.dart';
+import '../../widgets/custom_currency.dart';
+import 'notifier/currency_notifier.dart';
 import 'notifier/suggestion_notifier.dart';
 
 class SuggestionScreen extends ConsumerStatefulWidget {
@@ -108,46 +110,146 @@ class _SuggestionScreenState extends ConsumerState<SuggestionScreen> {
       text: 'Suggest amount',
       buttonStyle: CustomButtonStyles.fillPrimaryTL10,
       buttonTextStyle: theme.textTheme.bodySmall,
-      onPressed: () {},
+      onPressed: () {
+        showModalBottomSheet(
+          context: context,
+          builder: (BuildContext context) {
+            return SizedBox(
+              height: 1000.h,
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.h),
+                child: Column(
+                  children: [
+                    const SizedBox(height: 88),
+                    Center(
+                      child: CurrencyInputWidget(
+                        onChanged: (value) {
+                          print(
+                              'Current cash balance: \$${value.toStringAsFixed(2)}');
+                        },
+                      ),
+                    ),
+                    const Spacer(),
+                    const CustomElevatedButton(
+                      text: 'Continue',
+                    ),
+                    SizedBox(height: 30.h),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
     );
   }
 
   Widget _buildCurrencyDisplayContext(BuildContext context) {
-    return SizedBox(
-      width: double.maxFinite,
-      child: InkWell(
-        onTap: () {},
-        child: Container(
-          padding: EdgeInsets.symmetric(
-            horizontal: 16.h,
-            vertical: 15.h,
-          ),
-          decoration: AppDecoration.fillBlueGray.copyWith(
-            borderRadius: BorderRadiusStyle.roundedBorder12,
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Align(
-                alignment: Alignment.center,
-                child: Padding(
-                  padding: EdgeInsets.only(left: 8.h),
-                  child: Text(
-                    'Current Currency',
-                    style: theme.textTheme.titleSmall,
-                  ),
-                ),
+    return Consumer(
+      builder: (context, ref, _) {
+        final currencyState = ref.watch(currencyProvider);
+        return SizedBox(
+          width: double.maxFinite,
+          child: InkWell(
+            onTap: () {
+              showModalBottomSheet(
+                context: context,
+                builder: (BuildContext context) {
+                  return _buildCurrencySelectionGrid(context, ref);
+                },
+              );
+            },
+            child: Container(
+              padding: EdgeInsets.symmetric(
+                horizontal: 16.h,
+                vertical: 15.h,
               ),
-              Padding(
-                padding: EdgeInsets.only(right: 10.h),
-                child: Text(
-                  'USD',
-                  style: CustomTextStyles.labelLargeBlack900,
-                ),
-              )
-            ],
+              decoration: AppDecoration.fillBlueGray.copyWith(
+                borderRadius: BorderRadiusStyle.roundedBorder12,
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Align(
+                    alignment: Alignment.center,
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 8.h),
+                      child: Text(
+                        'Current Currency',
+                        style: theme.textTheme.titleSmall,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(right: 10.h),
+                    child: Text(
+                      currencyState.selectedCurrency.amountCard ?? 'USD',
+                      style: CustomTextStyles.labelLargeBlack900,
+                    ),
+                  )
+                ],
+              ),
+            ),
           ),
-        ),
+        );
+      },
+    );
+  }
+
+  Widget _buildCurrencySelectionGrid(BuildContext context, WidgetRef ref) {
+    final currencyState = ref.watch(currencyProvider);
+    return Container(
+      padding: EdgeInsets.all(16.h),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            'Select Currency',
+            style: theme.textTheme.titleLarge,
+          ),
+          SizedBox(height: 30.h),
+          Expanded(
+            child: GridView.builder(
+              itemCount: currencyState.currencies.length,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 3,
+                mainAxisSpacing: 12.h,
+                crossAxisSpacing: 12.h,
+                mainAxisExtent: 51.h,
+              ),
+              itemBuilder: (context, index) {
+                final currency = currencyState.currencies[index];
+                final isSelected = currency.amountCard ==
+                    currencyState.selectedCurrency.amountCard;
+                return InkWell(
+                  onTap: () {
+                    ref
+                        .read(currencyProvider.notifier)
+                        .selectCurrency(currency);
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(8.h),
+                    decoration: AppDecoration.fillPrimary.copyWith(
+                      borderRadius: BorderRadiusStyle.roundedBorder5,
+                      color: isSelected ? theme.colorScheme.primary : null,
+                    ),
+                    child: Center(
+                      child: Text(
+                        currency.amountCard ?? '',
+                        style: TextStyle(
+                          color: isSelected ? Colors.white : Colors.black,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ),
+                );
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
