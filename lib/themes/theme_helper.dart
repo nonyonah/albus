@@ -146,7 +146,7 @@ class ColorSchemes {
     errorContainer: Color(0XFF284B63),
     onError: Color(0XFF7209B7),
     onPrimary: Color(0x7FFFFFFF),
-    onPrimaryContainer: Color(0xFF3A0CA3),
+    onPrimaryContainer: Color(0xFF023E8A),
   );
 }
 

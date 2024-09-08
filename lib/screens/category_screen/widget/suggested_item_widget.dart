@@ -34,7 +34,8 @@ class SuggestedItemWidget extends StatelessWidget {
       label: Text(
         suggestedItem.name,
         style: TextStyle(
-          color: appTheme.black900,
+          color:
+              suggestedItem.isSelected ? appTheme.whiteA700 : appTheme.black900,
           fontSize: 14.fSize,
           fontFamily: 'Inter Tight',
           fontWeight: FontWeight.w700,
