@@ -10,8 +10,9 @@
 .svn/
 migrate_working_dir/
 
+
 # Ignoring the environment file
-.env
+key.env
 
 # IntelliJ related
 *.iml

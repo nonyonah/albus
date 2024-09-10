@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:intl/intl.dart';
 import '../../themes/theme_helper.dart';
+import '../core/utils/gemini_allocation_provider.dart';
 
 // State providers
 final selectedCurrencyProvider = StateProvider<String>((ref) => '\$');
@@ -14,13 +15,11 @@ class CurrencyInputWidget extends ConsumerStatefulWidget {
 
   const CurrencyInputWidget({
     super.key,
-    this.currencySymbols = const ['\$', '€', '£', '₦'],
-    required Null Function(dynamic value) onChanged,
+    this.currencySymbols = const ['\$', '€', '£', '₦'], required Null Function(dynamic value) onChanged,
   });
 
   @override
-  ConsumerState<CurrencyInputWidget> createState() =>
-      _CurrencyInputWidgetState();
+  ConsumerState<CurrencyInputWidget> createState() => _CurrencyInputWidgetState();
 }
 
 class _CurrencyInputWidgetState extends ConsumerState<CurrencyInputWidget> {
@@ -69,9 +68,25 @@ class _CurrencyInputWidgetState extends ConsumerState<CurrencyInputWidget> {
     }
   }
 
+  void _updateAllocations() async {
+    final amount = ref.read(amountProvider);
+    try {
+      final geminiAllocation = await ref.read(geminiAllocationProvider(amount).future);
+      ref.read(allocationsProvider.notifier).update((state) => {
+        ...state,
+        'Gemini': geminiAllocation,
+      });
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Error fetching allocations: $e')),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final selectedCurrency = ref.watch(selectedCurrencyProvider);
+    final allocations = ref.watch(allocationsProvider);
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,

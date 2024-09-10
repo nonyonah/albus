@@ -1,4 +1,3 @@
-//import 'package:albus/core/utils/size_utils.dart';
 import 'package:albus/localization/app_localization.dart';
 import 'package:albus/routes/app_routes.dart';
 import 'package:albus/themes/theme_helper.dart';
@@ -15,17 +14,34 @@ import 'repository/firebase_notification.dart';
 import 'themes/notifier/theme_notifier.dart';
 
 var globalMessengerKey = GlobalKey<ScaffoldMessengerState>();
+
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  await FirebaseNotification().initNotifications();
-  await dotenv.load(fileName: "key.env");
-  Future.wait([
-    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-  ]).then((value) {
-    runApp(const ProviderScope(child: MyApp()));
-  });
 
+  // Error handling for initialization
+  try {
+    await Firebase.initializeApp(
+        options: DefaultFirebaseOptions.currentPlatform);
+    await FirebaseNotification().initNotifications();
+  } catch (error) {
+    // Handle Firebase initialization errors here
+    print('Error initializing Firebase: $error');
+  }
+
+  try {
+    await dotenv.load(fileName: "./key.env");
+  } catch (error) {
+    // Handle dotenv loading errors
+    print('Error loading environment variables: $error');
+  }
+
+  await Future.wait([
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
+  ]);
+
+  runApp(const ProviderScope(child: MyApp()));
+
+  // Setting system UI style
   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
     statusBarIconBrightness: Brightness.light,
     statusBarBrightness: Brightness.dark,
@@ -40,11 +56,11 @@ class MyApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final themeType = ref.watch(themeNotifier).themeType;
+
     return Sizer(
       builder: (context, orientation, deviceType) {
         return MaterialApp(
-          theme: theme,
-          //title: albus,
+          theme: theme, // Get theme based on the current themeType
           navigatorKey: NavigatorService.navigatorKey,
           debugShowCheckedModeBanner: false,
           localizationsDelegates: const [
