@@ -5,6 +5,7 @@ import 'package:albus/themes/theme_helper.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'core/utils/navigator_service.dart';
@@ -18,6 +19,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   await FirebaseNotification().initNotifications();
+  await dotenv.load(fileName: "key.env");
   Future.wait([
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
   ]).then((value) {
