@@ -66,7 +66,7 @@ final geminiModelProvider = Provider((ref) {
   final apiKey = dotenv.env['key.env']!;
   return GenerativeModel(
     model: 'gemini-1.5-pro',
-    apiKey: apiKey,
+    apiKey: const String.fromEnvironment('api_key'),
   );
 });
 

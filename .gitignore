@@ -12,7 +12,7 @@ migrate_working_dir/
 
 
 # Ignoring the environment file
-key.env
+.env
 
 # IntelliJ related
 *.iml

@@ -12,7 +12,7 @@ final amountProvider = StateProvider<double>((ref) => 0);
 
 class CurrencyInputWidget extends ConsumerStatefulWidget {
   final List<String> currencySymbols;
-
+  
   const CurrencyInputWidget({
     super.key,
     this.currencySymbols = const ['\$', '€', '£', '₦'], required Null Function(dynamic value) onChanged,

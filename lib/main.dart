@@ -29,7 +29,7 @@ void main() async {
   }
 
   try {
-    await dotenv.load(fileName: "./key.env");
+    await dotenv.load(fileName: ".env");
   } catch (error) {
     // Handle dotenv loading errors
     print('Error loading environment variables: $error');
