@@ -1,5 +1,7 @@
 import 'package:equatable/equatable.dart';
 
+import 'allocation_list_model.dart';
+
 class AllocationModel extends Equatable {
   AllocationModel({this.allocationList = const []});
 
