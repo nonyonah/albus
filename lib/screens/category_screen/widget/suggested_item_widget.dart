@@ -49,7 +49,7 @@ class SuggestedItemWidget extends StatelessWidget {
       selectedColor: theme.colorScheme.primary,
       shape: RoundedRectangleBorder(
         side: BorderSide(
-          color: appTheme.black900.withOpacity(0.5),
+          color: appTheme.black900.withOpacity(0.05),
           width: 0.5.h,
         ),
         borderRadius: BorderRadius.circular(50.h),

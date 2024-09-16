@@ -141,12 +141,12 @@ class TextThemes {
 class ColorSchemes {
   static const lightCodeColorScheme = ColorScheme.light(
     primary: Color(0xFF252422),
-    primaryContainer: Color(0XFFFFB91F),
+    primaryContainer: Color(0XFF023E8A),
     secondaryContainer: Color(0X33FF0000),
     errorContainer: Color(0XFF284B63),
     onError: Color(0XFF7209B7),
     onPrimary: Color(0x7FFFFFFF),
-    onPrimaryContainer: Color(0xFF252422),
+    onPrimaryContainer: Color(0xFF023E8A),
   );
 }
 

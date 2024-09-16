@@ -51,41 +51,25 @@ class CashBalanceSetupScreenState
                   left: 16.h,
                   right: 12.h,
                 ),
-                child: Column(
-                  children: [
-                    _buildContentSection(context),
-                    const SizedBox(height: 88),
-                    Center(
-                      child: CurrencyInputWidget(
-                        onChanged: (value) {
-                          print(
-                              'Current cash balance: \$${value.toStringAsFixed(2)}');
-                        },
-                      ),
-                    ),
-                    const Spacer(),
-                    CustomElevatedButton(
-                      onPressed: () {
-                        _updateAllocations(ref.read(amountProvider));
+                child: Column(children: [
+                  _buildContentSection(context),
+                  const SizedBox(height: 88),
+                  Center(
+                    child: CurrencyInputWidget(
+                      onChanged: (value) {
+                        print(
+                            'Current cash balance: \$${value.toStringAsFixed(2)}');
                       },
-                      text: 'Continue',
                     ),
-                    if (allocations.isNotEmpty) ...[
-                      const SizedBox(height: 20),
-                      Text('AI Allocations:',
-                          style: theme.textTheme.headlineSmall),
-                      Expanded(
-                        child: ListView(
-                          children: [
-                            for (var entry
-                                in allocations['Gemini']?.entries ?? [])
-                              ListTile(),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ],
-                ),
+                  ),
+                  const Spacer(),
+                  CustomElevatedButton(
+                    onPressed: () {
+                      _updateAllocations(ref.read(amountProvider));
+                    },
+                    text: 'Continue',
+                  ),
+                ]),
               ),
             ),
           ),
