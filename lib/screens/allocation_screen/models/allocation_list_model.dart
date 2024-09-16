@@ -2,13 +2,13 @@ import 'package:equatable/equatable.dart';
 
 class AllocationListModel extends Equatable {
   final String name;
-  final String icon;
+  final String emoji;
   final double amount;
   final String timeFrame;
 
   AllocationListModel({
     required this.name,
-    required this.icon,
+    required this.emoji,
     required this.amount,
     required this.timeFrame,
   });
@@ -21,12 +21,12 @@ class AllocationListModel extends Equatable {
   }) {
     return AllocationListModel(
       name: name ?? this.name,
-      icon: icon ?? this.icon,
+      emoji: icon ?? this.emoji,
       amount: amount ?? this.amount,
       timeFrame: timeFrame ?? this.timeFrame,
     );
   }
 
   @override
-  List<Object> get props => [name, icon, amount, timeFrame];
+  List<Object> get props => [name, emoji, amount, timeFrame];
 }

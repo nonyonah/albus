@@ -10,24 +10,24 @@ final selectedCategoriesProvider = StateProvider<List<String>>((ref) => []);
 final inputAmountProvider = StateProvider<double>((ref) => 0.0);
 
 // Provider for AI-generated allocations
-final allocationsProvider = FutureProvider<AllocationModel>((ref) async {
+final allocationProvider = FutureProvider<AllocationModel>((ref) async {
   final categories = ref.watch(selectedCategoriesProvider);
   final amount = ref.watch(inputAmountProvider);
   
   // Simulate AI allocation (replace this with actual AI call)
   await Future.delayed(Duration(seconds: 2)); // Simulating API call
   return AllocationModel(allocationList: [
-    AllocationListModel(name: 'Groceries', icon: '🛒', amount: amount * 0.3, timeFrame: 'Weekly'),
-    AllocationListModel(name: 'Utilities', icon: '💡', amount: amount * 0.2, timeFrame: 'Monthly'),
-    AllocationListModel(name: 'Entertainment', icon: '🎭', amount: amount * 0.1, timeFrame: 'Weekly'),
+    AllocationListModel(name: 'Groceries', emoji: '🛒', amount: amount * 0.3, timeFrame: 'Weekly'),
+    AllocationListModel(name: 'Utilities', emoji: '💡', amount: amount * 0.2, timeFrame: 'Monthly'),
+    AllocationListModel(name: 'Entertainment', emoji: '🎭', amount: amount * 0.1, timeFrame: 'Weekly'),
     // Add more allocations based on selected categories
   ]);
 });
 
-class AllocationsNotifier extends StateNotifier<AllocationModel> {
-  AllocationsNotifier() : super(AllocationModel());
+class AllocationNotifier extends StateNotifier<AllocationModel> {
+  AllocationNotifier() : super(AllocationModel());
 
-  void setAllocations(AllocationModel allocations) {
+  void setAllocation(AllocationModel allocations) {
     state = allocations;
   }
 
@@ -45,6 +45,6 @@ class AllocationsNotifier extends StateNotifier<AllocationModel> {
   }
 }
 
-final allocationsNotifierProvider = StateNotifierProvider<AllocationsNotifier, AllocationModel>((ref) {
-  return AllocationsNotifier();
+final allocationsNotifierProvider = StateNotifierProvider<AllocationNotifier, AllocationModel>((ref) {
+  return AllocationNotifier();
 });
