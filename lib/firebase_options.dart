@@ -47,30 +47,29 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBwA0Ehj68caGopwr_UBawxra4YU4qXT5Q',
-    appId: '1:91175147280:web:94956a02f6350584a9f795',
-    messagingSenderId: '91175147280',
-    projectId: 'gemini-pay-fb7ad',
-    authDomain: 'gemini-pay-fb7ad.firebaseapp.com',
-    storageBucket: 'gemini-pay-fb7ad.appspot.com',
-    measurementId: 'G-PZ1F98VLK9',
+    apiKey: 'AIzaSyDaNoNyi7aG4LiAA-IimWJ4wyqleTjfH4Y',
+    appId: '1:33619678198:web:ae7ce88a51748248116dd7',
+    messagingSenderId: '33619678198',
+    projectId: 'albus-47539',
+    authDomain: 'albus-47539.firebaseapp.com',
+    storageBucket: 'albus-47539.firebasestorage.app',
+    measurementId: 'G-V5VJ9REWJB',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyD_DadAUwP6jweNXaV-PDwelAgH87clAEU',
-    appId: '1:91175147280:android:1ce9544c5b0b5320a9f795',
-    messagingSenderId: '91175147280',
-    projectId: 'gemini-pay-fb7ad',
-    storageBucket: 'gemini-pay-fb7ad.appspot.com',
+    apiKey: 'AIzaSyCS9VjyqsTn5uG_zlMSXPi3iIZ779M62zo',
+    appId: '1:33619678198:android:685a301bcd4e04e0116dd7',
+    messagingSenderId: '33619678198',
+    projectId: 'albus-47539',
+    storageBucket: 'albus-47539.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyCMK2uBnajDBu-XLbbDh-iw0YlBo4Hoqak',
-    appId: '1:91175147280:ios:dce6b5c34a1b7cd2a9f795',
-    messagingSenderId: '91175147280',
-    projectId: 'gemini-pay-fb7ad',
-    storageBucket: 'gemini-pay-fb7ad.appspot.com',
+    apiKey: 'AIzaSyBMQ2kxsCtzKAezstUKr0l-r5eYQ9IpU6k',
+    appId: '1:33619678198:ios:2f08d537954db0a9116dd7',
+    messagingSenderId: '33619678198',
+    projectId: 'albus-47539',
+    storageBucket: 'albus-47539.firebasestorage.app',
     iosBundleId: 'com.albus.app',
   );
-
 }

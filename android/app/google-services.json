@@ -1,26 +1,51 @@
 {
   "project_info": {
-    "project_number": "91175147280",
-    "project_id": "gemini-pay-fb7ad",
-    "storage_bucket": "gemini-pay-fb7ad.appspot.com"
+    "project_number": "848551879930",
+    "project_id": "albus-fcda1",
+    "storage_bucket": "albus-fcda1.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:91175147280:android:1ce9544c5b0b5320a9f795",
+        "mobilesdk_app_id": "1:848551879930:android:a2a9c46be98028ee345543",
         "android_client_info": {
           "package_name": "com.albus.app"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "848551879930-1sdm5f5741rsg8e505m3rn1787avbdgl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.albus.app",
+            "certificate_hash": "d99f5b8774d004eeeb9b52624465e46eb43a3ff6"
+          }
+        },
+        {
+          "client_id": "848551879930-mbm74fis1h7974nqk9s34h98s5ql0lod.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
-          "current_key": "AIzaSyD_DadAUwP6jweNXaV-PDwelAgH87clAEU"
+          "current_key": "AIzaSyCG4htNKvsWxws93G8p5aK4d69BWcY32b8"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "848551879930-mbm74fis1h7974nqk9s34h98s5ql0lod.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "848551879930-gra9u3b4d4ll0p4t0bbdpds24dr4u9jj.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.albus"
+              }
+            }
+          ]
         }
       }
     }
