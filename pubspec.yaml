@@ -64,6 +64,7 @@ dependencies:
   ed25519_hd_key: ^2.3.0
   flutter_secure_storage: ^4.2.1
   google_sign_in: ^6.2.2
+  freezed_annotation: ^2.4.4
 
 
 
@@ -94,7 +95,6 @@ flutter:
   assets: 
       - assets/images/
       - assets/animations/
-      - .env
       
 
 

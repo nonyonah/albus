@@ -16,3 +16,4 @@ class AccountConnectState extends Equatable {
     );
   }
 }
+
