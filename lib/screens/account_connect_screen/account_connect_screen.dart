@@ -103,7 +103,7 @@ class AccountConnectScreenState extends ConsumerState<AccountConnectScreen> {
                                   ),
                                   SizedBox(height: 30.h),
                                   CustomElevatedButton(
-                                    text: 'Import wallet',
+                                    text: 'Connect via Reown',
                                     margin: EdgeInsets.only(
                                       left: 10.h,
                                       right: 12.h,
