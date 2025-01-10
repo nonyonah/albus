@@ -108,7 +108,7 @@ class TextThemes {
           fontWeight: FontWeight.w700,
         ),
         headlineLarge: TextStyle(
-          color: appTheme.whiteA700,
+          color: appTheme.black900,
           fontSize: 30.fSize,
           fontFamily: GoogleFonts.interTight().fontFamily,
           fontWeight: FontWeight.w700,

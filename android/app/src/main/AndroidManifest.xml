@@ -1,5 +1,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- Permissions options for the `notification` group -->
+  <queries>
+        <package android:name="io.metamask"/>
+        <package android:name="com.wallet.crypto.trustapp"/>
+        <package android:name="io.gnosis.safe"/>
+        <package android:name="me.rainbow"/>
+        <package android:name="org.toshi"/>
+        <!-- Add other wallet schemes names here -->
+    </queries>
   <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
     <application
         android:label="myapp"

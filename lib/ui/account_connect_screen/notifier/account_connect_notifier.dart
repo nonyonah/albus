@@ -1,4 +1,4 @@
-import 'package:albus/screens/account_connect_screen/notifier/account_connect_state.dart';
+import 'package:albus/ui/account_connect_screen/notifier/account_connect_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final accountConnectNotifier = StateNotifierProvider.autoDispose<

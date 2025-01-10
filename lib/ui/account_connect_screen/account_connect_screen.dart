@@ -32,7 +32,7 @@ class AccountConnectScreenState extends ConsumerState<AccountConnectScreen> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               CustomImageView(
-                imagePath: ImageConstant.imgArrowLeft,
+                imagePath: ImageConstant.imgBack,
                 height: 24.h,
                 width: 26.h,
                 fit: BoxFit.contain,
@@ -103,7 +103,7 @@ class AccountConnectScreenState extends ConsumerState<AccountConnectScreen> {
                                   ),
                                   SizedBox(height: 30.h),
                                   CustomElevatedButton(
-                                    text: 'Connect via Reown',
+                                    text: 'Import address',
                                     margin: EdgeInsets.only(
                                       left: 10.h,
                                       right: 12.h,
@@ -138,4 +138,3 @@ class AccountConnectScreenState extends ConsumerState<AccountConnectScreen> {
     );
   }
 }
-
