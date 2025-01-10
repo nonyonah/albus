@@ -1,34 +1,53 @@
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
-
+import '../../../core/utils/chain_constants.dart';
 import '../model/import_address_model.dart';
 
 class ImportAddressState extends Equatable {
-  ImportAddressState(
-      {this.nameController,
-      this.addressController,
-      this.importAddressModelObj});
+  final TextEditingController nameController;
+  final Map<String, TextEditingController> addressControllers;
+  final ImportAddressModel? importAddressModelObj;
+  final String? error;
 
-  TextEditingController? nameController;
+  ImportAddressState({
+    required this.nameController,
+    required this.addressControllers,
+    this.importAddressModelObj,
+    this.error,
+  });
 
-  TextEditingController? addressController;
-
-  ImportAddressModel? importAddressModelObj;
+  factory ImportAddressState.initial() {
+    return ImportAddressState(
+      nameController: TextEditingController(),
+      addressControllers: {
+        ChainConstants.ethereum: TextEditingController(),
+        ChainConstants.base: TextEditingController(),
+        ChainConstants.optimism: TextEditingController(),
+        ChainConstants.solana: TextEditingController(),
+      },
+      importAddressModelObj: const ImportAddressModel(),
+    );
+  }
 
   @override
-  List<Object?> get props =>
-      [nameController, addressController, importAddressModelObj];
+  List<Object?> get props => [
+    nameController,
+    addressControllers,
+    importAddressModelObj,
+    error,
+  ];
 
   ImportAddressState copyWith({
     TextEditingController? nameController,
-    TextEditingController? addressController,
+    Map<String, TextEditingController>? addressControllers,
     ImportAddressModel? importAddressModelObj,
+    String? error,
   }) {
     return ImportAddressState(
       nameController: nameController ?? this.nameController,
-      addressController: addressController ?? this.addressController,
-      importAddressModelObj:
-          importAddressModelObj ?? this.importAddressModelObj,
+      addressControllers: addressControllers ?? this.addressControllers,
+      importAddressModelObj: importAddressModelObj ?? this.importAddressModelObj,
+      error: error,
     );
   }
 }

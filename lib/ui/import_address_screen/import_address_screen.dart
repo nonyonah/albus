@@ -121,8 +121,12 @@ class ImportAddressScreenState extends ConsumerState<ImportAddressScreen> {
           SizedBox(height: 6.h),
           Consumer(
             builder: (context, ref, child) {
+              final addressControllers =
+                  ref.watch(importAddressNotifier).addressControllers;
+              final defaultController = addressControllers.values.first;
+
               return CustomTextFormField(
-                controller: ref.watch(importAddressNotifier).addressController,
+                controller: defaultController,
                 contentPadding: EdgeInsets.all(14.h),
               );
             },
