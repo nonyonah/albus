@@ -11,7 +11,7 @@ import '../../widgets/custom_text_form.dart';
 import 'notifier/import_address_notifier.dart';
 
 class ImportAddressScreen extends ConsumerStatefulWidget {
-  const ImportAddressScreen({Key? key}) : super(key: key);
+  const ImportAddressScreen({super.key});
 
   @override
   ConsumerState<ImportAddressScreen> createState() =>
@@ -62,7 +62,7 @@ class ImportAddressScreenState extends ConsumerState<ImportAddressScreen> {
                   style: CustomTextStyles.bodySmallInterTightBlack900,
                 ),
               ),
-              Spacer(),
+              const Spacer(),
               CustomElevatedButton(
                 text: "Continue",
                 margin: EdgeInsets.symmetric(horizontal: 12.h),

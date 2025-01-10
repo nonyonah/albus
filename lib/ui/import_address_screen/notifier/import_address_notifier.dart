@@ -1,74 +1,94 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../../core/utils/address_validator.dart';
-import '../model/import_address_model.dart';
+
+import '../../../core/utils/chain_constants.dart';
+import '../../../core/utils/validation_messages.dart';
+import '../../../services/storage_services.dart';
 import 'import_address_state.dart';
 
-final importAddressNotifier = StateNotifierProvider.autoDispose<
-    ImportAddressNotifier, ImportAddressState>(
-  (ref) => ImportAddressNotifier(ImportAddressState.initial()),
-);
-
 class ImportAddressNotifier extends StateNotifier<ImportAddressState> {
-  ImportAddressNotifier(ImportAddressState state) : super(state) {
+  final StorageService _storage;
+  final ENSService _ensService;
+  final BalanceChecker _balanceChecker;
+
+  ImportAddressNotifier(
+    ImportAddressState state,
+    this._storage,
+    this._ensService,
+    this._balanceChecker,
+  ) : super(state) {
     _setupListeners();
   }
 
-  void _setupListeners() {
-    for (final entry in state.addressControllers.entries) {
-      entry.value.addListener(() {
-        _validateAddress(entry.key, entry.value.text);
-      });
-    }
-  }
-
-  void _validateAddress(String chain, String address) {
+  Future<void> _validateAddress(String chain, String address) async {
     if (address.isEmpty) return;
 
-    final isValid = AddressValidator.isValidAddress(chain, address);
-    final currentValidations = 
-        state.importAddressModelObj?.chainValidations ?? {};
-    
-    final updatedModel = ImportAddressModel(
-      chainValidations: {
-        ...currentValidations,
-        chain: isValid,
-      },
-    );
+    // Handle ENS names for Ethereum
+    if (chain == ChainConstants.ethereum && address.endsWith('.eth')) {
+      state = state.copyWith(isLoading: true);
+      final resolvedAddress = await _ensService.resolveENS(address);
+      state = state.copyWith(isLoading: false);
+
+      if (resolvedAddress != null) {
+        state.addressControllers[chain]?.text = resolvedAddress;
+        return;
+      }
+    }
+
+    final validationMessage =
+        ValidationMessages.getChainSpecificError(chain, address);
+    final currentMessages = Map<String, String>.from(state.validationMessages);
+    currentMessages[chain] = validationMessage;
 
     state = state.copyWith(
-      importAddressModelObj: updatedModel,
-      error: isValid ? null : 'Invalid $chain address',
+      validationMessages: currentMessages,
+      error: validationMessage.isNotEmpty ? validationMessage : null,
     );
   }
 
-  void updateName(String name) {
-    state.nameController.text = name;
-  }
+  Future<void> checkBalances() async {
+    try {
+      state = state.copyWith(isLoading: true);
 
-  void updateAddress(String chain, String address) {
-    final controller = state.addressControllers[chain];
-    if (controller != null) {
-      controller.text = address;
-      _validateAddress(chain, address);
+      final addresses = <String, String>{};
+      for (final entry in state.addressControllers.entries) {
+        if (entry.value.text.isNotEmpty) {
+          addresses[entry.key] = entry.value.text;
+        }
+      }
+
+      final balances = await _balanceChecker.checkBalances(addresses);
+      state = state.copyWith(
+        balances: balances,
+        isLoading: false,
+      );
+    } catch (e) {
+      state = state.copyWith(
+        error: 'Error checking balances: $e',
+        isLoading: false,
+      );
     }
   }
 
   Future<bool> importAddress() async {
-    final name = state.nameController.text;
-    if (name.isEmpty) {
+    if (state.nameController.text.isEmpty) {
       state = state.copyWith(error: 'Name is required');
       return false;
     }
 
-    // Check if at least one valid address is provided
+    // Validate all addresses
     bool hasValidAddress = false;
+    final addressData = <String, String>{};
+
     for (final entry in state.addressControllers.entries) {
       final address = entry.value.text;
       if (address.isNotEmpty) {
-        if (!AddressValidator.isValidAddress(entry.key, address)) {
-          state = state.copyWith(error: 'Invalid ${entry.key} address');
+        final validationMessage =
+            ValidationMessages.getChainSpecificError(entry.key, address);
+        if (validationMessage.isNotEmpty) {
+          state = state.copyWith(error: validationMessage);
           return false;
         }
+        addressData[entry.key] = address;
         hasValidAddress = true;
       }
     }
@@ -78,24 +98,22 @@ class ImportAddressNotifier extends StateNotifier<ImportAddressState> {
       return false;
     }
 
-    // If all validations pass, create the address data
-    final addresses = <String, String>{};
-    for (final entry in state.addressControllers.entries) {
-      if (entry.value.text.isNotEmpty) {
-        addresses[entry.key] = entry.value.text;
-      }
-    }
+    try {
+      // Check balances before saving
+      await checkBalances();
 
-    // TODO: Handle the successful import (e.g., save to storage, update global state)
-    return true;
-  }
+      // Save to storage
+      await _storage.saveAddress({
+        'name': state.nameController.text,
+        'addresses': addressData,
+        'balances': state.balances,
+        'timestamp': DateTime.now().toIso8601String(),
+      });
 
-  @override
-  void dispose() {
-    state.nameController.dispose();
-    for (final controller in state.addressControllers.values) {
-      controller.dispose();
+      return true;
+    } catch (e) {
+      state = state.copyWith(error: 'Failed to save address: $e');
+      return false;
     }
-    super.dispose();
   }
 }
