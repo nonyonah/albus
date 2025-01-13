@@ -1,6 +1,7 @@
 import 'package:albus/core/utils/size_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:albus/ui/import_address_screen/notifier/import_address_notifier.dart';
 
 import '../../core/utils/image_constant.dart';
 import '../../themes/custom_text_style.dart';
@@ -8,7 +9,6 @@ import '../../themes/theme_helper.dart';
 import '../../widgets/custom_elevated_button.dart';
 import '../../widgets/custom_image_view.dart';
 import '../../widgets/custom_text_form.dart';
-import 'notifier/import_address_notifier.dart';
 
 class ImportAddressScreen extends ConsumerStatefulWidget {
   const ImportAddressScreen({super.key});

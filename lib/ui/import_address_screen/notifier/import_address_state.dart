@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 
 import '../model/import_address_model.dart';
+import '../../../core/utils/chain_constants.dart';
 
 class ImportAddressState extends Equatable {
   final TextEditingController nameController;
@@ -21,6 +22,16 @@ class ImportAddressState extends Equatable {
     this.balances = const {},
     this.validationMessages = const {},
   });
+
+  factory ImportAddressState.initial() {
+    return ImportAddressState(
+      nameController: TextEditingController(),
+      addressControllers: {
+        'base': TextEditingController(),
+        'ethereum': TextEditingController(),
+      },
+    );
+  }
 
   @override
   List<Object?> get props => [

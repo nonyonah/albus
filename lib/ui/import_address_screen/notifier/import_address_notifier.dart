@@ -1,29 +1,52 @@
+import 'package:albus/core/utils/validation_messages.dart';
+import 'package:albus/services/chain_name.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/utils/chain_constants.dart';
-import '../../../core/utils/validation_messages.dart';
-import '../../../services/storage_services.dart';
 import 'import_address_state.dart';
 
+final importAddressNotifier =
+    StateNotifierProvider<ImportAddressNotifier, ImportAddressState>((ref) {
+  final chainNameResolver = ref.read(chainNameResolverProvider);
+  return ImportAddressNotifier(chainNameResolver, ImportAddressState.initial());
+});
+
 class ImportAddressNotifier extends StateNotifier<ImportAddressState> {
-  final StorageService _storage;
+  final ChainNameResolver _nameResolver;
 
-  ImportAddressNotifier(
-    ImportAddressState state,
-    this._storage,
-  ) : super(state) {
-    _setupListeners();
-  }
-
-  void _setupListeners() {
-    for (final entry in state.addressControllers.entries) {
-      entry.value.addListener(() {
-        _validateAddress(entry.key, entry.value.text);
-      });
-    }
-  }
+  ImportAddressNotifier(this._nameResolver, ImportAddressState state)
+      : super(state);
 
   Future<void> _validateAddress(String chain, String address) async {
     if (address.isEmpty) return;
 
+    // Handle chain names on appropriate networks
+    if (ChainName.isValidName(address)) {
+      state = state.copyWith(isLoading: true);
+      final resolvedAddress = await _nameResolver.resolveName(address);
+      state = state.copyWith(isLoading: false);
+
+      if (resolvedAddress != null) {
+        // Update the appropriate controller based on the chain
+        final chainType = ChainName.parse(address).type;
+        switch (chainType) {
+          case ChainNameType.base:
+            if (chain == ChainConstants.base) {
+              state.addressControllers[chain]?.text = resolvedAddress;
+            }
+            break;
+          case ChainNameType.ens:
+            if (chain == ChainConstants.ethereum) {
+              state.addressControllers[chain]?.text = resolvedAddress;
+            }
+            break;
+          default:
+          // Handle other chain types as needed
+        }
+        return;
+      }
+    }
+
+    // Continue with regular address validation...
     final validationMessage =
         ValidationMessages.getChainSpecificError(chain, address);
     final currentMessages = Map<String, String>.from(state.validationMessages);
@@ -33,56 +56,5 @@ class ImportAddressNotifier extends StateNotifier<ImportAddressState> {
       validationMessages: currentMessages,
       error: validationMessage.isNotEmpty ? validationMessage : null,
     );
-  }
-
-  bool validateForm() {
-    if (state.nameController.text.isEmpty) {
-      state = state.copyWith(error: 'Name is required');
-      return false;
-    }
-
-    bool hasValidAddress = false;
-    final addressData = <String, String>{};
-
-    for (final entry in state.addressControllers.entries) {
-      final address = entry.value.text;
-      if (address.isNotEmpty) {
-        final validationMessage =
-            ValidationMessages.getChainSpecificError(entry.key, address);
-        if (validationMessage.isNotEmpty) {
-          state = state.copyWith(error: validationMessage);
-          return false;
-        }
-        addressData[entry.key] = address;
-        hasValidAddress = true;
-      }
-    }
-
-    if (!hasValidAddress) {
-      state = state.copyWith(error: 'At least one address is required');
-      return false;
-    }
-
-    try {
-      _storage.saveAddress({
-        'name': state.nameController.text,
-        'addresses': addressData,
-        'timestamp': DateTime.now().toIso8601String(),
-      });
-
-      return true;
-    } catch (e) {
-      state = state.copyWith(error: 'Failed to save address: $e');
-      return false;
-    }
-  }
-
-  @override
-  void dispose() {
-    state.nameController.dispose();
-    for (final controller in state.addressControllers.values) {
-      controller.dispose();
-    }
-    super.dispose();
   }
 }
