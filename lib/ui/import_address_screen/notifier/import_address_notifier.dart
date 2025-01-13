@@ -1,19 +1,18 @@
 import 'package:albus/core/utils/validation_messages.dart';
 import 'package:albus/services/chain_name.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:albus/services/balance_checker.dart' show BalanceChecker, balanceCheckerProvider;
+import 'package:albus/services/balance_checker.dart'
+    show BalanceChecker, balanceCheckerProvider;
 import '../../../core/utils/chain_constants.dart';
+import '../../../main.dart';
 import 'import_address_state.dart';
 
 final importAddressNotifier =
     StateNotifierProvider<ImportAddressNotifier, ImportAddressState>((ref) {
   final chainNameResolver = ref.read(chainNameResolverProvider);
   final balanceChecker = ref.read(balanceCheckerProvider);
-  return ImportAddressNotifier(
-    ImportAddressState.initial(), 
-    chainNameResolver, 
-    balanceChecker
-  );
+  return ImportAddressNotifier(ImportAddressState.initial(),
+      chainNameResolver as ChainNameResolver, balanceChecker);
 });
 
 class ImportAddressNotifier extends StateNotifier<ImportAddressState> {
@@ -21,10 +20,8 @@ class ImportAddressNotifier extends StateNotifier<ImportAddressState> {
   final BalanceChecker _balanceChecker;
 
   ImportAddressNotifier(
-    ImportAddressState initialState, 
-    this._nameResolver, 
-    this._balanceChecker
-  ) : super(initialState);
+      ImportAddressState initialState, this._nameResolver, this._balanceChecker)
+      : super(initialState);
 
   Future<void> _validateAddress(String chain, String address) async {
     if (address.isEmpty) return;

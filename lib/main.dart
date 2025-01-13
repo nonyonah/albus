@@ -8,9 +8,35 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'core/utils/navigator_service.dart';
 import 'core/utils/size_utils.dart';
+import 'services/chain_name.dart';
 import 'themes/notifier/theme_notifier.dart';
 
 var globalMessengerKey = GlobalKey<ScaffoldMessengerState>();
+
+final chainNameResolverProvider = FutureProvider((ref) async {
+  final resolver = ChainNameResolver(
+    ethereumRpcUrl:
+        'https://mainnet.infura.io/v3/c06046673ac14658a6a8fd0f36a2fbcf',
+    baseRpcUrl: 'https://mainnet.base.org',
+  );
+
+  try {
+    final ethAddress = await resolver.resolveName('vitalik.eth');
+    final baseAddress = await resolver.resolveName('example.base');
+
+    print('Resolved ETH Address: $ethAddress');
+    print('Resolved Base Address: $baseAddress');
+
+    ref.onDispose(() {
+      resolver.dispose();
+    });
+
+    return resolver;
+  } catch (e) {
+    print('Error resolving addresses: $e');
+    rethrow;
+  }
+});
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
