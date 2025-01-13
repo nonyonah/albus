@@ -142,7 +142,6 @@ class ChainNameResolver {
   }
 }
 
-// Example Provider setup
 final chainNameResolverProvider = Provider((ref) {
   final resolver = ChainNameResolver(
     ethereumRpcUrl: 'https://mainnet.infura.io/v3/YOUR-PROJECT-ID',

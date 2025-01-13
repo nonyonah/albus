@@ -1,20 +1,30 @@
 import 'package:albus/core/utils/validation_messages.dart';
 import 'package:albus/services/chain_name.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:albus/services/balance_checker.dart' show BalanceChecker, balanceCheckerProvider;
 import '../../../core/utils/chain_constants.dart';
 import 'import_address_state.dart';
 
 final importAddressNotifier =
     StateNotifierProvider<ImportAddressNotifier, ImportAddressState>((ref) {
   final chainNameResolver = ref.read(chainNameResolverProvider);
-  return ImportAddressNotifier(chainNameResolver, ImportAddressState.initial());
+  final balanceChecker = ref.read(balanceCheckerProvider);
+  return ImportAddressNotifier(
+    ImportAddressState.initial(), 
+    chainNameResolver, 
+    balanceChecker
+  );
 });
 
 class ImportAddressNotifier extends StateNotifier<ImportAddressState> {
   final ChainNameResolver _nameResolver;
+  final BalanceChecker _balanceChecker;
 
-  ImportAddressNotifier(this._nameResolver, ImportAddressState state)
-      : super(state);
+  ImportAddressNotifier(
+    ImportAddressState initialState, 
+    this._nameResolver, 
+    this._balanceChecker
+  ) : super(initialState);
 
   Future<void> _validateAddress(String chain, String address) async {
     if (address.isEmpty) return;
@@ -56,5 +66,29 @@ class ImportAddressNotifier extends StateNotifier<ImportAddressState> {
       validationMessages: currentMessages,
       error: validationMessage.isNotEmpty ? validationMessage : null,
     );
+  }
+
+  Future<void> checkBalances() async {
+    try {
+      state = state.copyWith(isLoading: true);
+
+      final addresses = <String, String>{};
+      for (final entry in state.addressControllers.entries) {
+        if (entry.value.text.isNotEmpty) {
+          addresses[entry.key] = entry.value.text;
+        }
+      }
+
+      final balances = await _balanceChecker.checkBalances(addresses);
+      state = state.copyWith(
+        balances: balances,
+        isLoading: false,
+      );
+    } catch (e) {
+      state = state.copyWith(
+        error: 'Error checking balances: $e',
+        isLoading: false,
+      );
+    }
   }
 }
