@@ -9,7 +9,7 @@ class ChainConstants {
       name: 'Ethereum Sepolia',
       chainId: 11155111,
       symbol: 'ETH',
-      rpcUrl: 'https://sepolia.infura.io/v3/YOUR_API_KEY',
+      rpcUrl: 'https://sepolia.infura.io/v3/c06046673ac14658a6a8fd0f36a2fbcf',
     ),
     base: NetworkConfig(
       name: 'Base Sepolia',
@@ -33,7 +33,7 @@ class ChainConstants {
 
 class NetworkConfig {
   final String name;
-  final int? chainId;  // Null for Solana
+  final int? chainId; // Null for Solana
   final String symbol;
   final String rpcUrl;
 

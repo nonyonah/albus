@@ -38,19 +38,19 @@ class BalanceChecker {
   }
 }
 
-final balanceCheckerProvider = Provider<BalanceChecker>((ref) {
-  final evmClients = {
-    ChainConstants.base: Web3Client('https://base.publicnode.com', Client()),
-    ChainConstants.ethereum: Web3Client(
-        'https://mainnet.infura.io/v3/c06046673ac14658a6a8fd0f36a2fbcf',
-        Client()),
-    // Add other EVM chain clients as needed
-  };
+// final balanceCheckerProvider = Provider<BalanceChecker>((ref) {
+//   final evmClients = {
+//     ChainConstants.base: Web3Client('https://base.publicnode.com', Client()),
+//     ChainConstants.ethereum: Web3Client(
+//         'https://sepolia.infura.io/v3/c06046673ac14658a6a8fd0f36a2fbcf',
+//         Client()),
+//     // Add other EVM chain clients as needed
+//   };
 
-  final solanaClient = SolanaClient(
-    rpcUrl: Uri.parse('https://api.mainnet-beta.solana.com'),
-    websocketUrl: Uri.parse('wss://api.mainnet-beta.solana.com'),
-  );
+//   final solanaClient = SolanaClient(
+//     rpcUrl: Uri.parse('https://api.mainnet-beta.solana.com'),
+//     websocketUrl: Uri.parse('wss://api.mainnet-beta.solana.com'),
+//   );
 
-  return BalanceChecker(evmClients, solanaClient);
-});
+//   return BalanceChecker(evmClients, solanaClient);
+// });

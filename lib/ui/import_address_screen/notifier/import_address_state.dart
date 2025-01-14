@@ -13,7 +13,7 @@ class ImportAddressState extends Equatable {
   final Map<String, double> balances;
   final Map<String, String> validationMessages;
 
-  ImportAddressState({
+  const ImportAddressState({
     required this.nameController,
     required this.addressControllers,
     this.importAddressModelObj,
