@@ -92,4 +92,7 @@ class CustomTextStyles {
   static get bodySmallInterTightBlack900 => theme.textTheme.bodySmall!.copyWith(
         color: appTheme.black900,
       );
+  static get bodySmallInterTightError => theme.textTheme.bodySmall!.copyWith(
+        color: appTheme.redA700,
+      );
 }

@@ -1,5 +1,3 @@
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:http/http.dart';
 import 'package:web3dart/web3dart.dart';
 import 'package:solana/solana.dart';
 import '../core/utils/chain_constants.dart';

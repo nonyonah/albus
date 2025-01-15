@@ -34,7 +34,7 @@ class CustomTextFormField extends StatelessWidget {
     this.fillColor,
     this.filled = false,
     this.validator,
-    this.onTap,
+    this.onTap, String? errorText, String? suffixText,
   });
 
   final Alignment? alignment;
