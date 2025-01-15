@@ -57,9 +57,16 @@ void main() async {
 
   await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
+  final sharedPreferences = await SharedPreferences.getInstance();
+
   runApp(
-    const ProviderScope(
-      child: MyApp(),
+    ProviderScope(
+      overrides: [
+        sharedPreferencesProvider.overrideWith(
+          (ref) async => await SharedPreferences.getInstance(),
+        ),
+      ],
+      child: const MyApp(),
     ),
   );
 

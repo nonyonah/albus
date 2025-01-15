@@ -13,8 +13,12 @@ final importAddressNotifier =
   final balanceChecker = ref.read(balanceCheckerProvider);
 
   final sharedPreferencesAsync = ref.watch(sharedPreferencesProvider);
-  if (sharedPreferencesAsync.value == null) {
-    throw UnimplementedError('SharedPreferences is not initialized');
+  // Handle the uninitialized or loading state
+  if (sharedPreferencesAsync is AsyncLoading) {
+    throw Exception('SharedPreferences is still loading');
+  }
+  if (sharedPreferencesAsync is AsyncError) {
+    throw Exception('Failed to initialize SharedPreferences');
   }
 
   final storageService = StorageService(sharedPreferencesAsync.value!);
