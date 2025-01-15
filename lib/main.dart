@@ -14,73 +14,15 @@ import 'core/utils/chain_constants.dart';
 import 'core/utils/navigator_service.dart';
 import 'core/utils/size_utils.dart';
 import 'services/balance_checker.dart';
-import 'services/chain_name.dart';
 import 'themes/notifier/theme_notifier.dart';
 
 var globalMessengerKey = GlobalKey<ScaffoldMessengerState>();
 
-final sharedPreferencesProvider = Provider<SharedPreferences>((ref) {
-  throw UnimplementedError('SharedPreferences not initialized');
+// Asynchronous initialization for SharedPreferences
+final sharedPreferencesProvider =
+    FutureProvider<SharedPreferences>((ref) async {
+  return await SharedPreferences.getInstance();
 });
-
-// final chainNameResolverProvider = FutureProvider((ref) async {
-//   final resolver = ChainNameResolver(
-//     ethereumRpcUrl:
-//         'https://mainnet.infura.io/v3/c06046673ac14658a6a8fd0f36a2fbcf',
-//     baseRpcUrl: 'https://mainnet.base.org',
-//   );
-
-//   try {
-//     final ethAddress = await resolver.resolveName('vitalik.eth');
-//     final baseAddress = await resolver.resolveName('example.base');
-
-//     print('Resolved ETH Address: $ethAddress');
-//     print('Resolved Base Address: $baseAddress');
-
-//     ref.onDispose(() {
-//       resolver.dispose();
-//     });
-
-//     return resolver;
-//   } catch (e) {
-//     print('Error resolving addresses: $e');
-//     rethrow;
-//   }
-// });
-
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
-  try {
-    await dotenv.load(fileName: ".env");
-  } catch (error) {
-    print('Error loading .env file: $error');
-  }
-
-  // Ensure SharedPreferences is initialized before running the app
-  final sharedPreferences = await SharedPreferences.getInstance();
-
-  await Future.wait([
-    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp])
-  ]);
-
-  runApp(
-    ProviderScope(
-      overrides: [
-        sharedPreferencesProvider.overrideWithValue(sharedPreferences),
-      ],
-      child: const MyApp(),
-    ),
-  );
-
-  // Setting system UI style
-  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    statusBarIconBrightness: Brightness.light,
-    statusBarBrightness: Brightness.dark,
-    systemNavigationBarColor: Colors.transparent,
-    statusBarColor: Colors.transparent,
-  ));
-}
 
 final balanceCheckerProvider = Provider<BalanceChecker>((ref) {
   final evmClients = {
@@ -95,11 +37,7 @@ final balanceCheckerProvider = Provider<BalanceChecker>((ref) {
     websocketUrl: Uri.parse('wss://api.mainnet-beta.solana.com'),
   );
 
-  // Access SharedPreferences through the provider if needed
-  final prefs = ref.read(sharedPreferencesProvider);
-
   ref.onDispose(() {
-    // Clean up clients when disposed
     for (final client in evmClients.values) {
       client.dispose();
     }
@@ -108,10 +46,30 @@ final balanceCheckerProvider = Provider<BalanceChecker>((ref) {
   return BalanceChecker(evmClients, solanaClient);
 });
 
-final sharedPreferencesProvider =
-    FutureProvider<SharedPreferences>((ref) async {
-  return await SharedPreferences.getInstance();
-});
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  try {
+    await dotenv.load(fileName: ".env");
+  } catch (error) {
+    print('Error loading .env file: $error');
+  }
+
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+
+  runApp(
+    const ProviderScope(
+      child: MyApp(),
+    ),
+  );
+
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarIconBrightness: Brightness.light,
+    statusBarBrightness: Brightness.dark,
+    systemNavigationBarColor: Colors.transparent,
+    statusBarColor: Colors.transparent,
+  ));
+}
 
 class MyApp extends ConsumerWidget {
   const MyApp({super.key});
@@ -123,7 +81,7 @@ class MyApp extends ConsumerWidget {
     return Sizer(
       builder: (context, orientation, deviceType) {
         return MaterialApp(
-          theme: theme, // Get theme based on the current themeType
+          theme: theme,
           title: "albus",
           navigatorKey: NavigatorService.navigatorKey,
           debugShowCheckedModeBanner: false,

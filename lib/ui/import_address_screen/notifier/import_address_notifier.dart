@@ -1,75 +1,63 @@
-import 'package:albus/core/utils/validation_messages.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:albus/services/balance_checker.dart'
     show BalanceChecker, balanceCheckerProvider;
 import '../../../main.dart';
 import '../../../services/storage_services.dart';
 import 'import_address_state.dart';
-import 'package:albus/services/storage_services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:albus/core/utils/validation_messages.dart';
 
+// ImportAddressNotifier Provider
 final importAddressNotifier =
     StateNotifierProvider<ImportAddressNotifier, ImportAddressState>((ref) {
-  // final chainNameResolver = ref.read(chainNameResolverProvider);
   final balanceChecker = ref.read(balanceCheckerProvider);
-  final sharedPrefs = ref.read(sharedPreferencesProvider);
-  final storageService =
-      StorageService(ref.read(sharedPreferencesProvider).value!);
+
+  final sharedPreferencesAsync = ref.watch(sharedPreferencesProvider);
+  if (sharedPreferencesAsync.value == null) {
+    throw UnimplementedError('SharedPreferences is not initialized');
+  }
+
+  final storageService = StorageService(sharedPreferencesAsync.value!);
+
   return ImportAddressNotifier(
-      ImportAddressState.initial(), balanceChecker, storageService);
+    ImportAddressState.initial(),
+    balanceChecker,
+    storageService,
+  );
 });
 
+// Notifier Class
 class ImportAddressNotifier extends StateNotifier<ImportAddressState> {
-  // final ChainNameResolver _nameResolver;
   final BalanceChecker _balanceChecker;
   final StorageService _storage;
 
   ImportAddressNotifier(
-      ImportAddressState initialState, this._balanceChecker, this._storage)
-      : super(initialState);
+    ImportAddressState initialState,
+    this._balanceChecker,
+    this._storage,
+  ) : super(initialState);
 
+  // Validate Address
   Future<void> _validateAddress(String chain, String address) async {
     if (address.isEmpty) return;
 
-    // Handle chain names on appropriate networks
-    // if (ChainName.isValidName(address)) {
-    //   state = state.copyWith(isLoading: true);
-    //   final resolvedAddress = await _nameResolver.resolveName(address);
-    //   state = state.copyWith(isLoading: false);
+    try {
+      final validationMessage =
+          ValidationMessages.getChainSpecificError(chain, address);
+      final currentMessages =
+          Map<String, String>.from(state.validationMessages);
+      currentMessages[chain] = validationMessage;
 
-    //   if (resolvedAddress != null) {
-    //     // Update the appropriate controller based on the chain
-    //     final chainType = ChainName.parse(address).type;
-    //     switch (chainType) {
-    //       case ChainNameType.base:
-    //         if (chain == ChainConstants.base) {
-    //           state.addressControllers[chain]?.text = resolvedAddress;
-    //         }
-    //         break;
-    //       case ChainNameType.ens:
-    //         if (chain == ChainConstants.ethereum) {
-    //           state.addressControllers[chain]?.text = resolvedAddress;
-    //         }
-    //         break;
-    //       default:
-    //       // Handle other chain types as needed
-    //     }
-    //     return;
-    //   }
-    // }
-
-    // Continue with regular address validation...
-    final validationMessage =
-        ValidationMessages.getChainSpecificError(chain, address);
-    final currentMessages = Map<String, String>.from(state.validationMessages);
-    currentMessages[chain] = validationMessage;
-
-    state = state.copyWith(
-      validationMessages: currentMessages,
-      error: validationMessage.isNotEmpty ? validationMessage : null,
-    );
+      state = state.copyWith(
+        validationMessages: currentMessages,
+        error: validationMessage.isNotEmpty ? validationMessage : null,
+      );
+    } catch (e) {
+      state = state.copyWith(error: 'Validation error: $e');
+    }
   }
 
+  // Check Balances
   Future<void> checkBalances() async {
     try {
       state = state.copyWith(isLoading: true);
@@ -94,13 +82,13 @@ class ImportAddressNotifier extends StateNotifier<ImportAddressState> {
     }
   }
 
+  // Import Address
   Future<bool> importAddress() async {
     if (state.nameController.text.isEmpty) {
       state = state.copyWith(error: 'Name is required');
       return false;
     }
 
-    // Validate all addresses
     bool hasValidAddress = false;
     final addressData = <String, String>{};
 
@@ -124,10 +112,8 @@ class ImportAddressNotifier extends StateNotifier<ImportAddressState> {
     }
 
     try {
-      // Check balances before saving
       await checkBalances();
 
-      // Save to storage
       await _storage.saveAddress({
         'name': state.nameController.text,
         'addresses': addressData,
