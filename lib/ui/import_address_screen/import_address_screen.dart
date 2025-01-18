@@ -43,9 +43,9 @@ class ImportAddressScreenState extends ConsumerState<ImportAddressScreen> {
                     children: [
                       _buildHeader(context),
                       SizedBox(height: 30.h),
-                      _buildDropdownMenu(context),
-                      SizedBox(height: 20.h),
                       _buildNameField(context),
+                      SizedBox(height: 20.h),
+                      _buildDropdownMenu(context),
                       if (selectedChain != null) ...[
                         SizedBox(height: 20.h),
                         _buildAddressField(context, selectedChain!),

@@ -14,6 +14,7 @@ class AddressValidator {
       case ChainConstants.ethereum:
       case ChainConstants.base:
       case ChainConstants.optimism:
+      case ChainConstants.bsc:
         return isValidEVMAddress(address);
       case ChainConstants.solana:
         return isValidSolanaAddress(address);

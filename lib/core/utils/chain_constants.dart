@@ -24,17 +24,17 @@ class ChainConstants {
       symbol: 'ETH',
       rpcUrl: 'https://sepolia.optimism.io',
     ),
-    solana: NetworkConfig(
-      name: 'Solana',
-      symbol: 'SOL',
-      rpcUrl: 'https://api.devnet.solana.com',
-    ),
-    bsc: NetworkConfig(
-      name: 'Binance Smart Chain',
-      chainId: 56,
-      symbol: 'BNB',
-      rpcUrl: 'https://data-seed-pre-1-s1.binance.org:8545',
-    ),
+    // solana: NetworkConfig(
+    //   name: 'Solana',
+    //   symbol: 'SOL',
+    //   rpcUrl: 'https://api.devnet.solana.com',
+    // ),
+    // bsc: NetworkConfig(
+    //   name: 'Binance Smart Chain',
+    //   chainId: 56,
+    //   symbol: 'BNB',
+    //   rpcUrl: 'https://data-seed-pre-1-s1.binance.org:8545',
+    // ),
   };
 }
 
