@@ -12,7 +12,7 @@ class AppRoutes {
   static Map<String, WidgetBuilder> routes = {
     signUpScreen: (context) => const SignUpScreen(),
     accountConnectScreen: (context) => const AccountConnectScreen(),
-    importAddressScreen: (context) => ImportAddressScreen(),
-    initialRoute: (context) => ImportAddressScreen(),
+    importAddressScreen: (context) => const ImportAddressScreen(),
+    initialRoute: (context) => const ImportAddressScreen(),
   };
 }

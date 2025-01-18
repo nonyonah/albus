@@ -24,6 +24,8 @@ final sharedPreferencesProvider =
   return await SharedPreferences.getInstance();
 });
 
+final selectedChainProvider = StateProvider<String?>((ref) => null);
+
 final balanceCheckerProvider = Provider<BalanceChecker>((ref) {
   final evmClients = {
     ChainConstants.base: Web3Client('https://base.publicnode.com', Client()),

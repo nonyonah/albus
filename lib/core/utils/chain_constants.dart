@@ -3,30 +3,37 @@ class ChainConstants {
   static const base = 'base';
   static const optimism = 'optimism';
   static const solana = 'solana';
+  static const bsc = 'bsc';
 
   static const networkConfigs = {
     ethereum: NetworkConfig(
-      name: 'Ethereum Sepolia',
+      name: 'Ethereum',
       chainId: 11155111,
       symbol: 'ETH',
       rpcUrl: 'https://sepolia.infura.io/v3/c06046673ac14658a6a8fd0f36a2fbcf',
     ),
     base: NetworkConfig(
-      name: 'Base Sepolia',
+      name: 'Base',
       chainId: 84532,
       symbol: 'ETH',
       rpcUrl: 'https://sepolia.base.org',
     ),
     optimism: NetworkConfig(
-      name: 'Optimism Sepolia',
+      name: 'Optimism',
       chainId: 11155420,
       symbol: 'ETH',
       rpcUrl: 'https://sepolia.optimism.io',
     ),
     solana: NetworkConfig(
-      name: 'Solana Devnet',
+      name: 'Solana',
       symbol: 'SOL',
       rpcUrl: 'https://api.devnet.solana.com',
+    ),
+    bsc: NetworkConfig(
+      name: 'Binance Smart Chain',
+      chainId: 56,
+      symbol: 'BNB',
+      rpcUrl: 'https://data-seed-pre-1-s1.binance.org:8545',
     ),
   };
 }

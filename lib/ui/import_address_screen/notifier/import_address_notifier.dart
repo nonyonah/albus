@@ -10,7 +10,6 @@ import 'package:albus/core/utils/validation_messages.dart';
 final importAddressNotifier =
     StateNotifierProvider<ImportAddressNotifier, ImportAddressState>((ref) {
   final balanceChecker = ref.read(balanceCheckerProvider);
-
   final sharedPreferencesAsync = ref.watch(sharedPreferencesProvider);
   // Handle the uninitialized or loading state
   if (sharedPreferencesAsync is AsyncLoading) {
